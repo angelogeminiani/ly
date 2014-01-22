@@ -1349,6 +1349,13 @@ public abstract class CollectionUtils {
         }
     }
 
+    public static Object getFirst(final JSONArray array){
+        if(null!=array && array.length()>0){
+            return array.get(0);
+        }
+        return null;
+    }
+
     /**
      * Return last item of an array. NULL if array is empty or is null.
      */
@@ -1382,6 +1389,13 @@ public abstract class CollectionUtils {
             }
             return result;
         }
+    }
+
+    public static Object getLast(final JSONArray array){
+        if(null!=array && array.length()>0){
+            return array.get(array.length()-1);
+        }
+        return null;
     }
 
     /**
