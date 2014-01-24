@@ -147,6 +147,45 @@ public abstract class VLCTemplateManager
     }
 
     /**
+     * Use this to override template title
+     *
+     * @param locale          key
+     * @param templateContent vhtml template
+     */
+    public void setTitle(final Locale locale, final String templateContent) {
+        final Properties properties = getProperties(locale);
+        if (null != properties) {
+            properties.put(KEY_TITLE, templateContent);
+        }
+    }
+
+    /**
+     * Use this to override template description
+     *
+     * @param locale          key
+     * @param templateContent vhtml template
+     */
+    public void setDescription(final Locale locale, final String templateContent) {
+        final Properties properties = getProperties(locale);
+        if (null != properties) {
+            properties.put(KEY_DESCRIPTION, templateContent);
+        }
+    }
+
+    /**
+     * Use this to override template content
+     *
+     * @param locale          key
+     * @param templateContent vhtml template
+     */
+    public void setContent(final Locale locale, final String templateContent) {
+        final Properties properties = getProperties(locale);
+        if (null != properties) {
+            properties.put(KEY_CONTENT, templateContent);
+        }
+    }
+
+    /**
      * Returns default properties.
      *
      * @return Default Properties

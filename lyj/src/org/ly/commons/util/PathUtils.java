@@ -10,10 +10,7 @@ import org.ly.commons.lang.CharEncoding;
 
 import java.io.File;
 import java.net.URLEncoder;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Contains utility for path management.
@@ -742,7 +739,7 @@ public abstract class PathUtils
                                           final boolean encodeValues) {
 
         final Map<String, Object> params = var_params instanceof Map
-                ? (Map) var_params
+                ? new HashMap<String, Object>((Map) var_params)
                 : CollectionUtils.stringToMap(var_params.toString(), "&");
         return addURIParameters(uri, params, encodeValues, true);
     }
