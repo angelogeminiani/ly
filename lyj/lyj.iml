@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src_lib" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -14,7 +15,6 @@
     <orderEntry type="library" name="org.eclipse.jetty.aggregate:jetty-all:9.0.4.v20130625" level="application" />
     <orderEntry type="library" name="org.jsoup:jsoup:1.7.2" level="application" />
     <orderEntry type="library" name="org.mongodb:mongo-java-driver:2.11.3" level="application" />
-    <orderEntry type="library" name="org.mozilla:rhino:1.7R4" level="application" />
     <orderEntry type="library" name="org.apache.pdfbox:pdfbox:1.8.2" level="application" />
     <orderEntry type="library" name="bouncycastle:bcmail-jdk15:140" level="application" />
     <orderEntry type="library" name="bouncycastle:bcprov-jdk15:140" level="application" />
