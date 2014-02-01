@@ -58,7 +58,6 @@ public class CMSRouter {
     private static final String FILE_CONTENT = "hcontent.ly";
     private static final String FILE_FOOTER = "hfooter.ly";
     private static final String FILE_SCRIPT = "hscript.ly";
-    private static final String FILE_SCRIPT_DBG = "hscript_dbg.ly";
     private static final String FILE_LABELS = "labels.json";
 
     private final String _root;
@@ -205,7 +204,6 @@ public class CMSRouter {
         final String hcontent = _repo.getString(PathUtils.concat(path, FILE_CONTENT));
         final String hfooter = _repo.getString(PathUtils.concat(path, FILE_FOOTER));
         final String hscript = _repo.getString(PathUtils.concat(path, FILE_SCRIPT));
-        final String hscriptdbg = _repo.getString(PathUtils.concat(path, FILE_SCRIPT_DBG));
         final JSONObject labels = _repo.getJSONObject(PathUtils.concat(path, FILE_LABELS));
 
         final CMSEndPointPage result = new CMSEndPointPage(path);
@@ -214,7 +212,7 @@ public class CMSRouter {
         result.setHeader(hheader);
         result.setContent(hcontent);
         result.setFooter(hfooter);
-        result.setScript(isDebug() ? (StringUtils.hasText(hscriptdbg) ? hscriptdbg : hscript) : hscript);
+        result.setScript(hscript);
         result.setLocalizations(labels);
 
         return result;
