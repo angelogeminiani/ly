@@ -350,6 +350,21 @@ public abstract class RegExUtils {
         return result.toString();
     }
 
+    public static String escape(final String string,
+                                final String[] special) {
+        final StringBuffer result = new StringBuffer();
+        final char[] chars = string.toCharArray();
+        for (final char c : chars) {
+            final String item = String.valueOf(c);
+            if (CollectionUtils.contains(special, item)) {
+                result.append("\\").append(c);
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------

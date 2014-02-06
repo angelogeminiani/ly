@@ -20,6 +20,7 @@
 
 package org.ly.packages.velocity.impl.vtools.lang;
 
+import org.json.JSONObject;
 import org.ly.Smartly;
 import org.ly.commons.util.LocaleUtils;
 import org.ly.commons.util.StringUtils;
@@ -65,6 +66,11 @@ public final class VLCI18n {
 
     public void use(final String value) {
         _lang = getLang(value);
+    }
+
+    public String toString() {
+        final VLCObject dictionary = StringUtils.hasText(_lang) ? getDictionary(_lang) : getDictionary(_def_lang);
+        return toJsonString(dictionary);
     }
 
     // ------------------------------------------------------------------------
@@ -131,5 +137,15 @@ public final class VLCI18n {
 
     private String getLang(final String raw) {
         return LocaleUtils.getLocaleFromString(raw).getLanguage();
+    }
+
+    private String toJsonString(final VLCObject dictionary) {
+        try {
+            if (null != dictionary) {
+                return new JSONObject(dictionary).toString();
+            }
+        } catch (Throwable ignored) {
+        }
+        return new JSONObject().toString();
     }
 }

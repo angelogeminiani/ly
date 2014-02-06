@@ -147,6 +147,13 @@ public class WebServer
     public String toString() {
         final StringBuilder result = new StringBuilder();
         result.append(super.getJetty().toString());
+        result.append(" \n");
+        result.append("CONNECTORS: \n");
+        for(final Connector connector:_connectors){
+            result.append("\t");
+            result.append(connector.getProtocols());
+            result.append("\n");
+        }
         return result.toString();
     }
 
