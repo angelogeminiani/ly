@@ -833,6 +833,13 @@ public class MongoUtils
         return queryContains(field, value, CASE_INSENSITIVE);
     }
 
+    public static DBObject queryContains(final DBObject query,
+                                         final String field,
+                                         final String value) {
+        // ^.*John.*$
+        return queryContains(query, field, value, CASE_INSENSITIVE);
+    }
+
     /**
      * @param field
      * @param value
@@ -846,6 +853,16 @@ public class MongoUtils
         // ^.*John.*$
         final Pattern pattern = patternContains(value, flags);
         final DBObject query = new BasicDBObject(field, pattern);
+        return query;
+    }
+
+    public static DBObject queryContains(final DBObject query,
+                                         final String field,
+                                         final String value,
+                                         final Integer flags) {
+        // ^.*John.*$
+        final Pattern pattern = patternContains(value, flags);
+        query.put(field, pattern);
         return query;
     }
 
