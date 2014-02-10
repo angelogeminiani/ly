@@ -27,6 +27,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
 import org.ly.packages.mongo.impl.AbstractMongoService;
+import org.ly.packages.mongo.impl.MongoPage;
 import org.ly.packages.mongo.impl.db.entity.MongoCountry;
 
 import java.util.List;
@@ -34,7 +35,8 @@ import java.util.List;
 /**
  * @author angelo.geminiani
  */
-public class MongoCountryService extends AbstractMongoService {
+public class MongoCountryService
+        extends AbstractMongoService {
 
     // ------------------------------------------------------------------------
     //                      Constants
@@ -60,6 +62,10 @@ public class MongoCountryService extends AbstractMongoService {
         super.localize(item, lang, LOCALFIELDS);
     }
 
+    public void localize(final MongoPage item, final String lang) {
+        super.localize(item, lang, LOCALFIELDS);
+    }
+
     public List<DBObject> getEnabled() {
         final DBObject filter = new BasicDBObject();
         filter.put(MongoCountry.ENABLED, true);
@@ -73,6 +79,13 @@ public class MongoCountryService extends AbstractMongoService {
         localize(result, lang);
         return result;
     }
+
+    public List<DBObject> getAll(final String lang) {
+        final List<DBObject> result = super.find();
+        localize(result, lang);
+        return result;
+    }
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
