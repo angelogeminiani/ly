@@ -162,6 +162,7 @@ public class Delegates {
                         : BeanUtils.getMethodIfAny(hclass, "handle");
                 if (null != method) {
                     if (async) {
+                        //Async.Action((args2)->{});
                         Async.Action(new Action() {
                             @Override
                             public void handle(final Object... args2) {
