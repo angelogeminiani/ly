@@ -1,0 +1,1543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="42b8c92e-ca10-474d-aee1-be5a74b60697" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/configuration.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src_sample/i18n/en.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src_sample/i18n/it.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src_sample/index.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src_sample/view/pages/login/PageLogin.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src_sample/view/pages/login/PageLoginView.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tsconfig.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webpack.config.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/lyj.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/IConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/Smartly.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/SmartlyLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/SmartlyPathManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/SmartlyShutdownHook.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/Delegates.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/async/Async.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/async/AsyncUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/async/future/Timed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cmdline/ConsoleApp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cmdline/ConsoleAppPage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cmdline/ConsoleAppPages.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cmdline/cmdparser/CmdLineParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/AESEncrypter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/DESEncrypter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/GUID.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/HexString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/ICryptographConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/MD5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/cryptograph/SecurityMessageDigester.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/CSVFileReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/CSVFileWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/CSVReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/CSVWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/ICSVConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/csv/formatter/CSVDataFormatter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/Event.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/EventEmitter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/EventError.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/EventListeners.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/Events.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/IEventEmitter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/IEventListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/dispatcher/EventDispatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/event/impl/SampleEventListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/Dictionary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/DictionaryRegistry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/impl/BaseDictionary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/impl/BaseDictionary.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/impl/BaseDictionary_it.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/impl/ChainDictionary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/AbstractI18nBundle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/bundle/IResourceBundle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/bundle/ResourceBundleManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/bundle/impl/ClassResourceBundle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/bundle/impl/FileResourceBundle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/resourcebundle/cache/ResourceBundleCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/i18n/utils/I18nUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/image/ImageIOUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/image/ImageSize.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/image/eci/ISOcoated_v2_300_eci.icc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/image/resize/AsyncResize.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/image/resize/Resize.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/BinaryData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/FileMeta.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/FileMetaArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/FileObserver.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/FileWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/IFileObserverListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/filetokenizer/FileChunkInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/filetokenizer/FileTokenizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/filetokenizer/IFileTokenizerCallback.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/jsondb/IJsonDBConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/jsondb/JsonDB.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/jsondb/JsonDBCollection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/jsondb/exceptions/JsonDBInvalidItemException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/jsonrepository/JsonRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/AbstractRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/AbstractResource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/FileRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/FileResource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/Repository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/Resource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/Trackable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/Tracker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/ZipRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/ZipResource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/deploy/FileDeployer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/deploy/FileDeployerSettings.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/deploy/FileItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/repository/package.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/JsonBean.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/JsonSerializer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/serializer/BeanData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/serializer/BeanProcessed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/serializer/BeanSerializer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/serializer/BeanSerializerState.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/serialization/json/utils/JsonBeanUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/temprepository/Registry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/temprepository/RegistryItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/temprepository/TempRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/temprepository/registry_data.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/io/temprepository/registry_settings.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/lang/Base64.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/lang/CharEncoding.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/lang/compilers/CompilerRegistry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/lang/compilers/ICompiler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/Level.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/LogItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/LogItemRepositoryLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/Logger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/LoggingRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/logging/util/LoggingUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/mutex/Mutex.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/mutex/MutexPool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/AvatarUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/NetworkUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/URLUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/api/yahoo/placefinder/YahooPlaceFinder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/error.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/error.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/error.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/iplocation/IPLocation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/iplocation/IPLocator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/sftp/SFTPClient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/sftp/impl/SFTPProgressMonitor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/sftp/impl/SFTPUserInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/shorturl/IURLShortener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/shorturl/ShortURL.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/shorturl/impl/TinyUrl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/client/Client.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/client/DownloadRunnable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/client/UploadRunnable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/AbstractMessage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/MessageResponse.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/UserToken.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/multipart/Multipart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/multipart/MultipartInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/multipart/MultipartMessagePart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/multipart/MultipartPool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/rest/RESTMessage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/messages/tools/MultipartMessageUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/Server.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/ServerWorker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/SocketRequestServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/AbstractSocketHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/ISocketFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/ISocketHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/SocketRequest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/SocketResponse.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/FilterEcho.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/FilterEchoDate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/FilterEchoNull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/FilterEchoString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/HandlerMultipartMessage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/impl/HandlerREST.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/pool/SocketFilterPoolIterator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/socket/server/handlers/pool/SocketHandlerPool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/network/timeout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/pools/GenericPool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/Remoting.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/IRESTCons.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/RESTRegistry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/RESTService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/SampleRESTServiceImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/DELETE.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/FormParam.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/GET.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/POST.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/PUT.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/Path.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/PathParam.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/Produces.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/QueryParam.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/annotations/meta/HttpMethod.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/wrapper/MethodWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/wrapper/ResponseWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rest/wrapper/ServiceWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/IRemoteContext.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/IRemoteContextService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/RemoteInvoker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/RemoteService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/RemoteServiceContext.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/RemoteServiceRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/descriptor/MethodDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/descriptor/ServiceDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/exception/ServiceMethodNotFoundException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/util/RSFormatter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/remoting/rpc/util/RSSystem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/BeanUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/ByteUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/ClassLoaderUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/CollectionUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/CompareUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/ConversionUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/DateUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/DateWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/ExceptionUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/FileUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/FormatUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/JsonList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/JsonWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/LocaleUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/MathUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/MimeTypeUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/NumberWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/PathUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/RandomUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/RegExUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/StringEscapeUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/StringUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/SystemUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/ZipUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/commons/util/nodata.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/Deployer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/databases/MONGO_sample.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/htmldeployer/htmldeployer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/http/webserver.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/languages/de.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/languages/en.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/languages/es.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/languages/fr.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/languages/it.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/mail/smtp.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/remoting/remoting.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/smartly.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/config/velocity/velocity.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/launcher/AbstractLauncher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/launcher/SmartlyClassLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/launcher/SmartlyLauncher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/AbstractPackage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/ISmartlyModalPackage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/ISmartlySystemPackage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/SmartlyPackageLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/SmartlyHttpCms.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/endpoint/CMSEndPointPage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/endpoint/CMSEndPointRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/endpoint/CMSRouter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/endpoint/CMSUrl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/CMSPage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/mongodb/CMSDBFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/mongodb/CMSMongoSchema.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/mongodb/entities/CMSPageEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/mongodb/entities/items/CMSPageEntitySection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/cms/page/mongodb/services/CMSPageEntityService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/handlers/filters/SmartlyCMSFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/handlers/servlets/endpoint/EndPointServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/handlers/servlets/pages/PagesServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/AppRouter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hcontent.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hfooter.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hhead.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hheader.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hscript.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/hscript_dbg.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/_stub/labels.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/index/hcontent.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/index/hfooter.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/index/hhead.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/index/hheader.ly" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/index/labels.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htcms/sitemap.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/VM_const.vm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/basic/font.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/basic/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/basic/script.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/basic/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/basic/template.vhtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/cmspages/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/macro/templates/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/cms/impl/htdocs/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/htmldeployer/impl/HtmlDeployer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/htmlparser/impl/HtmlParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/htmlparser/impl/vtools/DocumentTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/htmlparser/impl/vtools/HtmlTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/SmartlyHttp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/AbstractHttpServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/WebServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/SmartlyRemotingHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/SmartlyResourceHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/SmartlyShutdownHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/remoting/SmartlyRemotingHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/rest/SmartlyRESTHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/servlets/HelloSmartlyServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/servlets/MultipartFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/servlets/SmartlyUploadServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/servlets/SmartlyVHTMLServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/websocket/ChatAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/websocket/ChatWebSocket.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/websocket/WSocketCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/websocket/WSocketProtocol.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/handlers/websocket/WSocketServlet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/ServletUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/client/Client.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/resource/MemoryResource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/vtool/AppTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/vtool/Cookies.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/http/impl/util/vtool/Req.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mail/SmartlyMail.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mail/impl/MailUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mail/impl/RunnablePostman.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/SmartlyMongo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/AbstractMongoService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/IMongoConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/MongoDB.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/MongoDBConnection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/MongoDBConnectionFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/MongoObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/MongoPage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/StandardCodedException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/StandardException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/GenericMongoService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/SampleMongoInitializer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/SampleMongoService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/IMongoEntityConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/MongoAnalytics.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/MongoCountry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/MongoRole.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/MongoSession.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/MongoUser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/item/MongoAddress.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/entity/item/MongoCountryRegion.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/MongoAnalyticsService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/MongoCountryService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/MongoRoleService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/MongoSessionService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/MongoUserService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/tasks/analytics/AnalyticsData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/tasks/analytics/AnalyticsTask.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/db/service/tasks/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/i18n/DictionaryManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/i18n/MongoTranslation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/i18n/MongoTranslationManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/io/MongoExporter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/io/MongoImporter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/schema/MongoSchema.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/mongo/impl/util/MongoUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/pdf/impl/PDFUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/SmartlyVelocity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/IVLCCostants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/VLCManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/compilers/CompilerVelocity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/VLCEngine.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/eventhandlers/VLCEventHandlerInvalidReference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/eventhandlers/VLCEventHandlerMethodException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/loaders/VLCClasspathLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/loaders/VLCFileLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/engine/loggers/VLCLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/events/OnBeforeEvaluate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/VLCTemplateManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager_de.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager_en.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager_es.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager_fr.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/SampleTemplateManager_it.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content_de.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content_en.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content_es.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content_fr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/templates/impl/content_it.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/util/URLEncodeUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/AppTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/ConsoleTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/ConvertTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/EngineTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/FmtTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/IVLCTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/JSONTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/MathTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/ScriptTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/StringTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/SysTool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/lang/VLCI18n.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/lang/VLCObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/lang/VLCString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/toolbox/VLCToolbox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/packages/velocity/impl/vtools/toolbox/VLCToolboxItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/proxies/DBProxy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/proxies/IDBProxy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src/org/ly/proxies/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Buffer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Channel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelAgentForwarding.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelDirectTCPIP.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelExec.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelForwardedTCPIP.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelSession.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelSftp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelShell.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelSubsystem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ChannelX11.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Cipher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/CipherNone.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Compression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/DH.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/DHG1.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/DHG14.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/DHGEX.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ForwardedTCPIPDaemon.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/GSSContext.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/HASH.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/HostKey.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/HostKeyRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/IO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Identity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/IdentityFile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/IdentityRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/JSch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/JSchAuthCancelException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/JSchException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/JSchPartialAuthException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyExchange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyPair.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyPairDSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyPairGenDSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyPairGenRSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KeyPairRSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/KnownHosts.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/LocalIdentityRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Logger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/MAC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Packet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/PortWatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Proxy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ProxyHTTP.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ProxySOCKS4.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ProxySOCKS5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Random.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Request.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestAgentForwarding.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestEnv.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestExec.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestPtyReq.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestSftp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestShell.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestSignal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestSubsystem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestWindowChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/RequestX11.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/ServerSocketFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Session.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SftpATTRS.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SftpException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SftpProgressMonitor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Signature.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SignatureDSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SignatureRSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/SocketFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UIKeyboardInteractive.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuth.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuthGSSAPIWithMIC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuthKeyboardInteractive.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuthNone.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuthPassword.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserAuthPublicKey.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/UserInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/Util.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES128CBC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES128CTR.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES192CBC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES192CTR.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES256CBC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/AES256CTR.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/ARCFOUR.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/ARCFOUR128.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/ARCFOUR256.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/BlowfishCBC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/DH.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMAC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACMD5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACMD596.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACSHA1.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACSHA196.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACSHA256.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/HMACSHA512.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/KeyPairGenDSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/KeyPairGenRSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/MD5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/Random.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/SHA1.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/SignatureDSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/SignatureRSA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/TripleDESCBC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jce/TripleDESCTR.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/Compression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/HMAC.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/HMACMD5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/HMACMD596.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/HMACSHA1.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jcraft/HMACSHA196.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jsch/jgss/GSSContextKrb5.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Adler32.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/CRC32.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Checksum.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Deflate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Deflater.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/DeflaterOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/GZIPException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/GZIPHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/GZIPInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/GZIPOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/InfBlocks.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/InfCodes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/InfTree.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Inflate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Inflater.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/InflaterInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/JZlib.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/StaticTree.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/Tree.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/ZInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/ZOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/ZStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/com/jcraft/jzlib/ZStreamException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ColorTools.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/FormatCompliance.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageDump.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageFormat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageReadException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImageWriteException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/Imaging.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImagingConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/ImagingException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/PixelDensity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorCieLab.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorCieLch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorCieLuv.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorCmy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorCmyk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorConversions.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorHsl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorHsv.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorHunterLab.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/ColorXyz.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/color/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BasicCParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BinaryConstant.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BinaryFileParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BinaryFunctions.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BinaryInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BinaryOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BitArrayOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BitInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/BitInputStreamFlexible.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/ByteConversions.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/ByteOrder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/Compression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/FastByteArrayOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/IBufferedImageFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/IImageMetadata.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/ImageBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/ImageMetadata.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/PackBits.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/RationalNumber.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/RationalNumberUtilities.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/RgbBufferedImageFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/SimpleBufferedImageFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/ZLibUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/bytesource/ByteSource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/bytesource/ByteSourceArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/bytesource/ByteSourceFile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/bytesource/ByteSourceInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/itu_t4/HuffmanTree.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/itu_t4/HuffmanTreeException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/itu_t4/T4AndT6Compression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/itu_t4/T4_T6_Tables.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/mylzw/BitsToByteInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/mylzw/MyBitInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/mylzw/MyBitOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/mylzw/MyLzwCompressor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/mylzw/MyLzwDecompressor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/common/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/BmpHeaderInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/BmpImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/ImageContents.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/pixelparsers/PixelParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/pixelparsers/PixelParserBitFields.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/pixelparsers/PixelParserRgb.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/pixelparsers/PixelParserRle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/pixelparsers/PixelParserSimple.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/writers/BmpWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/writers/BmpWriterPalette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/bmp/writers/BmpWriterRgb.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/dcx/DcxImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/GenericGifBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/GifBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/GifHeaderInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/GifImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/GraphicControlExtension.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/ImageContents.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/gif/ImageDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/icns/IcnsDecoder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/icns/IcnsImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/icns/IcnsType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/icns/Rle24Compression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/ico/IcoImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/Block.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/JpegConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/JpegImageMetadata.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/JpegImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/JpegPhotoshopMetadata.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/JpegUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/ZigZag.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/decoder/Dct.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/decoder/JpegDecoder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/decoder/JpegInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/decoder/YCbCrConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/exif/ExifRewriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcRecord.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcTypeLookup.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/IptcTypes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/JpegIptcRewriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/iptc/PhotoshopApp13Data.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/App13Segment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/App14Segment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/App2Segment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/AppnSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/ComSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/DhtSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/DqtSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/GenericSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/JfifSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/Segment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/SofnSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/SosSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/segments/UnknownSegment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/xmp/JpegRewriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/xmp/JpegXmpParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/jpeg/xmp/JpegXmpRewriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pcx/PcxConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pcx/PcxImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pcx/PcxWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/BitParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/GammaCorrection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngCrc.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngImageInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngText.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/PngWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/ScanExpediter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/ScanExpediterInterlaced.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/ScanExpediterSimple.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkGama.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkIccp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkIdat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkIhdr.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkItxt.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkPhys.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkPlte.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkText.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngChunkZtxt.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/chunks/PngTextChunk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilterAverage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilterNone.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilterPaeth.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilterSub.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/scanlinefilters/ScanlineFilterUp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/transparencyfilters/TransparencyFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/transparencyfilters/TransparencyFilterGrayscale.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/transparencyfilters/TransparencyFilterIndexedColor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/png/transparencyfilters/TransparencyFilterTrueColor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/FileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PamFileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PamWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PbmFileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PbmWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PgmFileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PgmWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PnmConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PnmImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PnmWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PpmFileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/PpmWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/pnm/WhiteSpaceReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/ImageContents.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/ImageResourceBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/ImageResourceType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/PsdConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/PsdHeaderInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/PsdImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserBitmap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserCmyk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserGrayscale.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserIndexed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserLab.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserRgb.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/dataparsers/DataParserStub.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/datareaders/CompressedDataReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/datareaders/DataReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/psd/datareaders/UncompressedDataReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/rgbe/InfoHeaderReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/rgbe/RgbeConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/rgbe/RgbeImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/rgbe/RgbeInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tga/TgaConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tga/TgaImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/JpegImageData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffContents.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffDirectory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffElement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffField.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffFieldFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffImageData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffImageMetadata.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/TiffReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/AdobePageMaker6TagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/AdobePhotoshopTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/AliasSketchbookProTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/AllTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/DcfTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/DngTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/ExifTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/GdalLibraryTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/GeoTiffTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/GpsTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/HylaFaxTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/MicrosoftHdPhotoTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/MicrosoftTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/MolecularDynamicsGelTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/OceScanjobTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/Rfc2301TagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TagConstantsUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/Tiff4TagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TiffConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TiffDirectoryConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TiffDirectoryType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TiffEpTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/TiffTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/constants/WangTagConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/datareaders/DataReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/datareaders/DataReaderStrips.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/datareaders/DataReaderTiled.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeAscii.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeByte.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeDouble.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeFloat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeLong.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/fieldtypes/FieldTypeShort.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterBiLevel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterCieLab.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterCmyk.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterLogLuv.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterPalette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterRgb.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/photometricinterpreters/PhotometricInterpreterYCbCr.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoAny.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoAscii.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoAsciiOrByte.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoAsciiOrRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoByte.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoByteOrShort.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoDirectory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoDouble.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoFloat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoGpsText.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoLong.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoLongOrIFD.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoSByte.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoSLong.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoSRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoSShort.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoShort.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoShortOrLong.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoShortOrLongOrRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoShortOrRational.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoUndefined.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoUnknown.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/taginfos/TagInfoXpString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/ImageDataOffsets.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffImageWriterBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffImageWriterLossless.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffImageWriterLossy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffOutputDirectory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffOutputField.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffOutputItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffOutputSet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/tiff/write/TiffOutputSummary.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/wbmp/WbmpImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/xbm/XbmImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/formats/xpm/XpmImageParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccConstants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccProfileInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccProfileParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccTag.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccTagDataType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccTagDataTypes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccTagType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/IccTagTypes.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/icc/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/ColorComponent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/ColorCount.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/ColorGroup.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/ColorGroupCut.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/ColorSpaceSubset.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/Dithering.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/MedianCutImplementation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/MedianCutLongestAxisImplementation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/MedianCutMostPopulatedBoxesImplementation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/MedianCutPalette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/MedianCutQuantizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/Palette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/PaletteFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/QuantizedPalette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/SimplePalette.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/palette/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/CachingInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/CachingOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/Debug.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/IoUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/ParamMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/apache/commons/imaging/util/UnicodeUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/CDL.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/Cookie.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/CookieList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/HTTP.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/HTTPTokener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONML.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONStringer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONTokener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/JSONWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/None.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/XML.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/XMLTokener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/src_lib/org/json/package.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/async/AsyncTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/event/dispatcher/DispatcherEventTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/BaseDictionaryTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/TestDic.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/TestDic.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/TestDic_de.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/file.de.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/i18n/impl/file.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/io/filetokenizer/FileTokenizerTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/io/temprepository/TempRepositoryTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/logging/LoggerTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/AvatarUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/URLUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/api/yahoo/placefinder/YahooPlaceFinderTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/sftp/SFTPClientTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/messages/multipart/MultipartPoolTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/AllTests.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/RESTMessageTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/SendFileTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/SendMultipartTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/TestObjects.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/TestServer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/TestServer.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/VerySimpleTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/helpers/FooFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/helpers/SampleFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/helpers/SampleRESTMessage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/helpers/SampleRESTService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/network/socket/server/helpers/ThreadClient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/BeanUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/CompareUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/DateUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/FileObserverTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/FormatUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/JsonWrapperTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/LocaleUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/MathUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/PathUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/RegExUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/StringUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/SystemUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lyj/test/org/ly/commons/util/ZipUtilsTest.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ly.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ly.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/components/Component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-748">
+              <caret line="9" column="15" lean-forward="false" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tsconfig.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webpack.config.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src_sample/index.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+                <marker date="1510222688059" expanded="true" signature="3906:3947" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageLogin.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src_sample/view/pages/login/PageLogin.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="115" lean-forward="true" selection-start-line="9" selection-start-column="115" selection-end-line="9" selection-end-column="115" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bundle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build/bundle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="2214" column="64" lean-forward="true" selection-start-line="2214" selection-start-column="64" selection-end-line="2214" selection-end-column="64" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/docs/configuration.md" />
+        <option value="$PROJECT_DIR$/LICENSE" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/tests/index.html" />
+        <option value="$PROJECT_DIR$/src_sample/view/pages/login/PageLoginView.ts" />
+        <option value="$PROJECT_DIR$/src_sample/view/pages/login/PageLogin.ts" />
+        <option value="$PROJECT_DIR$/src_sample/index.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="286" />
+    <option name="y" value="56" />
+    <option name="width" value="1570" />
+    <option name="height" value="911" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src_sample" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src_sample" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src_sample" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src_sample" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="src_sample" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="typescript-compiler-editor-notification" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src_sample" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42b8c92e-ca10-474d-aee1-be5a74b60697" name="Default" comment="" />
+      <created>1510220871534</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1510220871534</updated>
+      <workItem from="1510220872745" duration="1813000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1813000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="286" y="56" width="1570" height="911" extended-state="0" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32965687" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3841623" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="107" lean-forward="true" selection-start-line="21" selection-start-column="107" selection-end-line="21" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/components/Component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-748">
+          <caret line="9" column="15" lean-forward="false" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ly.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src_sample/view/pages/login/PageLoginView.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="33" lean-forward="false" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
+          <folding>
+            <marker date="1510222295879" expanded="true" signature="268:1787" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="291:1768" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="481:569" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="830:917" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="1053:1108" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="1195:1236" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="1447:1508" ph="..." />
+            <marker date="1510222295879" expanded="true" signature="1586:1654" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src_sample/view/pages/login/PageLogin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="115" lean-forward="true" selection-start-line="9" selection-start-column="115" selection-end-line="9" selection-end-column="115" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="2214" column="64" lean-forward="true" selection-start-line="2214" selection-start-column="64" selection-end-line="2214" selection-end-column="64" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src_sample/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+            <marker date="1510222688059" expanded="true" signature="3906:3947" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/configuration.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="2025">
+            <caret line="135" column="100" lean-forward="false" selection-start-line="135" selection-start-column="100" selection-end-line="135" selection-end-column="100" />
+            <folding>
+              <marker date="1510220991817" expanded="true" signature="961:1475" ph="{&quot;entry&quot;: './src/index.ts'...}" />
+              <marker date="1510220991817" expanded="true" signature="1018:1112" ph="{&quot;filename&quot;: 'bundle.js'...}" />
+              <marker date="1510220991817" expanded="true" signature="1134:1252" ph="{...}" />
+              <marker date="1510220991817" expanded="true" signature="1277:1470" ph="{...}" />
+              <marker date="1510220991817" expanded="true" signature="1297:1461" ph="[...]" />
+              <marker date="1510220991817" expanded="true" signature="1314:1448" ph="{&quot;use&quot;: 'ts-loader'...}" />
+              <marker date="1510220991817" expanded="true" signature="2326:2885" ph="{&quot;entry&quot;: './src/index.ts'...}" />
+              <marker date="1510220991817" expanded="true" signature="2383:2477" ph="{&quot;filename&quot;: 'bundle.js'...}" />
+              <marker date="1510220991817" expanded="true" signature="2499:2617" ph="{...}" />
+              <marker date="1510220991817" expanded="true" signature="2642:2835" ph="{...}" />
+              <marker date="1510220991817" expanded="true" signature="2662:2826" ph="[...]" />
+              <marker date="1510220991817" expanded="true" signature="2679:2813" ph="{&quot;use&quot;: 'ts-loader'...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>bootstrap</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ly</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
