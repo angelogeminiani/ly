@@ -81,9 +81,12 @@ abstract class Component
         i18n.localize(this._element);
     }
 
-    public appendTo(selector: string): void {
+    public appendTo(selector: string, clean_parent: boolean = false): void {
         const elem: HTMLElement | null = dom.getFirst(selector);
         if (!!elem) {
+            if (clean_parent) {
+                elem.innerHTML = '';
+            }
             elem.appendChild(this._element);
         }
     }
