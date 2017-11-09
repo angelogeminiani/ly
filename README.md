@@ -1,4 +1,12 @@
-ly
+lyts
 ==
 
-Application Server Platform
+A lean framework written in Typescript to build Applications.
+
+Installation
+------------
+```bash
+npm install --save lyts
+```
+
+

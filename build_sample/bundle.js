@@ -927,7 +927,6 @@ var dom = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENT_CHANGE_LANG; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_events_EventEmitter__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__browser__ = __webpack_require__(2);
@@ -963,10 +962,17 @@ var i18n = /** @class */ (function (_super) {
         _this.register("", { key: "" });
         return _this;
     }
-    Object.defineProperty(i18n.prototype, "lang", {
+    Object.defineProperty(i18n.prototype, "EVENT_CHANGE_LANG", {
         // ------------------------------------------------------------------------
         //                      p u b l i c
         // ------------------------------------------------------------------------
+        get: function () {
+            return i18n._EVENT_CHANGE_LANG;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(i18n.prototype, "lang", {
         get: function () {
             return this._lang;
         },
@@ -982,15 +988,15 @@ var i18n = /** @class */ (function (_super) {
     };
     i18n.prototype.registerDefault = function (dictionary) {
         var dic = (dictionary instanceof __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */]) ? dictionary : new __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */](dictionary);
-        this._dictionaries.put(i18n.DEF_LANG, dic);
+        this._dictionaries.put(i18n._DEF_LANG, dic);
     };
     i18n.prototype.get = function (label, def_val) {
         if (this._dictionaries.containsKey(this._lang)) {
             var dic = this._dictionaries.get(this._lang);
             return dic.get(label) || def_val || '';
         }
-        else if (this._dictionaries.containsKey(i18n.DEF_LANG)) {
-            var dic = this._dictionaries.get(i18n.DEF_LANG);
+        else if (this._dictionaries.containsKey(i18n._DEF_LANG)) {
+            var dic = this._dictionaries.get(i18n._DEF_LANG);
             return dic.get(label) || def_val || '';
         }
         return def_val || '';
@@ -1009,11 +1015,11 @@ var i18n = /** @class */ (function (_super) {
         var trigger_event = !!this._lang && this._dictionaries.count() > 0;
         this._lang = lang.split('-')[0];
         if (trigger_event) {
-            _super.prototype.emit.call(this, i18n.EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
+            _super.prototype.emit.call(this, i18n._EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
         }
     };
     i18n.prototype._localize = function (elem) {
-        var data_i18n = elem.getAttribute(i18n.ATTR_DATA_I18N) || '';
+        var data_i18n = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
         if (!!data_i18n) {
             var value = this.get(data_i18n);
             if (!!value) {
@@ -1042,16 +1048,15 @@ var i18n = /** @class */ (function (_super) {
     // ------------------------------------------------------------------------
     //                      c o n s t
     // ------------------------------------------------------------------------
-    i18n.ATTR_DATA_I18N = "data-i18n";
-    i18n.EVENT_CHANGE_LANG = "on_change_lang";
-    i18n.DEF_LANG = "base";
+    i18n._EVENT_CHANGE_LANG = "on_change_lang";
+    i18n._DEF_LANG = "base";
+    i18n._ATTR_DATA_I18N = "data-i18n";
     return i18n;
 }(__WEBPACK_IMPORTED_MODULE_1__commons_events_EventEmitter__["a" /* default */]));
 // ------------------------------------------------------------------------
 //                      e x p o r t
 // ------------------------------------------------------------------------
-/* harmony default export */ __webpack_exports__["b"] = (i18n.instance());
-var EVENT_CHANGE_LANG = i18n.EVENT_CHANGE_LANG;
+/* harmony default export */ __webpack_exports__["a"] = (i18n.instance());
 
 
 /***/ }),
@@ -1448,7 +1453,7 @@ var ly = {
     browser: __WEBPACK_IMPORTED_MODULE_5__view_browser__["a" /* default */],
     cookies: __WEBPACK_IMPORTED_MODULE_6__view_cookies__["a" /* default */],
     dom: __WEBPACK_IMPORTED_MODULE_7__view_dom__["b" /* default */],
-    i18n: __WEBPACK_IMPORTED_MODULE_8__view_i18n__["b" /* default */],
+    i18n: __WEBPACK_IMPORTED_MODULE_8__view_i18n__["a" /* default */],
     Events: __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__["a" /* default */],
     EventEmitter: __WEBPACK_IMPORTED_MODULE_11__commons_events_EventEmitter__["a" /* default */],
     Dictionary: __WEBPACK_IMPORTED_MODULE_9__commons_collections_Dictionary__["a" /* Dictionary */],
@@ -2068,7 +2073,7 @@ var Component = /** @class */ (function (_super) {
     //                      d o m
     // ------------------------------------------------------------------------
     Component.prototype.localize = function () {
-        __WEBPACK_IMPORTED_MODULE_6__i18n__["b" /* default */].localize(this._element);
+        __WEBPACK_IMPORTED_MODULE_6__i18n__["a" /* default */].localize(this._element);
     };
     Component.prototype.appendTo = function (selector) {
         var elem = __WEBPACK_IMPORTED_MODULE_2__dom__["b" /* default */].getFirst(selector);
@@ -2488,7 +2493,7 @@ var PageLogin = /** @class */ (function (_super) {
         _super.prototype.addEventListener.call(this, "[data-id=tarea]", "change", function () {
             console.log("change tarea", _super.prototype.getValue.call(_this, "[data-id=tarea]"));
         });
-        __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["b" /* default */].on(__WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["a" /* EVENT_CHANGE_LANG */], function () {
+        __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["a" /* default */].on(__WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["a" /* default */].EVENT_CHANGE_LANG, function () {
             console.log("CHANGE LANG");
             _this.localize();
         });
@@ -2496,7 +2501,7 @@ var PageLogin = /** @class */ (function (_super) {
     PageLogin.prototype.handleClick = function () {
         console.log("CLICK");
         console.log("hash", _super.prototype.hashCode.call(this));
-        __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["b" /* default */].lang = __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["b" /* default */].lang === "it" ? "en" : "it";
+        __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["a" /* default */].lang = __WEBPACK_IMPORTED_MODULE_2__src_view_i18n__["a" /* default */].lang === "it" ? "en" : "it";
     };
     PageLogin.prototype.handleClickRemove = function () {
         console.log("CLICK REMOVE");
@@ -2518,7 +2523,7 @@ var PageLogin = /** @class */ (function (_super) {
 
 function view(uid, props) {
     props = props || {};
-    return "\n            <div id=\"" + uid + "\">\n                <form>\n                    <label for=\"" + uid + "-username\" data-i18n=\"lbl_username\">INSERT USERNAME</label>\n                    <input id=\"" + uid + "-username\" data-id=\"username\" data-i18n=\"ph_username\"\n                        type=\"text\" value=\"" + (props.username || 'hello') + "\" placeholder=\"\">\n                    \n                    <br>\n                    \n                    <label for=\"" + uid + "-password\" data-i18n=\"lbl_password\">INSERT PASSWORD</label>    \n                    <input id=\"" + uid + "-password\" data-id=\"password\" data-i18n=\"ph_password\"\n                        type=\"password\" value=\"" + (props.password || '') + "\" placeholder=\"\">\n                     \n                     <br>\n                     \n                     <textarea id=\"" + uid + "-tarea\" data-id=\"tarea\"\n                         placeholder=\"\">TEST</textarea>\n                        \n                    <input id=\"" + uid + "-check\" data-id=\"check\"\n                        type=\"checkbox\" > \n                         \n                    <input id=\"" + uid + "-button\" data-id=\"btn-login\" type=\"button\" data-i18n=\"btn_login\" value=\"LOGIN\">\n                    \n                    <div data-id=\"btn-click\">\n                        CLICK ME!\n                    </div>\n                    <br>\n                    <div data-id=\"btn-click-remove\">\n                        CLICK TO REMOVE!\n                    </div>\n                    \n                    " + __WEBPACK_IMPORTED_MODULE_0__src_view_i18n__["b" /* default */].get("lbl_username") + "\n                    \n                </form>\n            </div>\n        ";
+    return "\n            <div id=\"" + uid + "\">\n                <form>\n                    <label for=\"" + uid + "-username\" data-i18n=\"lbl_username\">INSERT USERNAME</label>\n                    <input id=\"" + uid + "-username\" data-id=\"username\" data-i18n=\"ph_username\"\n                        type=\"text\" value=\"" + (props.username || 'hello') + "\" placeholder=\"\">\n                    \n                    <br>\n                    \n                    <label for=\"" + uid + "-password\" data-i18n=\"lbl_password\">INSERT PASSWORD</label>    \n                    <input id=\"" + uid + "-password\" data-id=\"password\" data-i18n=\"ph_password\"\n                        type=\"password\" value=\"" + (props.password || '') + "\" placeholder=\"\">\n                     \n                     <br>\n                     \n                     <textarea id=\"" + uid + "-tarea\" data-id=\"tarea\"\n                         placeholder=\"\">TEST</textarea>\n                        \n                    <input id=\"" + uid + "-check\" data-id=\"check\"\n                        type=\"checkbox\" > \n                         \n                    <input id=\"" + uid + "-button\" data-id=\"btn-login\" type=\"button\" data-i18n=\"btn_login\" value=\"LOGIN\">\n                    \n                    <div data-id=\"btn-click\">\n                        CLICK ME!\n                    </div>\n                    <br>\n                    <div data-id=\"btn-click-remove\">\n                        CLICK TO REMOVE!\n                    </div>\n                    \n                    " + __WEBPACK_IMPORTED_MODULE_0__src_view_i18n__["a" /* default */].get("lbl_username") + "\n                    \n                </form>\n            </div>\n        ";
 }
 
 

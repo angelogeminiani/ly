@@ -19,11 +19,9 @@ class i18n
     //                      c o n s t
     // ------------------------------------------------------------------------
 
-    public static readonly ATTR_DATA_I18N: string = "data-i18n";
-
-    public static readonly EVENT_CHANGE_LANG: string = "on_change_lang";
-
-    private static readonly DEF_LANG: string = "base";
+    private static readonly _EVENT_CHANGE_LANG: string = "on_change_lang";
+    private static readonly _DEF_LANG: string = "base";
+    private static readonly _ATTR_DATA_I18N: string = "data-i18n";
 
     // ------------------------------------------------------------------------
     //                      f i e l d s
@@ -50,6 +48,10 @@ class i18n
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get EVENT_CHANGE_LANG(): string {
+        return i18n._EVENT_CHANGE_LANG;
+    }
+
     public get lang(): string {
         return this._lang;
     }
@@ -65,15 +67,15 @@ class i18n
 
     public registerDefault(dictionary: Dictionary<string> | Items): void {
         let dic: Dictionary<string> = (dictionary instanceof Dictionary) ? dictionary as Dictionary<string> : new Dictionary(dictionary);
-        this._dictionaries.put(i18n.DEF_LANG, dic);
+        this._dictionaries.put(i18n._DEF_LANG, dic);
     }
 
     public get(label: string, def_val?: string): string {
         if (this._dictionaries.containsKey(this._lang)) {
             const dic: Dictionary<string> = this._dictionaries.get(this._lang);
             return dic.get(label) || def_val || '';
-        } else if (this._dictionaries.containsKey(i18n.DEF_LANG)) {
-            const dic: Dictionary<string> = this._dictionaries.get(i18n.DEF_LANG);
+        } else if (this._dictionaries.containsKey(i18n._DEF_LANG)) {
+            const dic: Dictionary<string> = this._dictionaries.get(i18n._DEF_LANG);
             return dic.get(label) || def_val || '';
         }
         return def_val || '';
@@ -94,12 +96,12 @@ class i18n
         const trigger_event: boolean = !!this._lang && this._dictionaries.count() > 0;
         this._lang = lang.split('-')[0];
         if (trigger_event) {
-            super.emit(i18n.EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
+            super.emit(i18n._EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
         }
     }
 
     private _localize(elem: HTMLElement): void {
-        const data_i18n: string = elem.getAttribute(i18n.ATTR_DATA_I18N) || '';
+        const data_i18n: string = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
         if (!!data_i18n) {
             const value: string = this.get(data_i18n);
             if (!!value) {
@@ -139,4 +141,3 @@ class i18n
 // ------------------------------------------------------------------------
 
 export default i18n.instance();
-export const EVENT_CHANGE_LANG: string = i18n.EVENT_CHANGE_LANG;

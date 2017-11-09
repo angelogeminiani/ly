@@ -1,6 +1,6 @@
 {
   "name": "lyts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Typescript Framework that just 'Love You'.",
   "main": "ly.ts",
   "scripts": {
@@ -16,6 +16,6 @@
   } ,
   "repository": {
     "type": "git",
-    "url": "git://github.com/angelogeminiani/ly.git"
+    "url": "git://github.com/angelogeminiani/lyts.git"
   }
 }

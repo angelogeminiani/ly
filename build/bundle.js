@@ -1322,7 +1322,6 @@ var objects = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export EVENT_CHANGE_LANG */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_events_EventEmitter__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__browser__ = __webpack_require__(2);
@@ -1358,10 +1357,17 @@ var i18n = /** @class */ (function (_super) {
         _this.register("", { key: "" });
         return _this;
     }
-    Object.defineProperty(i18n.prototype, "lang", {
+    Object.defineProperty(i18n.prototype, "EVENT_CHANGE_LANG", {
         // ------------------------------------------------------------------------
         //                      p u b l i c
         // ------------------------------------------------------------------------
+        get: function () {
+            return i18n._EVENT_CHANGE_LANG;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(i18n.prototype, "lang", {
         get: function () {
             return this._lang;
         },
@@ -1377,15 +1383,15 @@ var i18n = /** @class */ (function (_super) {
     };
     i18n.prototype.registerDefault = function (dictionary) {
         var dic = (dictionary instanceof __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */]) ? dictionary : new __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */](dictionary);
-        this._dictionaries.put(i18n.DEF_LANG, dic);
+        this._dictionaries.put(i18n._DEF_LANG, dic);
     };
     i18n.prototype.get = function (label, def_val) {
         if (this._dictionaries.containsKey(this._lang)) {
             var dic = this._dictionaries.get(this._lang);
             return dic.get(label) || def_val || '';
         }
-        else if (this._dictionaries.containsKey(i18n.DEF_LANG)) {
-            var dic = this._dictionaries.get(i18n.DEF_LANG);
+        else if (this._dictionaries.containsKey(i18n._DEF_LANG)) {
+            var dic = this._dictionaries.get(i18n._DEF_LANG);
             return dic.get(label) || def_val || '';
         }
         return def_val || '';
@@ -1404,11 +1410,11 @@ var i18n = /** @class */ (function (_super) {
         var trigger_event = !!this._lang && this._dictionaries.count() > 0;
         this._lang = lang.split('-')[0];
         if (trigger_event) {
-            _super.prototype.emit.call(this, i18n.EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
+            _super.prototype.emit.call(this, i18n._EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
         }
     };
     i18n.prototype._localize = function (elem) {
-        var data_i18n = elem.getAttribute(i18n.ATTR_DATA_I18N) || '';
+        var data_i18n = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
         if (!!data_i18n) {
             var value = this.get(data_i18n);
             if (!!value) {
@@ -1437,16 +1443,15 @@ var i18n = /** @class */ (function (_super) {
     // ------------------------------------------------------------------------
     //                      c o n s t
     // ------------------------------------------------------------------------
-    i18n.ATTR_DATA_I18N = "data-i18n";
-    i18n.EVENT_CHANGE_LANG = "on_change_lang";
-    i18n.DEF_LANG = "base";
+    i18n._EVENT_CHANGE_LANG = "on_change_lang";
+    i18n._DEF_LANG = "base";
+    i18n._ATTR_DATA_I18N = "data-i18n";
     return i18n;
 }(__WEBPACK_IMPORTED_MODULE_1__commons_events_EventEmitter__["a" /* default */]));
 // ------------------------------------------------------------------------
 //                      e x p o r t
 // ------------------------------------------------------------------------
 /* harmony default export */ __webpack_exports__["a"] = (i18n.instance());
-var EVENT_CHANGE_LANG = i18n.EVENT_CHANGE_LANG;
 
 
 /***/ }),

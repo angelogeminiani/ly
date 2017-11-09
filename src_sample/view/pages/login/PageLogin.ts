@@ -1,6 +1,6 @@
 import ly from "../../../../src/ly";
 import view from "./PageLoginView";
-import i18n, {EVENT_CHANGE_LANG} from "../../../../src/view/i18n";
+import i18n from "../../../../src/view/i18n";
 
 export default class PageLogin
     extends ly.Component {
@@ -55,7 +55,7 @@ export default class PageLogin
             console.log("change tarea", super.getValue("[data-id=tarea]"));
         });
 
-        i18n.on(EVENT_CHANGE_LANG, ()=>{
+        i18n.on(i18n.EVENT_CHANGE_LANG, ()=>{
             console.log("CHANGE LANG");
             this.localize();
         });
