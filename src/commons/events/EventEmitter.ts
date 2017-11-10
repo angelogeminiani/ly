@@ -1,9 +1,11 @@
 import Events, {Listener} from "./Events";
+import BaseObject from "../../application/BaseObject";
 
 /**
  * Class that emit events.
  */
-export default class EventEmitter {
+export default class EventEmitter
+    extends BaseObject {
 
     // ------------------------------------------------------------------------
     //                      f i e l d s
@@ -16,6 +18,7 @@ export default class EventEmitter {
     // ------------------------------------------------------------------------
 
     constructor(){
+        super();
         this._events = new Events;
     }
 

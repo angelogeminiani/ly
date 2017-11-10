@@ -22,7 +22,6 @@ abstract class Component
 
     private readonly _native_events: Dictionary<Events>; // event handlers for element events
     private readonly _native_elements: Dictionary<HTMLElement>; // map childs by hash_code
-    private readonly _uid: string;
     private readonly _element: HTMLElement;
 
 
@@ -34,7 +33,6 @@ abstract class Component
         super();
         this._native_events = new Dictionary<Events>();
         this._native_elements = new Dictionary<HTMLElement>();
-        this._uid = random.uniqueId("ly_comp_");
         this._element = this._createElement(this.render());
 
         this._normalizeElements();
@@ -53,10 +51,6 @@ abstract class Component
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
-
-    public get uid(): string {
-        return this._uid;
-    }
 
     public get outerHTML(): string {
         return !!this._element ? this._element.outerHTML : "";
