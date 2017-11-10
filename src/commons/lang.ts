@@ -190,8 +190,8 @@ export default class lang {
      * @return promise {{done: done}}
      */
     static funcLoop(func: Function, wait: number, ...args: any[]): any {
-        var callback: Function;
-        var timer = setInterval(function () {
+        let callback: Function;
+        let timer = setInterval(function () {
             let exit = !!func.apply(null, args);
             if (exit) {
                 clearInterval(timer);

@@ -2075,9 +2075,13 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.localize = function () {
         __WEBPACK_IMPORTED_MODULE_6__i18n__["a" /* default */].localize(this._element);
     };
-    Component.prototype.appendTo = function (selector) {
+    Component.prototype.appendTo = function (selector, clean_parent) {
+        if (clean_parent === void 0) { clean_parent = false; }
         var elem = __WEBPACK_IMPORTED_MODULE_2__dom__["b" /* default */].getFirst(selector);
         if (!!elem) {
+            if (clean_parent) {
+                elem.innerHTML = '';
+            }
             elem.appendChild(this._element);
         }
     };

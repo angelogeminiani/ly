@@ -8,7 +8,7 @@ export interface RequestOptions {
 export const DEFAULT_REQUEST_OPTIONS: RequestOptions = {
     ignoreCache: false,
     headers: {
-        Accept: 'application/json, text/javascript, text/plain',
+        Accept: 'application/json, text/javascript, text/plain, */*; q=0.01',
     },
     // default max duration for a request
     timeout: 5000,
