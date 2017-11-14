@@ -5,6 +5,7 @@ import lang from "../../commons/lang";
 import {Dictionary} from "../../commons/collections/Dictionary";
 import EventEmitter from "../../commons/events/EventEmitter";
 import i18n from "../i18n";
+import ElementWrapper from "./ElementWrapper";
 
 
 abstract class Component
@@ -75,8 +76,27 @@ abstract class Component
         i18n.localize(this._element);
     }
 
-    public appendTo(selector: string, clean_parent: boolean = false): void {
-        const elem: HTMLElement | null = dom.getFirst(selector);
+    public get(selector: string): Array<ElementWrapper> {
+        let result: Array<ElementWrapper> = [];
+        let elements: Array<HTMLElement> = dom.get(selector, this._element);
+        for (let elem of elements) {
+            result.push(new ElementWrapper(elem));
+        }
+        return result;
+    }
+
+    public getFirst(selector: string): ElementWrapper {
+        return new ElementWrapper(dom.getFirst(selector, this._element));
+    }
+
+    public getLast(selector: string): ElementWrapper {
+        return new ElementWrapper(dom.getLast(selector, this._element));
+    }
+
+    public appendTo(selector: string | ElementWrapper, clean_parent: boolean = false): void {
+        const elem: ElementWrapper = (selector instanceof ElementWrapper)
+            ? selector
+            : new ElementWrapper(dom.getFirst(selector));
         if (!!elem) {
             if (clean_parent) {
                 elem.innerHTML = '';
