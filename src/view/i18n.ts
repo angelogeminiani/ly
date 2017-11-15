@@ -114,7 +114,7 @@ class i18n
                         elem.setAttribute("placeholder", value);
                     }
                 } else {
-                    elem.innerText = value;
+                    elem.innerHTML = value;
                 }
             }
         }
