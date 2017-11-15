@@ -292,7 +292,7 @@ abstract class Component
         }
     }
 
-    private _classAdd(elem: HTMLElement, class_name: string | string[]): boolean {
+    private _classAdd(elem: HTMLElement|null, class_name: string | string[]): boolean {
         if (!!elem) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -305,11 +305,11 @@ abstract class Component
         return false;
     }
 
-    private _classRemove(elem: HTMLElement, class_name: string | string[]): boolean {
+    private _classRemove(elem: HTMLElement|null, class_name: string | string[]): boolean {
         if (!!elem) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
-                if (!elem.classList.contains(aclass)) {
+                if (elem.classList.contains(aclass)) {
                     elem.classList.remove(aclass)
                 }
             }

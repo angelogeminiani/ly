@@ -1444,7 +1444,7 @@ var i18n = /** @class */ (function (_super) {
                     }
                 }
                 else {
-                    elem.innerText = value;
+                    elem.innerHTML = value;
                 }
             }
         }
@@ -1910,6 +1910,12 @@ var Component = /** @class */ (function (_super) {
         }
         return this._hash(this._element);
     };
+    Component.prototype.hide = function () {
+        this._classAdd(this._element, 'hidden');
+    };
+    Component.prototype.show = function () {
+        this._classRemove(this._element, 'hidden');
+    };
     // ------------------------------------------------------------------------
     //                      d o m
     // ------------------------------------------------------------------------
@@ -2007,31 +2013,11 @@ var Component = /** @class */ (function (_super) {
     };
     Component.prototype.classAdd = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
-        if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
-            for (var _i = 0, classes_3 = classes; _i < classes_3.length; _i++) {
-                var aclass = classes_3[_i];
-                if (!elem.classList.contains(aclass)) {
-                    elem.classList.add(aclass);
-                }
-            }
-            return true;
-        }
-        return false;
+        return this._classAdd(elem, class_name);
     };
     Component.prototype.classRemove = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
-        if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
-            for (var _i = 0, classes_4 = classes; _i < classes_4.length; _i++) {
-                var aclass = classes_4[_i];
-                if (!elem.classList.contains(aclass)) {
-                    elem.classList.remove(aclass);
-                }
-            }
-            return true;
-        }
-        return false;
+        return this._classRemove(elem, class_name);
     };
     Component.prototype.classSet = function (selector, value) {
         return this.attrSet(selector, "class", name);
@@ -2123,6 +2109,32 @@ var Component = /** @class */ (function (_super) {
                 //console.log("Component._free()", hash_code, names, count);
             }
         }
+    };
+    Component.prototype._classAdd = function (elem, class_name) {
+        if (!!elem) {
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
+            for (var _i = 0, classes_3 = classes; _i < classes_3.length; _i++) {
+                var aclass = classes_3[_i];
+                if (!elem.classList.contains(aclass)) {
+                    elem.classList.add(aclass);
+                }
+            }
+            return true;
+        }
+        return false;
+    };
+    Component.prototype._classRemove = function (elem, class_name) {
+        if (!!elem) {
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
+            for (var _i = 0, classes_4 = classes; _i < classes_4.length; _i++) {
+                var aclass = classes_4[_i];
+                if (!elem.classList.contains(aclass)) {
+                    elem.classList.remove(aclass);
+                }
+            }
+            return true;
+        }
+        return false;
     };
     Component.prototype._normalizeElements = function () {
         var _this = this;
