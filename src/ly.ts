@@ -8,16 +8,13 @@ import browser from "./view/browser";
 import cookies from "./view/cookies";
 import dom from "./view/dom";
 import i18n from "./view/i18n";
-
 //-- classes --//
 import {Dictionary} from "./commons/collections/Dictionary";
 import Events from "./commons/events/Events";
 import EventEmitter from "./commons/events/EventEmitter";
 import {HttpClient} from "./net/HttpClient";
-
 //-- views --//
 import Component from "./view/components/Component";
-
 //-- singleton --//
 import Application from "./application/Application";
 
@@ -34,7 +31,7 @@ const ly = {
     random: random,
     browser: browser,
     cookies: cookies,
-    dom:dom,
+    dom: dom,
     i18n: i18n,
 
     Events: Events,

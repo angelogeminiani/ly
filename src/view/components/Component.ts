@@ -1,5 +1,4 @@
 import Events, {Listener, Listeners} from "../../commons/events/Events";
-import random from "../../commons/random";
 import dom from "../dom";
 import lang from "../../commons/lang";
 import {Dictionary} from "../../commons/collections/Dictionary";
@@ -14,8 +13,6 @@ abstract class Component
     // ------------------------------------------------------------------------
     //                      c o n s t
     // ------------------------------------------------------------------------
-
-    private static readonly HASH_ATTRIBUTE: string = "__hash__";
 
     // ------------------------------------------------------------------------
     //                      f i e l d s
@@ -80,23 +77,23 @@ abstract class Component
         let result: Array<ElementWrapper> = [];
         let elements: Array<HTMLElement> = dom.get(selector, this._element);
         for (let elem of elements) {
-            result.push(new ElementWrapper(elem));
+            result.push(new ElementWrapper(this, elem));
         }
         return result;
     }
 
     public getFirst(selector: string): ElementWrapper {
-        return new ElementWrapper(dom.getFirst(selector, this._element));
+        return new ElementWrapper(this, dom.getFirst(selector, this._element));
     }
 
     public getLast(selector: string): ElementWrapper {
-        return new ElementWrapper(dom.getLast(selector, this._element));
+        return new ElementWrapper(this, dom.getLast(selector, this._element));
     }
 
     public appendTo(selector: string | ElementWrapper, clean_parent: boolean = false): void {
         const elem: ElementWrapper = (selector instanceof ElementWrapper)
             ? selector
-            : new ElementWrapper(dom.getFirst(selector));
+            : new ElementWrapper(this, dom.getFirst(selector));
         if (!!elem) {
             if (clean_parent) {
                 elem.innerHTML = '';
@@ -247,10 +244,13 @@ abstract class Component
      * @param {string} event_name
      * @param {Listener} listener
      */
-    protected addEventListener(selector: string, event_name: string, listener: Listener): void {
+    addEventListener(selector: string, event_name: string, listener: Listener): void {
         const elem: HTMLElement | null = this._resolveElement(selector, this._element);
         if (!!elem) {
             this._addEventListener(elem, event_name, listener);
+        } else {
+            console.warn("Component.addEventListener()",
+                "Unable to add event '" + event_name + "' to '" + selector + "': Element not found!");
         }
     }
 
@@ -259,7 +259,7 @@ abstract class Component
      * @param {string} selector
      * @param {string | string[]} event_names
      */
-    protected removeEventListener(selector: string, event_names?: string | string[]): void {
+    removeEventListener(selector: string, event_names?: string | string[]): void {
         const elem: HTMLElement | null = this._resolveElement(selector, this._element);
         if (!!elem) {
             this._removeEventListener(elem, lang.toArray(event_names));
@@ -403,15 +403,13 @@ abstract class Component
     }
 
     private _hash(elem: HTMLElement | null): string {
-        if (!!elem) {
-            if (!elem.hasAttribute(Component.HASH_ATTRIBUTE)) {
-                let hash_code = random.id();
-                elem.setAttribute(Component.HASH_ATTRIBUTE, hash_code);
-
+        if (null != elem) {
+            let hash_code: string = ElementWrapper.hash(elem);
+            if (!!hash_code) {
                 // add new element reference to internal hash dictionary
                 this._native_elements.put(hash_code, elem);
             }
-            return elem.getAttribute(Component.HASH_ATTRIBUTE) || '';
+            return hash_code;
         }
         return '';
     }

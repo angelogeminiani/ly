@@ -1,9 +1,10 @@
-import ly from "../../../../src/ly";
 import view from "./PageLoginView";
 import i18n from "../../../../src/view/i18n";
+import Component from "../../../../src/view/components/Component";
+import ElementWrapper from "../../../../src/view/components/ElementWrapper";
 
 export default class PageLogin
-    extends ly.Component {
+    extends Component {
 
 
     // ------------------------------------------------------------------------
@@ -42,8 +43,13 @@ export default class PageLogin
     // ------------------------------------------------------------------------
 
     private init(): void {
+
+        let btn_click: ElementWrapper = super.getFirst("[data-id=btn-click]");
+
         // handle events
-        super.addEventListener("[data-id=btn-click]", "click", this.handleClick);
+        // super.addEventListener("[data-id=btn-click]", "click", this.handleClick);
+        btn_click.addEventListener("click", this.handleClick);
+
         super.addEventListener("[data-id=btn-click-remove]", "click", this.handleClickRemove);
         super.addEventListener("[data-id=username]", "keydown", () => {
             console.log("change input", super.getValue("[data-id=username]"));
@@ -55,7 +61,7 @@ export default class PageLogin
             console.log("change tarea", super.getValue("[data-id=tarea]"));
         });
 
-        i18n.on(i18n.EVENT_CHANGE_LANG, ()=>{
+        i18n.on(i18n.EVENT_CHANGE_LANG, () => {
             console.log("CHANGE LANG");
             this.localize();
         });
@@ -65,7 +71,7 @@ export default class PageLogin
         console.log("CLICK");
         console.log("hash", super.hashCode());
 
-        i18n.lang = i18n.lang==="it" ? "en" : "it";
+        i18n.lang = i18n.lang === "it" ? "en" : "it";
     }
 
     private handleClickRemove(): void {

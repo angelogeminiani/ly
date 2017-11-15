@@ -585,250 +585,10 @@ var browser = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections_Dictionary__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang__ = __webpack_require__(0);
-
-
-/**
- * Events controller.
- *
- * <code>
- *
- * import {Events} from "./events/Events";
- *
- * class MyEmitter extends Events{}
- *
- * let myEmitter = new MyEmitter();
- * myEmitter.on('event', () => {
- *   console.log('event occured')
- * });
- *
- * myEmitter.emit('event');
- *
- * </code>
- *
- *
- */
-var Events = /** @class */ (function () {
-    function Events() {
-        // ------------------------------------------------------------------------
-        //                      C O N S T
-        // ------------------------------------------------------------------------
-        // ------------------------------------------------------------------------
-        //                      f i e l d s
-        // ------------------------------------------------------------------------
-        this._events = new __WEBPACK_IMPORTED_MODULE_0__collections_Dictionary__["a" /* Dictionary */]();
-        this._maxListeners = 0;
-    }
-    // ------------------------------------------------------------------------
-    //                      p r o p e r t i e s
-    // ------------------------------------------------------------------------
-    Events.prototype.getMaxListeners = function () {
-        return this._maxListeners === 0 ? Events.DEFAULT_MAX_LISTENERS : this._maxListeners;
-    };
-    Events.prototype.setMaxListeners = function (limit) {
-        this._maxListeners = limit;
-        return this;
-    };
-    // ------------------------------------------------------------------------
-    //                      p u b l i c
-    // ------------------------------------------------------------------------
-    Events.prototype.addListener = function (eventName, listener) {
-        return this.on(eventName, listener);
-    };
-    Events.prototype.on = function (eventName, listener) {
-        this._registerEvent(eventName, listener, false);
-        return this;
-    };
-    Events.prototype.once = function (eventName, listener) {
-        this._registerEvent(eventName, listener, true);
-        return this;
-    };
-    Events.prototype.off = function (event_names, listener) {
-        var names = __WEBPACK_IMPORTED_MODULE_1__lang__["a" /* default */].isArray(event_names)
-            ? event_names
-            : !!event_names ? [event_names] : [];
-        if (!!listener) {
-            for (var _i = 0, names_1 = names; _i < names_1.length; _i++) {
-                var name_1 = names_1[_i];
-                this.removeListener(name_1, listener);
-            }
-        }
-        else {
-            if (names.length > 0) {
-                this.removeAllListeners(names);
-            }
-            else {
-                this.removeAllListeners();
-            }
-        }
-        return this;
-    };
-    Events.prototype.emit = function (eventName) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var listeners = this._events.get(eventName);
-        var listenerCount = this.listenerCount(eventName);
-        if (listeners) {
-            listeners.map(function (listener) { return listener.apply(void 0, args); });
-        }
-        return listenerCount !== 0;
-    };
-    Events.prototype.eventNames = function () {
-        return this._events.keys();
-    };
-    Events.prototype.listeners = function (eventName) {
-        return this._events.get(eventName);
-    };
-    Events.prototype.listenerCount = function (eventName) {
-        var listeners = this._events.get(eventName);
-        return listeners === undefined ? 0 : listeners.length;
-    };
-    Events.prototype.removeAllListeners = function (eventNames) {
-        var _this = this;
-        if (!eventNames) {
-            eventNames = this._events.keys();
-        }
-        eventNames.forEach(function (eventName) { return _this._events.remove(eventName); });
-        return this;
-    };
-    Events.prototype.removeListener = function (eventName, listener) {
-        var listeners = this.listeners(eventName);
-        var filtered_listeners = !!listeners
-            ? listeners.filter(function (item) { return item === listener; }) // filter only valid
-            : [];
-        this._events.put(eventName, filtered_listeners);
-        return this;
-    };
-    Events.prototype.clear = function () {
-        this._events.clear();
-    };
-    // ------------------------------------------------------------------------
-    //                      p r i v a t e
-    // ------------------------------------------------------------------------
-    Events.prototype._registerEvent = function (eventName, listener, type) {
-        if (this._listenerLimitReached(eventName)) {
-            console.warn("Maximum listener reached, new Listener not added");
-            return;
-        }
-        if (type === true) {
-            listener = this._createOnceListener(listener, eventName);
-        }
-        var listeners = Events._createListeners(listener, this.listeners(eventName));
-        this._events.put(eventName, listeners);
-        return;
-    };
-    Events.prototype._createOnceListener = function (listener, eventName) {
-        var _this = this;
-        return function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            _this.removeListener(eventName, listener);
-            return listener.apply(void 0, args);
-        };
-    };
-    Events.prototype._listenerLimitReached = function (eventName) {
-        return this.listenerCount(eventName) >= this.getMaxListeners();
-    };
-    Events._createListeners = function (listener, listeners) {
-        if (!listeners) {
-            listeners = [];
-        }
-        listeners.push(listener);
-        return listeners;
-    };
-    Events.DEFAULT_MAX_LISTENERS = 10; // max listener for each event name
-    return Events;
-}());
-// ------------------------------------------------------------------------
-//                      e x p o r t s
-// ------------------------------------------------------------------------
-/* harmony default export */ __webpack_exports__["a"] = (Events);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
-
-var strings = /** @class */ (function () {
-    function strings() {
-    }
-    // ------------------------------------------------------------------------
-    //                      p u b l i c
-    // ------------------------------------------------------------------------
-    /**
-     * Replace all occurrences of 'find' parameter with 'replace' parameter in a string 'str'.
-     * @param {string[] | string} find Parameter to find
-     * @param {string} replace Replace value
-     * @param {string} str Source string
-     * @return {string} String with replaced values
-     */
-    strings.replaceAll = function (find, replace, str) {
-        var rep_array = [];
-        if (__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */].isString(find)) {
-            rep_array.push(find);
-        }
-        else {
-            rep_array.push.apply(rep_array, find);
-        }
-        var result = str;
-        for (var i = 0; i < rep_array.length; i++) {
-            result = strings._replaceAll(rep_array[i], replace, result);
-        }
-        return result;
-    };
-    strings.endWith = function (str, suffix) {
-        if (str === null || suffix === null)
-            return false;
-        return str.indexOf(suffix, str.length - suffix.length) !== -1;
-    };
-    strings.startWith = function (str, prefix) {
-        if (str === null || prefix === null)
-            return false;
-        return str.indexOf(prefix) === 0;
-    };
-    strings.fillLeft = function (value, fill, size) {
-        while (value.length < size) {
-            value = fill + value;
-        }
-        return value;
-    };
-    strings.fillRight = function (value, fill, size) {
-        while (value.length < size) {
-            value = value + fill;
-        }
-        return value;
-    };
-    // ------------------------------------------------------------------------
-    //                      p r i v a t e
-    // ------------------------------------------------------------------------
-    strings._escapeRegExp = function (value) {
-        return value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-    };
-    strings._replaceAll = function (find, replace, str) {
-        return str.replace(new RegExp(strings._escapeRegExp(find), 'g'), replace);
-    };
-    return strings;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (strings);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* unused harmony export SelectorType */
 /* unused harmony export SelectorParser */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__browser__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_strings__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_strings__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_lang__ = __webpack_require__(0);
 
 
@@ -1222,11 +982,251 @@ var dom = /** @class */ (function () {
 
 
 /***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__collections_Dictionary__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang__ = __webpack_require__(0);
+
+
+/**
+ * Events controller.
+ *
+ * <code>
+ *
+ * import {Events} from "./events/Events";
+ *
+ * class MyEmitter extends Events{}
+ *
+ * let myEmitter = new MyEmitter();
+ * myEmitter.on('event', () => {
+ *   console.log('event occured')
+ * });
+ *
+ * myEmitter.emit('event');
+ *
+ * </code>
+ *
+ *
+ */
+var Events = /** @class */ (function () {
+    function Events() {
+        // ------------------------------------------------------------------------
+        //                      C O N S T
+        // ------------------------------------------------------------------------
+        // ------------------------------------------------------------------------
+        //                      f i e l d s
+        // ------------------------------------------------------------------------
+        this._events = new __WEBPACK_IMPORTED_MODULE_0__collections_Dictionary__["a" /* Dictionary */]();
+        this._maxListeners = 0;
+    }
+    // ------------------------------------------------------------------------
+    //                      p r o p e r t i e s
+    // ------------------------------------------------------------------------
+    Events.prototype.getMaxListeners = function () {
+        return this._maxListeners === 0 ? Events.DEFAULT_MAX_LISTENERS : this._maxListeners;
+    };
+    Events.prototype.setMaxListeners = function (limit) {
+        this._maxListeners = limit;
+        return this;
+    };
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+    Events.prototype.addListener = function (eventName, listener) {
+        return this.on(eventName, listener);
+    };
+    Events.prototype.on = function (eventName, listener) {
+        this._registerEvent(eventName, listener, false);
+        return this;
+    };
+    Events.prototype.once = function (eventName, listener) {
+        this._registerEvent(eventName, listener, true);
+        return this;
+    };
+    Events.prototype.off = function (event_names, listener) {
+        var names = __WEBPACK_IMPORTED_MODULE_1__lang__["a" /* default */].isArray(event_names)
+            ? event_names
+            : !!event_names ? [event_names] : [];
+        if (!!listener) {
+            for (var _i = 0, names_1 = names; _i < names_1.length; _i++) {
+                var name_1 = names_1[_i];
+                this.removeListener(name_1, listener);
+            }
+        }
+        else {
+            if (names.length > 0) {
+                this.removeAllListeners(names);
+            }
+            else {
+                this.removeAllListeners();
+            }
+        }
+        return this;
+    };
+    Events.prototype.emit = function (eventName) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var listeners = this._events.get(eventName);
+        var listenerCount = this.listenerCount(eventName);
+        if (listeners) {
+            listeners.map(function (listener) { return listener.apply(void 0, args); });
+        }
+        return listenerCount !== 0;
+    };
+    Events.prototype.eventNames = function () {
+        return this._events.keys();
+    };
+    Events.prototype.listeners = function (eventName) {
+        return this._events.get(eventName);
+    };
+    Events.prototype.listenerCount = function (eventName) {
+        var listeners = this._events.get(eventName);
+        return listeners === undefined ? 0 : listeners.length;
+    };
+    Events.prototype.removeAllListeners = function (eventNames) {
+        var _this = this;
+        if (!eventNames) {
+            eventNames = this._events.keys();
+        }
+        eventNames.forEach(function (eventName) { return _this._events.remove(eventName); });
+        return this;
+    };
+    Events.prototype.removeListener = function (eventName, listener) {
+        var listeners = this.listeners(eventName);
+        var filtered_listeners = !!listeners
+            ? listeners.filter(function (item) { return item === listener; }) // filter only valid
+            : [];
+        this._events.put(eventName, filtered_listeners);
+        return this;
+    };
+    Events.prototype.clear = function () {
+        this._events.clear();
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    Events.prototype._registerEvent = function (eventName, listener, type) {
+        if (this._listenerLimitReached(eventName)) {
+            console.warn("Maximum listener reached, new Listener not added");
+            return;
+        }
+        if (type === true) {
+            listener = this._createOnceListener(listener, eventName);
+        }
+        var listeners = Events._createListeners(listener, this.listeners(eventName));
+        this._events.put(eventName, listeners);
+        return;
+    };
+    Events.prototype._createOnceListener = function (listener, eventName) {
+        var _this = this;
+        return function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            _this.removeListener(eventName, listener);
+            return listener.apply(void 0, args);
+        };
+    };
+    Events.prototype._listenerLimitReached = function (eventName) {
+        return this.listenerCount(eventName) >= this.getMaxListeners();
+    };
+    Events._createListeners = function (listener, listeners) {
+        if (!listeners) {
+            listeners = [];
+        }
+        listeners.push(listener);
+        return listeners;
+    };
+    Events.DEFAULT_MAX_LISTENERS = 10; // max listener for each event name
+    return Events;
+}());
+// ------------------------------------------------------------------------
+//                      e x p o r t s
+// ------------------------------------------------------------------------
+/* harmony default export */ __webpack_exports__["a"] = (Events);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
+
+var strings = /** @class */ (function () {
+    function strings() {
+    }
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+    /**
+     * Replace all occurrences of 'find' parameter with 'replace' parameter in a string 'str'.
+     * @param {string[] | string} find Parameter to find
+     * @param {string} replace Replace value
+     * @param {string} str Source string
+     * @return {string} String with replaced values
+     */
+    strings.replaceAll = function (find, replace, str) {
+        var rep_array = [];
+        if (__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */].isString(find)) {
+            rep_array.push(find);
+        }
+        else {
+            rep_array.push.apply(rep_array, find);
+        }
+        var result = str;
+        for (var i = 0; i < rep_array.length; i++) {
+            result = strings._replaceAll(rep_array[i], replace, result);
+        }
+        return result;
+    };
+    strings.endWith = function (str, suffix) {
+        if (str === null || suffix === null)
+            return false;
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    };
+    strings.startWith = function (str, prefix) {
+        if (str === null || prefix === null)
+            return false;
+        return str.indexOf(prefix) === 0;
+    };
+    strings.fillLeft = function (value, fill, size) {
+        while (value.length < size) {
+            value = fill + value;
+        }
+        return value;
+    };
+    strings.fillRight = function (value, fill, size) {
+        while (value.length < size) {
+            value = value + fill;
+        }
+        return value;
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    strings._escapeRegExp = function (value) {
+        return value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    };
+    strings._replaceAll = function (find, replace, str) {
+        return str.replace(new RegExp(strings._escapeRegExp(find), 'g'), replace);
+    };
+    return strings;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (strings);
+
+
+/***/ }),
 /* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Events__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Events__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__application_BaseObject__ = __webpack_require__(13);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1340,7 +1340,7 @@ var objects = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_events_EventEmitter__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__browser__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom__ = __webpack_require__(4);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1477,15 +1477,15 @@ var i18n = /** @class */ (function (_super) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_lang__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_strings__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_strings__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_objects__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_random__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_browser__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_dom__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_i18n__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_collections_Dictionary__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_events_EventEmitter__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_components_Component__ = __webpack_require__(15);
@@ -1543,7 +1543,7 @@ var ly = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__strings__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__strings__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objects__ = __webpack_require__(8);
 
 
@@ -1846,14 +1846,13 @@ var HttpClient = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_events_Events__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_random__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_lang__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_collections_Dictionary__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_events_EventEmitter__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__i18n__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_events_Events__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_lang__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__i18n__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(16);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1871,7 +1870,6 @@ var __extends = (this && this.__extends) || (function () {
 
 
 
-
 var Component = /** @class */ (function (_super) {
     __extends(Component, _super);
     // ------------------------------------------------------------------------
@@ -1879,8 +1877,8 @@ var Component = /** @class */ (function (_super) {
     // ------------------------------------------------------------------------
     function Component() {
         var _this = _super.call(this) || this;
-        _this._native_events = new __WEBPACK_IMPORTED_MODULE_4__commons_collections_Dictionary__["a" /* Dictionary */]();
-        _this._native_elements = new __WEBPACK_IMPORTED_MODULE_4__commons_collections_Dictionary__["a" /* Dictionary */]();
+        _this._native_events = new __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__["a" /* Dictionary */]();
+        _this._native_elements = new __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__["a" /* Dictionary */]();
         _this._element = _this._createElement(_this.render());
         _this._normalizeElements();
         _this.localize();
@@ -1916,28 +1914,28 @@ var Component = /** @class */ (function (_super) {
     //                      d o m
     // ------------------------------------------------------------------------
     Component.prototype.localize = function () {
-        __WEBPACK_IMPORTED_MODULE_6__i18n__["a" /* default */].localize(this._element);
+        __WEBPACK_IMPORTED_MODULE_5__i18n__["a" /* default */].localize(this._element);
     };
     Component.prototype.get = function (selector) {
         var result = [];
-        var elements = __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].get(selector, this._element);
+        var elements = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].get(selector, this._element);
         for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
             var elem = elements_1[_i];
-            result.push(new __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__["a" /* default */](elem));
+            result.push(new __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */](this, elem));
         }
         return result;
     };
     Component.prototype.getFirst = function (selector) {
-        return new __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__["a" /* default */](__WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getFirst(selector, this._element));
+        return new __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */](this, __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getFirst(selector, this._element));
     };
     Component.prototype.getLast = function (selector) {
-        return new __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__["a" /* default */](__WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getLast(selector, this._element));
+        return new __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */](this, __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getLast(selector, this._element));
     };
     Component.prototype.appendTo = function (selector, clean_parent) {
         if (clean_parent === void 0) { clean_parent = false; }
-        var elem = (selector instanceof __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__["a" /* default */])
+        var elem = (selector instanceof __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */])
             ? selector
-            : new __WEBPACK_IMPORTED_MODULE_7__ElementWrapper__["a" /* default */](__WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getFirst(selector));
+            : new __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */](this, __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getFirst(selector));
         if (!!elem) {
             if (clean_parent) {
                 elem.innerHTML = '';
@@ -1977,7 +1975,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.classHas = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
         if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].toArray(class_name);
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
             for (var _i = 0, classes_1 = classes; _i < classes_1.length; _i++) {
                 var aclass = classes_1[_i];
                 if (!elem.classList.contains(aclass)) {
@@ -1997,7 +1995,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.classHasOne = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
         if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].toArray(class_name);
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
             for (var _i = 0, classes_2 = classes; _i < classes_2.length; _i++) {
                 var aclass = classes_2[_i];
                 if (elem.classList.contains(aclass)) {
@@ -2010,7 +2008,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.classAdd = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
         if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].toArray(class_name);
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
             for (var _i = 0, classes_3 = classes; _i < classes_3.length; _i++) {
                 var aclass = classes_3[_i];
                 if (!elem.classList.contains(aclass)) {
@@ -2024,7 +2022,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.classRemove = function (selector, class_name) {
         var elem = this._getFirstElement(selector);
         if (!!elem) {
-            var classes = __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].toArray(class_name);
+            var classes = __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(class_name);
             for (var _i = 0, classes_4 = classes; _i < classes_4.length; _i++) {
                 var aclass = classes_4[_i];
                 if (!elem.classList.contains(aclass)) {
@@ -2063,7 +2061,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.getValue = function (selector) {
         var elem = this._getFirstElement(selector);
         if (!!elem) {
-            return __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getValue(elem);
+            return __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getValue(elem);
         }
         return null;
     };
@@ -2081,6 +2079,9 @@ var Component = /** @class */ (function (_super) {
         if (!!elem) {
             this._addEventListener(elem, event_name, listener);
         }
+        else {
+            console.warn("Component.addEventListener()", "Unable to add event '" + event_name + "' to '" + selector + "': Element not found!");
+        }
     };
     /**
      * Remove event listener from internal HTMLElement
@@ -2090,7 +2091,7 @@ var Component = /** @class */ (function (_super) {
     Component.prototype.removeEventListener = function (selector, event_names) {
         var elem = this._resolveElement(selector, this._element);
         if (!!elem) {
-            this._removeEventListener(elem, __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].toArray(event_names));
+            this._removeEventListener(elem, __WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].toArray(event_names));
         }
     };
     // ------------------------------------------------------------------------
@@ -2128,13 +2129,13 @@ var Component = /** @class */ (function (_super) {
         // events on root
         this._normalizeElement(this._element);
         // events on child
-        __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].forEachChild(this._element, function (elem) {
+        __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].forEachChild(this._element, function (elem) {
             _this._normalizeElement(elem);
         }, true);
     };
     Component.prototype._resolveElement = function (elem_or_selector, defVal) {
         if (!!elem_or_selector) {
-            if (__WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].isString(elem_or_selector)) {
+            if (__WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].isString(elem_or_selector)) {
                 var found = this._getFirstElement(elem_or_selector);
                 if (!!found) {
                     return this._normalizeElement(found);
@@ -2150,13 +2151,13 @@ var Component = /** @class */ (function (_super) {
         return !!defVal ? this._normalizeElement(defVal) : null;
     };
     Component.prototype._getElement = function (selector) {
-        return __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].get(selector, this._element);
+        return __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].get(selector, this._element);
     };
     Component.prototype._getFirstElement = function (selector) {
-        return __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getFirst(selector, this._element);
+        return __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getFirst(selector, this._element);
     };
     Component.prototype._getLastElement = function (selector) {
-        return __WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].getLast(selector, this._element);
+        return __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].getLast(selector, this._element);
     };
     Component.prototype._addEventListener = function (elem, event_name, listener) {
         var hash_code = this._hash(elem);
@@ -2203,7 +2204,7 @@ var Component = /** @class */ (function (_super) {
     };
     Component.prototype._createElement = function (html) {
         html = html.trim();
-        return this._normalizeElement(__WEBPACK_IMPORTED_MODULE_2__dom__["a" /* default */].newElement(html));
+        return this._normalizeElement(__WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].newElement(html));
     };
     Component.prototype._normalizeElement = function (elem) {
         // add hash
@@ -2212,23 +2213,18 @@ var Component = /** @class */ (function (_super) {
         return elem;
     };
     Component.prototype._hash = function (elem) {
-        if (!!elem) {
-            if (!elem.hasAttribute(Component.HASH_ATTRIBUTE)) {
-                var hash_code = __WEBPACK_IMPORTED_MODULE_1__commons_random__["a" /* default */].id();
-                elem.setAttribute(Component.HASH_ATTRIBUTE, hash_code);
+        if (null != elem) {
+            var hash_code = __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__["a" /* default */].hash(elem);
+            if (!!hash_code) {
                 // add new element reference to internal hash dictionary
                 this._native_elements.put(hash_code, elem);
             }
-            return elem.getAttribute(Component.HASH_ATTRIBUTE) || '';
+            return hash_code;
         }
         return '';
     };
-    // ------------------------------------------------------------------------
-    //                      c o n s t
-    // ------------------------------------------------------------------------
-    Component.HASH_ATTRIBUTE = "__hash__";
     return Component;
-}(__WEBPACK_IMPORTED_MODULE_5__commons_events_EventEmitter__["a" /* default */]));
+}(__WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__["a" /* default */]));
 // ------------------------------------------------------------------------
 //                      e x p o r t s
 // ------------------------------------------------------------------------
@@ -2240,12 +2236,21 @@ var Component = /** @class */ (function (_super) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_random__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dom__ = __webpack_require__(4);
+
+
+/**
+ * Wrap a native HTMLElement to expose at Component methods.
+ */
 var ElementWrapper = /** @class */ (function () {
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
-    function ElementWrapper(elem) {
+    function ElementWrapper(owner, elem) {
+        this._owner = owner;
         this._element = elem;
+        this._hash_all();
     }
     // ------------------------------------------------------------------------
     //                      p u b l i c
@@ -2273,6 +2278,60 @@ var ElementWrapper = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    ElementWrapper.prototype.addEventListener = function (event_name, listener) {
+        if (null != this._element && !!this._owner) {
+            var hash_code = ElementWrapper.hash(this._element);
+            if (!!hash_code) {
+                var selector = "[" + ElementWrapper.HASH_ATTRIBUTE + "=" + hash_code + "]";
+                this._owner.addEventListener(selector, event_name, listener);
+            }
+        }
+        else {
+            console.error("ElementWrapper.addEventListener()", "Missing HTML Element or Component Owner.");
+        }
+    };
+    ElementWrapper.prototype.removeEventListener = function (event_names) {
+        if (null != this._element && !!this._owner) {
+            var hash_code = ElementWrapper.hash(this._element);
+            if (!!hash_code) {
+                var selector = "[" + ElementWrapper.HASH_ATTRIBUTE + "=" + hash_code + "]";
+                this._owner.removeEventListener(selector, event_names);
+            }
+        }
+        else {
+            console.error("ElementWrapper.removeEventListener()", "Missing HTML Element or Component Owner.");
+        }
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    ElementWrapper.prototype._hash_all = function () {
+        if (null != this._element) {
+            // events on root
+            ElementWrapper.hash(this._element);
+            // events on child
+            __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].forEachChild(this._element, function (elem) {
+                ElementWrapper.hash(elem);
+            }, true);
+        }
+    };
+    // ------------------------------------------------------------------------
+    //                      S T A T I C
+    // ------------------------------------------------------------------------
+    ElementWrapper.hash = function (elem) {
+        if (!!elem) {
+            if (!elem.hasAttribute(ElementWrapper.HASH_ATTRIBUTE)) {
+                var hash_code = __WEBPACK_IMPORTED_MODULE_0__commons_random__["a" /* default */].id();
+                elem.setAttribute(ElementWrapper.HASH_ATTRIBUTE, hash_code);
+            }
+            return elem.getAttribute(ElementWrapper.HASH_ATTRIBUTE) || '';
+        }
+        return '';
+    };
+    // ------------------------------------------------------------------------
+    //                      c o n s t
+    // ------------------------------------------------------------------------
+    ElementWrapper.HASH_ATTRIBUTE = "__hash__";
     return ElementWrapper;
 }());
 /* harmony default export */ __webpack_exports__["a"] = (ElementWrapper);
@@ -2283,7 +2342,7 @@ var ElementWrapper = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_events_Events__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_events_Events__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_collections_Dictionary__ = __webpack_require__(1);
 
 
