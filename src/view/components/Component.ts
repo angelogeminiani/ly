@@ -65,6 +65,14 @@ abstract class Component
         return this._hash(this._element);
     }
 
+    public hide(): void {
+       this._classAdd(this._element, 'hidden');
+    }
+
+    public show(): void {
+        this._classRemove(this._element, 'hidden');
+    }
+
     // ------------------------------------------------------------------------
     //                      d o m
     // ------------------------------------------------------------------------
@@ -169,30 +177,12 @@ abstract class Component
 
     public classAdd(selector: string, class_name: string | string[]): boolean {
         const elem: HTMLElement | null = this._getFirstElement(selector);
-        if (!!elem) {
-            let classes: string[] = lang.toArray<string>(class_name);
-            for (let aclass of classes) {
-                if (!elem.classList.contains(aclass)) {
-                    elem.classList.add(aclass)
-                }
-            }
-            return true;
-        }
-        return false;
+        return this._classAdd(elem, class_name);
     }
 
     public classRemove(selector: string, class_name: string | string[]): boolean {
         const elem: HTMLElement | null = this._getFirstElement(selector);
-        if (!!elem) {
-            let classes: string[] = lang.toArray<string>(class_name);
-            for (let aclass of classes) {
-                if (!elem.classList.contains(aclass)) {
-                    elem.classList.remove(aclass)
-                }
-            }
-            return true;
-        }
-        return false;
+        return this._classRemove(elem, class_name);
     }
 
     public classSet(selector: string, value: string): string {
@@ -300,6 +290,32 @@ abstract class Component
                 //console.log("Component._free()", hash_code, names, count);
             }
         }
+    }
+
+    private _classAdd(elem: HTMLElement, class_name: string | string[]): boolean {
+        if (!!elem) {
+            let classes: string[] = lang.toArray<string>(class_name);
+            for (let aclass of classes) {
+                if (!elem.classList.contains(aclass)) {
+                    elem.classList.add(aclass)
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private _classRemove(elem: HTMLElement, class_name: string | string[]): boolean {
+        if (!!elem) {
+            let classes: string[] = lang.toArray<string>(class_name);
+            for (let aclass of classes) {
+                if (!elem.classList.contains(aclass)) {
+                    elem.classList.remove(aclass)
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     private _normalizeElements(): void {
