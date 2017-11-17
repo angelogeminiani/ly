@@ -23,6 +23,8 @@ abstract class Component
     private readonly _element: HTMLElement;
     private readonly _element_wrapper: ElementWrapper;
 
+    private readonly _func_localize: Listener;
+
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
@@ -37,6 +39,10 @@ abstract class Component
         this._normalizeElements();
 
         this.localize();
+
+        // binding for event remove
+        this._func_localize = this.localize.bind(this);
+        i18n.on(i18n.EVENT_CHANGE_LANG, this._func_localize);
     }
 
     public remove(): void {
@@ -280,6 +286,8 @@ abstract class Component
         // clear list
         this._native_events.clear();
         this._native_elements.clear();
+
+        i18n.off(i18n.EVENT_CHANGE_LANG, this._func_localize);
 
         // call abstract free
         this.free();

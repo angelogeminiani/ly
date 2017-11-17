@@ -337,6 +337,8 @@ export default class dom {
             } else if (dom.isTextArea(elem)) {
                 const e = elem as HTMLTextAreaElement;
                 e.value = value;
+            } else {
+                elem.innerHTML = value;
             }
         }
     }

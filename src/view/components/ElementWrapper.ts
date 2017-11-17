@@ -59,6 +59,17 @@ class ElementWrapper {
         return '';
     }
 
+    public get children(): Array<ElementWrapper> {
+        let response: Array<ElementWrapper> = [];
+        if (!!this._element) {
+            dom.forEachChild(this._element, (elem) => {
+                response.push(new ElementWrapper(this._owner, elem));
+            });
+        }
+        return response;
+    }
+
+
     public addEventListener(event_name: string, listener: Listener): void {
         if (null != this._element && !!this._owner) {
             let hash_code: string = ElementWrapper.hash(this._element);
