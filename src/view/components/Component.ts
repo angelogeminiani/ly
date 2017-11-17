@@ -21,7 +21,7 @@ abstract class Component
     private readonly _native_events: Dictionary<Events>; // event handlers for element events
     private readonly _native_elements: Dictionary<HTMLElement>; // map childs by hash_code
     private readonly _element: HTMLElement;
-
+    private readonly _element_wrapper: ElementWrapper;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -32,6 +32,7 @@ abstract class Component
         this._native_events = new Dictionary<Events>();
         this._native_elements = new Dictionary<HTMLElement>();
         this._element = this._createElement(this.render());
+        this._element_wrapper = new ElementWrapper(this, this._element);
 
         this._normalizeElements();
 
@@ -50,6 +51,10 @@ abstract class Component
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get element(): ElementWrapper {
+        return this._element_wrapper;
+    }
+
     public get outerHTML(): string {
         return !!this._element ? this._element.outerHTML : "";
     }
@@ -66,11 +71,11 @@ abstract class Component
     }
 
     public hide(): void {
-       this._classAdd(this._element, 'hidden');
+        dom.classAdd(this._element, 'hidden');
     }
 
     public show(): void {
-        this._classRemove(this._element, 'hidden');
+        dom.classRemove(this._element, 'hidden');
     }
 
     // ------------------------------------------------------------------------
@@ -177,12 +182,12 @@ abstract class Component
 
     public classAdd(selector: string, class_name: string | string[]): boolean {
         const elem: HTMLElement | null = this._getFirstElement(selector);
-        return this._classAdd(elem, class_name);
+        return dom.classAdd(elem, class_name);
     }
 
     public classRemove(selector: string, class_name: string | string[]): boolean {
         const elem: HTMLElement | null = this._getFirstElement(selector);
-        return this._classRemove(elem, class_name);
+        return dom.classRemove(elem, class_name);
     }
 
     public classSet(selector: string, value: string): string {
@@ -292,31 +297,6 @@ abstract class Component
         }
     }
 
-    private _classAdd(elem: HTMLElement|null, class_name: string | string[]): boolean {
-        if (!!elem) {
-            let classes: string[] = lang.toArray<string>(class_name);
-            for (let aclass of classes) {
-                if (!elem.classList.contains(aclass)) {
-                    elem.classList.add(aclass)
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    private _classRemove(elem: HTMLElement|null, class_name: string | string[]): boolean {
-        if (!!elem) {
-            let classes: string[] = lang.toArray<string>(class_name);
-            for (let aclass of classes) {
-                if (elem.classList.contains(aclass)) {
-                    elem.classList.remove(aclass)
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 
     private _normalizeElements(): void {
         // events on root

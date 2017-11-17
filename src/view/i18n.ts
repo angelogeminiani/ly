@@ -101,20 +101,22 @@ class i18n
     }
 
     private _localize(elem: HTMLElement): void {
-        const data_i18n: string = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
-        if (!!data_i18n) {
-            const value: string = this.get(data_i18n);
-            if (!!value) {
-                // console.log("i18n._localize", data_i18n, value);
-                // ready to set i18n text or placeholder
-                if (dom.isInput(elem)) {
-                    if (dom.isInputButton(elem)) {
-                        dom.setValue(elem, value);
-                    } else if (elem.hasAttribute("placeholder")) {
-                        elem.setAttribute("placeholder", value);
+        if (!!elem && !!elem.hasAttribute) {
+            const data_i18n: string = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
+            if (!!data_i18n) {
+                const value: string = this.get(data_i18n);
+                if (!!value) {
+                    // console.log("i18n._localize", data_i18n, value);
+                    // ready to set i18n text or placeholder
+                    if (dom.isInput(elem)) {
+                        if (dom.isInputButton(elem)) {
+                            dom.setValue(elem, value);
+                        } else if (elem.hasAttribute("placeholder")) {
+                            elem.setAttribute("placeholder", value);
+                        }
+                    } else {
+                        elem.innerHTML = value;
                     }
-                } else {
-                    elem.innerHTML = value;
                 }
             }
         }

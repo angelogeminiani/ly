@@ -237,7 +237,7 @@ export default class dom {
     }
 
     public static forEachChild(elem: HTMLElement, func: (child: HTMLElement) => void, deep: boolean = false): void {
-        if (lang.isFunction(func) && !!elem) {
+        if (lang.isFunction(func) && !!elem && !!elem.children) {
             const count = elem.children.length;
             for (let i = 0; i < count; i++) {
                 const child: HTMLElement = elem.children.item(i) as HTMLElement;
@@ -308,7 +308,7 @@ export default class dom {
                 const e = elem as HTMLInputElement;
                 if (!!e) {
                     const type = e.getAttribute("type");
-                    if (type === "text") {
+                    if (!!e.value) {
                         return e.value;
                     } else if (type === "checkbox") {
                         return e.checked;
@@ -340,6 +340,33 @@ export default class dom {
             }
         }
     }
+
+    public static classAdd(elem: HTMLElement | null, class_name: string | string[]): boolean {
+        if (!!elem && !!elem.classList) {
+            let classes: string[] = lang.toArray<string>(class_name);
+            for (let aclass of classes) {
+                if (!elem.classList.contains(aclass)) {
+                    elem.classList.add(aclass)
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static classRemove(elem: HTMLElement | null, class_name: string | string[]): boolean {
+        if (!!elem && !!elem.classList) {
+            let classes: string[] = lang.toArray<string>(class_name);
+            for (let aclass of classes) {
+                if (elem.classList.contains(aclass)) {
+                    elem.classList.remove(aclass)
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------

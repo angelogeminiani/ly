@@ -83,6 +83,28 @@ class ElementWrapper {
         }
     }
 
+    public classAdd(class_name: string | string[]): boolean {
+        return dom.classAdd(this._element, class_name);
+    }
+
+    public classRemove(class_name: string | string[]): boolean {
+        return dom.classRemove(this._element, class_name);
+    }
+
+    public value(value?: any): any {
+        try {
+            if (!!this._element) {
+                if (!!value) {
+                    dom.setValue(this._element, value);
+                }
+                return dom.getValue(this._element);
+            }
+        } catch (err) {
+            console.error("ElementWrapper.value()", err);
+        }
+        return '';
+    }
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
@@ -103,7 +125,7 @@ class ElementWrapper {
     // ------------------------------------------------------------------------
 
     public static hash(elem: HTMLElement | null): string {
-        if (!!elem) {
+        if (!!elem && !!elem.hasAttribute) {
             if (!elem.hasAttribute(ElementWrapper.HASH_ATTRIBUTE)) {
                 let hash_code = random.id();
                 elem.setAttribute(ElementWrapper.HASH_ATTRIBUTE, hash_code);
