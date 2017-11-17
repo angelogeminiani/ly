@@ -2,3 +2,4 @@ lyj/.idea
 lyj/out
 npm-debug.log
 .idea
+bundle.js
