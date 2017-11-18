@@ -78,7 +78,11 @@ class ElementWrapper {
                 this._owner.addEventListener(selector, event_name, listener);
             }
         } else {
-            console.error("ElementWrapper.addEventListener()", "Missing HTML Element or Component Owner.");
+            if(!this._element){
+                console.error("ElementWrapper.addEventListener()", "Missing HTML Element.", this);
+            } else {
+                console.error("ElementWrapper.addEventListener()", "Component Owner.", this._element);
+            }
         }
     }
 

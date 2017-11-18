@@ -1,4 +1,4 @@
-import random from "../commons/random";
+import random from "./random";
 
 abstract class BaseObject {
 

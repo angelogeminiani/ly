@@ -40,9 +40,8 @@ abstract class Component
 
         this.localize();
 
-        // binding for event remove
-        this._func_localize = this.localize.bind(this);
-        i18n.on(i18n.EVENT_CHANGE_LANG, this._func_localize);
+        // auto-localize
+        i18n.on(this, i18n.EVENT_CHANGE_LANG, this.localize);
     }
 
     public remove(): void {
@@ -273,7 +272,7 @@ abstract class Component
 
     private _free(): void {
         // remove ly events
-        super.off();
+        super.off(this);
 
         // remove native events
         this._freeListeners();
@@ -287,7 +286,7 @@ abstract class Component
         this._native_events.clear();
         this._native_elements.clear();
 
-        i18n.off(i18n.EVENT_CHANGE_LANG, this._func_localize);
+        i18n.off(this, i18n.EVENT_CHANGE_LANG);
 
         // call abstract free
         this.free();

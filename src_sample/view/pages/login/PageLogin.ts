@@ -61,7 +61,7 @@ export default class PageLogin
             console.log("change tarea", super.getValue("[data-id=tarea]"));
         });
 
-        i18n.on(i18n.EVENT_CHANGE_LANG, () => {
+        i18n.on(this, i18n.EVENT_CHANGE_LANG, () => {
             console.log("CHANGE LANG");
             this.localize();
         });

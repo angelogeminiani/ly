@@ -11,6 +11,11 @@ interface Items {
 /**
  * Localization singleton controller.
  * Add dictionary using i18n.register(lang, dictionary);
+ *
+ * WARN:
+ *  Do not listen directly at EVENT_CHANGE_LANG, but use Application events propagation.
+ *  Components automatically handle this event, so you do not need to do it by yourself.
+ *
  */
 class i18n
     extends EventEmitter {

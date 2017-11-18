@@ -1,8 +1,9 @@
 import Events, {Listener} from "./Events";
-import BaseObject from "../../application/BaseObject";
+import BaseObject from "../BaseObject";
+import {Dictionary} from "../collections/Dictionary";
 
 /**
- * Class that emit events.
+ * Class that emit events with a scope.
  */
 export default class EventEmitter
     extends BaseObject {
@@ -11,38 +12,73 @@ export default class EventEmitter
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private _events:Events;
+    private readonly _listeners: Dictionary<Events>;
 
     // ------------------------------------------------------------------------
-    //                      c o ns t r u c t o r
+    //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(){
+    constructor() {
         super();
-        this._events = new Events;
+        this._listeners = new Dictionary<Events>();
     }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
-    public on(event_name: string, listener: Listener): void {
-        // ly events
-        this._events.removeListener(event_name, listener);
-        this._events.on(event_name, listener);
+    public on(scope: BaseObject, eventName: string, listener: Listener): void {
+        let key: string = EventEmitter.key(scope);
+        if (!this._listeners.containsKey(key)) {
+            this._listeners.put(key, new Events());
+        }
+        this._listeners.get(key).on(eventName, listener.bind(scope));
     }
 
-    public off(event_names?: string | string[], listener?: Listener): void {
-        this._events.off(event_names, listener);
+    public once(scope: BaseObject, eventName: string, listener: Listener): void {
+        let key: string = EventEmitter.key(scope);
+        if (!this._listeners.containsKey(key)) {
+            this._listeners.put(key, new Events());
+        }
+        this._listeners.get(key).once(eventName, listener.bind(scope));
+    }
+
+    public off(scope: BaseObject, eventName?: string): void {
+        let key: string = EventEmitter.key(scope);
+        if (this._listeners.containsKey(key)) {
+            this._listeners.get(key).off(eventName);
+        }
+    }
+
+    public clear(): void {
+        let keys: string[] = this._listeners.keys();
+        for (let key of keys) {
+            if (this._listeners.containsKey(key)) {
+                this._listeners.get(key).clear();
+            }
+        }
+    }
+
+    public emit(eventName: string, ...args: any[]): void {
+        let keys: string[] = this._listeners.keys();
+        for (let key of keys) {
+            if (this._listeners.containsKey(key)) {
+                this._listeners.get(key).emit(eventName, ...args);
+            }
+        }
     }
 
     // ------------------------------------------------------------------------
-    //                      p r o t e c t e d
+    //                      S T A T I C
     // ------------------------------------------------------------------------
 
-    protected emit(eventName: string, ...args: any[]): boolean {
-        return this._events.emit(eventName, ...args);
+    private static key(scope: BaseObject): string {
+        try {
+            return scope.uid;
+        } catch (err) {
+            console.warn("ApplicationEvents.key()", "BINDING EVENT ON DEFAULT KEY!");
+            return '_default';
+        }
     }
-
 
 }

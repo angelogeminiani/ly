@@ -1,6 +1,8 @@
 import Events, {Listener} from "../commons/events/Events";
 import {Dictionary} from "../commons/collections/Dictionary";
-import BaseObject from "./BaseObject";
+import BaseObject from "../commons/BaseObject";
+import i18n from "../view/i18n";
+import EventEmitter from "../commons/events/EventEmitter";
 
 
 class ApplicationEvents {
@@ -65,8 +67,14 @@ class ApplicationEvents {
 /**
  * Main Application Controller.
  * This is a singleton
+ *
+ * Events:
+ * i18n.EVENT_CHANGE_LANG: Application propagates i18n EVENT_CHANGE_LANG for a centralized and
+ * managed access to this event.
+ *
  */
-class Application {
+class Application
+    extends BaseObject {
 
     // ------------------------------------------------------------------------
     //                      C O N S T
@@ -77,7 +85,7 @@ class Application {
     // ------------------------------------------------------------------------
 
     //-- main event bus --//
-    private readonly _events: ApplicationEvents;
+    private readonly _events: EventEmitter;
 
     //-- application global scope --//
     private readonly _scope: Dictionary<any>;
@@ -87,15 +95,18 @@ class Application {
     // ------------------------------------------------------------------------
 
     private constructor() {
-        this._events = new ApplicationEvents();
+        super();
+        this._events = new EventEmitter();
         this._scope = new Dictionary();
+
+        this.init();
     }
 
     // ------------------------------------------------------------------------
     //                      p r o p e r t i e s
     // ------------------------------------------------------------------------
 
-    public get events(): ApplicationEvents {
+    public get events(): EventEmitter {
         return this._events;
     }
 
@@ -119,6 +130,16 @@ class Application {
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
+
+    private init(): void {
+        // i18n event
+        i18n.on(this, i18n.EVENT_CHANGE_LANG, this.oni18nLangChange);
+    }
+
+    private oni18nLangChange(lang: string, dictionary: Dictionary<string>) {
+        this.events.emit(i18n.EVENT_CHANGE_LANG, lang, dictionary);
+    }
+
 
     // ------------------------------------------------------------------------
     //                      S I N G L E T O N
