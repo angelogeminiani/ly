@@ -106,6 +106,26 @@ class ElementWrapper {
         return dom.classRemove(this._element, class_name);
     }
 
+    public hasAttribute(name: string): boolean {
+        if(!!this._element){
+            this._element.hasAttribute(name);
+        }
+        return false;
+    }
+
+    public setAttribute(name: string, value:string): void {
+        if(!!this._element){
+            this._element.setAttribute(name, value);
+        }
+    }
+
+    public getAttribute(name: string, value:string): string {
+        if(!!this._element){
+            this._element.getAttribute(name);
+        }
+        return "";
+    }
+
     public value(value?: any): any {
         try {
             if (!!this._element) {

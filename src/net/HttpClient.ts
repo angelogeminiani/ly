@@ -108,7 +108,13 @@ export class HttpClient {
             statusText: xhr.statusText,
             headers: xhr.getAllResponseHeaders(),
             data: xhr.responseText,
-            json: <T>() => JSON.parse(xhr.responseText) as T,
+            json: <T>() => {
+                try {
+                    return JSON.parse(xhr.responseText) as T;
+                } catch (err) {
+                    return {} as T;
+                }
+            },
         };
     }
 
@@ -119,7 +125,13 @@ export class HttpClient {
             statusText: xhr.statusText,
             headers: xhr.getAllResponseHeaders(),
             data: message || xhr.statusText,
-            json: <T>() => JSON.parse(message || xhr.statusText) as T,
+            json: <T>() => {
+                try {
+                    return JSON.parse(message || xhr.statusText) as T
+                } catch (err) {
+                    return {} as T;
+                }
+            },
         };
     }
 

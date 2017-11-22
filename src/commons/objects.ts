@@ -45,4 +45,19 @@ export default class objects {
         return target;
     }
 
+    static isEmpty(value: any) {
+        if (!!value) {
+            if (value.hasOwnProperty("length")) {
+                return value.length === 0;
+            } else {
+                for(let key in value){
+                    if(value.hasOwnProperty(key)){
+                       return false; // not empty
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
 }
