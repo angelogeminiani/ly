@@ -51,19 +51,23 @@ export default class EventEmitter
     }
 
     public clear(): void {
-        let keys: string[] = this._listeners.keys();
-        for (let key of keys) {
-            if (this._listeners.containsKey(key)) {
-                this._listeners.get(key).clear();
+        if(!!this._listeners) {
+            let keys: string[] = this._listeners.keys();
+            for (let key of keys) {
+                if (this._listeners.containsKey(key)) {
+                    this._listeners.get(key).clear();
+                }
             }
         }
     }
 
     public emit(eventName: string, ...args: any[]): void {
-        let keys: string[] = this._listeners.keys();
-        for (let key of keys) {
-            if (this._listeners.containsKey(key)) {
-                this._listeners.get(key).emit(eventName, ...args);
+        if(!!this._listeners){
+            let keys: string[] = this._listeners.keys();
+            for (let key of keys) {
+                if (this._listeners.containsKey(key)) {
+                    this._listeners.get(key).emit(eventName, ...args);
+                }
             }
         }
     }
