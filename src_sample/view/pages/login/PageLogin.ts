@@ -29,7 +29,11 @@ export default class PageLogin
         return view(this.uid, {test: "hello"});
     }
 
-    protected free() {
+    protected free():void {
+
+    }
+
+    protected ready():void {
 
     }
 

@@ -36,6 +36,15 @@ class ElementWrapper {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    /**
+     * Warning: do not attach events to this object.
+     * Use instead "addEventListener" method.
+     * @return {HTMLElement}
+     */
+    public get element(): HTMLElement|null {
+        return this._element;
+    }
+
     public hasElement(): boolean {
         return !!this._element;
     }
@@ -78,7 +87,7 @@ class ElementWrapper {
                 this._owner.addEventListener(selector, event_name, listener);
             }
         } else {
-            if(!this._element){
+            if (!this._element) {
                 console.error("ElementWrapper.addEventListener()", "Missing HTML Element.", this);
             } else {
                 console.error("ElementWrapper.addEventListener()", "Component Owner.", this._element);
@@ -107,20 +116,20 @@ class ElementWrapper {
     }
 
     public hasAttribute(name: string): boolean {
-        if(!!this._element){
+        if (!!this._element) {
             this._element.hasAttribute(name);
         }
         return false;
     }
 
-    public setAttribute(name: string, value:string): void {
-        if(!!this._element){
+    public setAttribute(name: string, value: string): void {
+        if (!!this._element) {
             this._element.setAttribute(name, value);
         }
     }
 
-    public getAttribute(name: string, value:string): string {
-        if(!!this._element){
+    public getAttribute(name: string, value: string): string {
+        if (!!this._element) {
             this._element.getAttribute(name);
         }
         return "";

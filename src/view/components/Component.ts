@@ -50,6 +50,8 @@ abstract class Component
 
     protected abstract render(): string;
 
+    protected abstract ready(): void;
+
     protected abstract free(): void;
 
     // ------------------------------------------------------------------------
@@ -117,6 +119,9 @@ abstract class Component
                 elem.innerHTML = '';
             }
             elem.appendChild(this._element);
+
+            //-- this is ready --//
+            this.ready();
         }
     }
 
