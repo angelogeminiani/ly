@@ -41,7 +41,7 @@ class ElementWrapper {
      * Use instead "addEventListener" method.
      * @return {HTMLElement}
      */
-    public get element(): HTMLElement|null {
+    public get htmlElement(): HTMLElement|null {
         return this._element;
     }
 
