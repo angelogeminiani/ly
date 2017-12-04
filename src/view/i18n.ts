@@ -25,6 +25,8 @@ class i18n
     // ------------------------------------------------------------------------
 
     private static readonly _EVENT_CHANGE_LANG: string = "on_change_lang";
+    private static readonly _EVENT_LOCALIZED: string = "on_localized";
+
     private static readonly _DEF_LANG: string = "base";
     private static readonly _ATTR_DATA_I18N: string = "data-i18n";
 
@@ -32,7 +34,8 @@ class i18n
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private _dictionaries: Dictionary<Dictionary<string>>;
+    private readonly _dictionaries: Dictionary<Dictionary<string>>;
+    private readonly _browser_lang: string;
     private _lang: string;
 
     // ------------------------------------------------------------------------
@@ -44,7 +47,7 @@ class i18n
         this._dictionaries = new Dictionary<Dictionary<string>>();
 
         // get lang from browser
-        this.lang = browser.lang();
+        this._browser_lang = browser.lang();
 
         this.register("", {key: ""});
     }
@@ -57,8 +60,12 @@ class i18n
         return i18n._EVENT_CHANGE_LANG;
     }
 
+    public get EVENT_LOCALIZED(): string {
+        return i18n._EVENT_LOCALIZED;
+    }
+
     public get lang(): string {
-        return this._lang;
+        return this._lang || this._browser_lang;
     }
 
     public set lang(lang: string) {
@@ -91,17 +98,24 @@ class i18n
         dom.forEachChild(elem, (child: HTMLElement) => {
             this._localize(child);
         }, true);
+        const trigger_event: boolean = !!this._lang && this._dictionaries.count() > 0;
+        if (trigger_event) {
+            super.emit(i18n._EVENT_LOCALIZED, this._lang, this._dictionaries.get(this._lang));
+        }
     }
 
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private _changeLang(lang: string): void {
-        const trigger_event: boolean = !!this._lang && this._dictionaries.count() > 0;
-        this._lang = lang.split('-')[0];
-        if (trigger_event) {
-            super.emit(i18n._EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
+    private _changeLang(value: string): void {
+        const new_lang: string = !!value ? value.split('-')[0] : '';
+        if (!!new_lang) {
+            const lang_changed: boolean = (this._dictionaries.count() > 0) && (new_lang !== this._lang);
+            if (lang_changed) {
+                this._lang = new_lang;
+                super.emit(i18n._EVENT_CHANGE_LANG, this._lang, this._dictionaries.get(this._lang));
+            }
         }
     }
 

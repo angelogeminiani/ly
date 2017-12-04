@@ -3,6 +3,7 @@ import {Dictionary} from "../commons/collections/Dictionary";
 import BaseObject from "../commons/BaseObject";
 import i18n from "../view/i18n";
 import EventEmitter from "../commons/events/EventEmitter";
+import lang from "../commons/lang";
 
 
 class ApplicationEvents {
@@ -80,6 +81,9 @@ class Application
     //                      C O N S T
     // ------------------------------------------------------------------------
 
+    private static _EVENT_CHANGE_LANG: string = i18n.EVENT_CHANGE_LANG;
+    private static _EVENT_LOCALIZED: string = i18n.EVENT_LOCALIZED;
+
     // ------------------------------------------------------------------------
     //                      f i e l d s
     // ------------------------------------------------------------------------
@@ -105,6 +109,14 @@ class Application
     // ------------------------------------------------------------------------
     //                      p r o p e r t i e s
     // ------------------------------------------------------------------------
+
+    public get EVENT_CHANGE_LANG(): string {
+        return Application._EVENT_CHANGE_LANG;
+    }
+
+    public get EVENT_LOCALIZED(): string {
+        return Application._EVENT_LOCALIZED;
+    }
 
     public get events(): EventEmitter {
         return this._events;
@@ -132,14 +144,18 @@ class Application
     // ------------------------------------------------------------------------
 
     private init(): void {
-        // i18n event
-        i18n.on(this, i18n.EVENT_CHANGE_LANG, this.oni18nLangChange);
+        // i18n event (debounced to avoid multiple events)
+        i18n.on(this, this.EVENT_CHANGE_LANG, lang.funcDebounce(this, this.oni18nLangChange, 400, true));
+        i18n.on(this, this.EVENT_LOCALIZED, lang.funcDebounce(this, this.oni18nLocalized, 400, true));
     }
 
     private oni18nLangChange(lang: string, dictionary: Dictionary<string>) {
-        this.events.emit(i18n.EVENT_CHANGE_LANG, lang, dictionary);
+        this.events.emit(this.EVENT_CHANGE_LANG, lang, dictionary);
     }
 
+    private oni18nLocalized(lang: string, dictionary: Dictionary<string>) {
+        this.events.emit(this.EVENT_LOCALIZED, lang, dictionary);
+    }
 
     // ------------------------------------------------------------------------
     //                      S I N G L E T O N
