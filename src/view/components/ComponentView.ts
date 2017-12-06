@@ -1,17 +1,9 @@
-export interface ComponentProps {
-    [key: string]: any;
-}
+import style from "./ComponentStyle";
 
+export default function view(uid: string, props?: any): string {
 
-/**
- * Sample view function
- * @param {string} uid
- * @param {ComponentProps} props
- * @return {string}
- */
-export default function view(uid: string, props?: ComponentProps): string {
-
-        return `
+    return `
+            ${style(uid, props)}
             <div id="${uid}">
                 ${ !!props ? props.test : "" }
             </div>
