@@ -1,14 +1,14 @@
 export default function style(uid: string, props?: any): string {
 
     const main: string = `
-        .container {
-        
-        }
+        <style>
+            ${uid} .container {
+            
+            }
+        </style>
     `;
 
     return `
-        <style>
-            ${main}
-        </style>
+        ${main}
     `;
 };

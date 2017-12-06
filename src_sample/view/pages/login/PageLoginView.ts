@@ -1,8 +1,7 @@
-import {ComponentProps} from "../../../../src/view/components/ComponentView";
 import i18n from "../../../../src/view/i18n";
 
 
-export default function view(uid: string, props?: ComponentProps): string {
+export default function view(uid: string, props?: any): string {
     props = props || {};
     return `
             <div id="${uid}">
