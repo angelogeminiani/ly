@@ -23,7 +23,7 @@ abstract class Component
     private readonly _element: HTMLElement;
     private readonly _element_wrapper: ElementWrapper;
 
-    private readonly _func_localize: Listener;
+    private readonly _data: any; // simple data container
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -31,10 +31,12 @@ abstract class Component
 
     constructor() {
         super();
+
         this._native_events = new Dictionary<Events>();
         this._native_elements = new Dictionary<HTMLElement>();
         this._element = this._createElement(this.render());
         this._element_wrapper = new ElementWrapper(this, this._element);
+        this._data = {};
 
         this._normalizeElements();
 
@@ -57,6 +59,10 @@ abstract class Component
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+
+    public get data(): any {
+        return this._data;
+    }
 
     public get element(): ElementWrapper {
         return this._element_wrapper;

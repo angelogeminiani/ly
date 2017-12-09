@@ -128,7 +128,7 @@ class ElementWrapper {
         }
     }
 
-    public getAttribute(name: string, value: string): string {
+    public getAttribute(name: string): string {
         if (!!this._element) {
             this._element.getAttribute(name);
         }
