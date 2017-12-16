@@ -41,7 +41,7 @@ class ElementWrapper {
      * Use instead "addEventListener" method.
      * @return {HTMLElement}
      */
-    public get htmlElement(): HTMLElement|null {
+    public get htmlElement(): HTMLElement | null {
         return this._element;
     }
 
@@ -49,9 +49,26 @@ class ElementWrapper {
         return !!this._element;
     }
 
-    public appendChild(child: HTMLElement): void {
+    public appendChild(child: HTMLElement | ElementWrapper): void {
         if (!!this._element) {
-            this._element.appendChild(child);
+            if (parent instanceof ElementWrapper) {
+                const elem: ElementWrapper = child as ElementWrapper;
+                if (!!elem._element) {
+                    this._element.appendChild(elem._element);
+                }
+            } else {
+                this._element.appendChild(child as HTMLElement);
+            }
+        }
+    }
+
+    public appendTo(parent: HTMLElement | ElementWrapper): void {
+        if (!!this._element && !!parent) {
+            if (parent instanceof ElementWrapper) {
+                (parent as ElementWrapper).appendChild(this._element);
+            } else {
+                (parent as HTMLElement).appendChild(this._element);
+            }
         }
     }
 
