@@ -51,7 +51,7 @@ class ElementWrapper {
 
     public appendChild(child: HTMLElement | ElementWrapper): void {
         if (!!this._element) {
-            if (parent instanceof ElementWrapper) {
+            if (child instanceof ElementWrapper) {
                 const elem: ElementWrapper = child as ElementWrapper;
                 if (!!elem._element) {
                     this._element.appendChild(elem._element);
