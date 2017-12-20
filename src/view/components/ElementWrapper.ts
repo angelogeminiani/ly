@@ -153,7 +153,7 @@ class ElementWrapper {
 
     public getAttribute(name: string): string {
         if (!!this._element) {
-            this._element.getAttribute(name);
+            return this._element.getAttribute(name)||"";
         }
         return "";
     }
