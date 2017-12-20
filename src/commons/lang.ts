@@ -31,7 +31,9 @@ export default class lang {
     }
 
     static toArray<T>(value: any | any[]) {
-        return lang.isArray(value) ? value as Array<T> : [value as T];
+        return !!value
+            ? lang.isArray(value) ? value as Array<T> : [value as T]
+            : [];
     }
 
     static toBoolean(value: any, def_val: boolean): boolean {

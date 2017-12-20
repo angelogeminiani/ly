@@ -49,6 +49,12 @@ class ElementWrapper {
         return !!this._element;
     }
 
+    public remove(): void {
+        if (!!this._element) {
+            this._element.remove();
+        }
+    }
+
     public appendChild(child: HTMLElement | ElementWrapper): void {
         if (!!this._element) {
             if (child instanceof ElementWrapper) {
@@ -114,9 +120,9 @@ class ElementWrapper {
 
     public removeEventListener(event_names?: string | string[]): void {
         if (null != this._element && !!this._owner) {
-            let hash_code: string = ElementWrapper.hash(this._element);
+            const hash_code: string = ElementWrapper.hash(this._element);
             if (!!hash_code) {
-                let selector: string = "[" + ElementWrapper.HASH_ATTRIBUTE + "=" + hash_code + "]";
+                const selector: string = "[" + ElementWrapper.HASH_ATTRIBUTE + "=" + hash_code + "]";
                 this._owner.removeEventListener(selector, event_names);
             }
         } else {
