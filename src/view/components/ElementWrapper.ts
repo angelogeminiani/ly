@@ -153,7 +153,7 @@ class ElementWrapper {
 
     public getAttribute(name: string): string {
         if (!!this._element) {
-            return this._element.getAttribute(name)||"";
+            return this._element.getAttribute(name) || "";
         }
         return "";
     }
@@ -161,7 +161,7 @@ class ElementWrapper {
     public value(value?: any): any {
         try {
             if (!!this._element) {
-                if (!!value) {
+                if (value != undefined) {
                     dom.setValue(this._element, value);
                 }
                 return dom.getValue(this._element);
