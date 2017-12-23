@@ -308,10 +308,10 @@ export default class dom {
                 const e = elem as HTMLInputElement;
                 if (!!e) {
                     const type = e.getAttribute("type");
-                    if (!!e.value) {
-                        return e.value;
-                    } else if (type === "checkbox") {
+                    if (type === "checkbox") {
                         return e.checked;
+                    } else if (!!e.value) {
+                        return e.value;
                     }
                 }
             } else if (dom.isTextArea(elem)) {
@@ -322,7 +322,7 @@ export default class dom {
         return null;
     }
 
-    public static setValue(elem: HTMLElement | null, value:any): void {
+    public static setValue(elem: HTMLElement | null, value: any): void {
         if (!!elem) {
             if (dom.isInput(elem)) {
                 const e = elem as HTMLInputElement;
