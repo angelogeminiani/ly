@@ -140,7 +140,7 @@ class ElementWrapper {
 
     public hasAttribute(name: string): boolean {
         if (!!this._element) {
-            this._element.hasAttribute(name);
+            return this._element.hasAttribute(name);
         }
         return false;
     }
