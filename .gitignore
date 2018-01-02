@@ -3,3 +3,6 @@ lyj/out
 npm-debug.log
 .idea
 bundle.js
+lyts/node_modules
+lyts/tests
+lyts.iml
