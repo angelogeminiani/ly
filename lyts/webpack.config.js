@@ -50,13 +50,13 @@ const config_tests = {
     }
 };
 
-const config_gui_materialize = {
+const config_app = {
 
-    entry: './lyts_materialize/index.ts',
+    entry: './lyts_sample_app/launcher.ts',
 
     output: {
-        path: path.resolve(__dirname, 'build_gui'),
-        filename: 'lyts_materialize.js'
+        path: path.resolve(__dirname, 'build_sample_app'),
+        filename: 'build.js'
     },
 
     resolve: {
@@ -76,4 +76,4 @@ const config_gui_materialize = {
 };
 
 
-module.exports = [config, config_tests, config_gui_materialize];
+module.exports = [config, config_tests, config_app];

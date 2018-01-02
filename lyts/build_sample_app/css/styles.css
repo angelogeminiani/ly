@@ -1,0 +1,14 @@
+/* Base */
+@import url('base/_normalize.css');
+@import url('base/_base.css');
+
+/* FONTS */
+@font-face {
+    font-family: RobotoBold;
+    src: url('../fonts/roboto/Roboto-Bold.woff2');
+}
+
+@font-face {
+    font-family: RobotoRegular;
+    src: url('../fonts/roboto/Roboto-Regular.woff2');
+}
