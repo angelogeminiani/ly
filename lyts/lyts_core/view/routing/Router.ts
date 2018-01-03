@@ -3,6 +3,9 @@ import Page from "../components/page/Page";
 import {Dictionary} from "../../commons/collections/Dictionary";
 import browser from "../browser";
 import console from "../../commons/console";
+import lang from "../../commons/lang";
+import objects from "../../commons/objects";
+import random from "../../commons/random";
 
 class Route {
 
@@ -17,6 +20,15 @@ class Route {
     public handler: Function | null;
     public tokens: string[];
     public params: any;
+
+    public uid(): string {
+        try {
+            return lang.className(this.handler) + "." + objects.values(this.params).join('.');
+        } catch (err) {
+            console.error("Route.uid", err);
+        }
+        return random.guid();
+    }
 
     public isEmpty(): boolean {
         return !this.handler;
@@ -96,7 +108,7 @@ class Router
     private readonly _routes: Dictionary<Route>;
 
     private _home_route: Route;
-    private _current_route: Route;
+    private _last_route: Route;
 
     private _mode: string;
     private _native_listener: EventListener;
@@ -115,7 +127,7 @@ class Router
         super();
         this._routes = new Dictionary<Route>();
 
-        this._mode = this.isPushStateAvailable() ? _EVENT_POP_STATE : this.isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
+        this._mode = browser.isPushStateAvailable() ? _EVENT_POP_STATE : browser.isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
         this._native_listener = this.onLocationChange.bind(this);
 
         this._hash = !!hash ? hash : _DEF_HASH;
@@ -208,20 +220,8 @@ class Router
                 ? this.root.replace(/\/$/, '/' + this._hash)
                 : this.root.replace(/\/$/, '');
         } else if (this._use_hash) {
-            this._root = this.location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
+            this._root = browser.location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
         }
-    }
-
-    private isPushStateAvailable(): boolean {
-        return browser.isPushStateAvailable();
-    }
-
-    private isHashChangeAvailable(): boolean {
-        return browser.isHashChangeAvailable();
-    }
-
-    private location(): string {
-        return window.location.href;
     }
 
     private startListen(): void {
@@ -247,7 +247,7 @@ class Router
     }
 
     private getRoute(url: string): Route {
-        if (!!url && !this._routes.isEmpty() && !this.paused) {
+        if (!this._routes.isEmpty() && !this.paused) {
             const paths: string[] = this._routes.keys();
             for (let path of paths) {
                 const route: Route = this._routes.get(path);
@@ -255,17 +255,26 @@ class Router
                     return route;
                 }
             }
+            return this._home_route; // fallback page is always home page
         }
         return new Route("", null); // empty route
     }
 
     // https://github.com/krasimir/navigo/blob/master/src/index.js
     private resolve(raw_path?: string): void {
-        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(this.location());
+        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(browser.location());
         // remove root from url
         const url = raw_path.replace(this.root, '').replace(this.hash, '');
+        const last_uid = !!this._last_route ? this._last_route.uid(): '';
         const route = this.getRoute(url);
         if (!route.isEmpty()) {
+            const curr_uid = route.uid();
+            //console.log("resolve", last_uid, curr_uid);
+            if (last_uid===curr_uid) {
+                // alredy routed
+                return;
+            }
+            this._last_route = route;
             super.emit(EVENT_ON_ROUTE, route);
         }
     }

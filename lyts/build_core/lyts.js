@@ -192,6 +192,21 @@ var lang = /** @class */ (function () {
             return false;
         }
     };
+    lang.className = function (item) {
+        try {
+            if (!!item) {
+                if (!!item.prototype && !!item.prototype.constructor) {
+                    return item.prototype.constructor.name;
+                }
+                else if (!!item.constructor) {
+                    return item.constructor.name;
+                }
+            }
+        }
+        catch (err) {
+        }
+        return '';
+    };
     // ------------------------------------------------------------------------
     //                      u t i l s
     // ------------------------------------------------------------------------
@@ -526,6 +541,9 @@ var browser = /** @class */ (function () {
     };
     browser.prototype.lang = function () {
         return this.language().split('-')[0];
+    };
+    browser.prototype.location = function () {
+        return window.location.href;
     };
     browser.prototype.hasStorage = function () {
         return (typeof (Storage) !== "undefined");
@@ -1590,6 +1608,24 @@ var objects = /** @class */ (function () {
             }
         }
         return true;
+    };
+    objects.keys = function (value) {
+        var result = [];
+        for (var key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(key);
+            }
+        }
+        return result;
+    };
+    objects.values = function (value) {
+        var result = [];
+        for (var key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(value[key]);
+            }
+        }
+        return result;
     };
     return objects;
 }());

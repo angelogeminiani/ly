@@ -132,6 +132,20 @@ export default class lang {
         }
     }
 
+    static className(item: any): string {
+        try {
+            if (!!item) {
+                if (!!item.prototype && !!item.prototype.constructor) {
+                    return item.prototype.constructor.name;
+                } else if (!!item.constructor) {
+                    return item.constructor.name;
+                }
+            }
+        } catch (err) {
+        }
+        return '';
+    }
+
     // ------------------------------------------------------------------------
     //                      u t i l s
     // ------------------------------------------------------------------------

@@ -192,6 +192,21 @@ var lang = /** @class */ (function () {
             return false;
         }
     };
+    lang.className = function (item) {
+        try {
+            if (!!item) {
+                if (!!item.prototype && !!item.prototype.constructor) {
+                    return item.prototype.constructor.name;
+                }
+                else if (!!item.constructor) {
+                    return item.constructor.name;
+                }
+            }
+        }
+        catch (err) {
+        }
+        return '';
+    };
     // ------------------------------------------------------------------------
     //                      u t i l s
     // ------------------------------------------------------------------------
@@ -599,6 +614,9 @@ var browser = /** @class */ (function () {
     browser.prototype.lang = function () {
         return this.language().split('-')[0];
     };
+    browser.prototype.location = function () {
+        return window.location.href;
+    };
     browser.prototype.hasStorage = function () {
         return (typeof (Storage) !== "undefined");
     };
@@ -677,7 +695,7 @@ var browser = /** @class */ (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Events__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BaseObject__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BaseObject__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__collections_Dictionary__ = __webpack_require__(1);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1380,17 +1398,17 @@ var Events = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_lang__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_strings__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_objects__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_objects__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_random__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_browser__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_dom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_i18n__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_i18n__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_events_EventEmitter__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_components_Component__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_components_Component__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__application_Application__ = __webpack_require__(21);
 //-- static --//
 
@@ -1511,6 +1529,91 @@ var strings = /** @class */ (function () {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
+
+var objects = /** @class */ (function () {
+    function objects() {
+    }
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+    /**
+     * Recursively goes through an object trying to resolve a path.
+     * <code>
+     *      console.log("name.value", ly.lang.get({"name":{"value":1}}, "name.value"));
+     *      console.log("[name,value]", ly.lang.get({"name":{"value":1}}, ["name","value"]));
+     *      console.log("length", ly.lang.get([1,2], ["length"]));
+     * </code>
+     * @param {Object} scope - The object to traverse (in each recursive call we dig into this object)
+     * @param {string[]} path - An array of property names to traverse one-by-one
+     * @param {number} [pathIndex=0] - The current index in the path array
+     */
+    objects.get = function (scope, path, pathIndex) {
+        if (pathIndex === void 0) { pathIndex = 0; }
+        if (typeof scope !== 'object' || scope === null || scope === undefined) {
+            return '';
+        }
+        path = __WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */].isArray(path) ? path : path.split('.');
+        var varName = path[pathIndex];
+        var value = scope[varName];
+        if (pathIndex === path.length - 1) {
+            // It's a leaf, return whatever it is
+            return value;
+        }
+        return objects.get(value, path, ++pathIndex);
+    };
+    objects.clone = function (obj) {
+        var target = {};
+        for (var field in obj) {
+            if (obj.hasOwnProperty(field)) {
+                target[field] = obj[field];
+            }
+        }
+        return target;
+    };
+    objects.isEmpty = function (value) {
+        if (!!value) {
+            if (value.hasOwnProperty("length")) {
+                return value.length === 0;
+            }
+            else {
+                for (var key in value) {
+                    if (value.hasOwnProperty(key)) {
+                        return false; // not empty
+                    }
+                }
+            }
+        }
+        return true;
+    };
+    objects.keys = function (value) {
+        var result = [];
+        for (var key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(key);
+            }
+        }
+        return result;
+    };
+    objects.values = function (value) {
+        var result = [];
+        for (var key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(value[key]);
+            }
+        }
+        return result;
+    };
+    return objects;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (objects);
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1669,7 +1772,7 @@ var i18n = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1705,7 +1808,7 @@ var BaseObject = /** @class */ (function () {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1714,7 +1817,7 @@ var BaseObject = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_lang__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__i18n__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__i18n__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(20);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2102,73 +2205,6 @@ var Component = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
-
-var objects = /** @class */ (function () {
-    function objects() {
-    }
-    // ------------------------------------------------------------------------
-    //                      p u b l i c
-    // ------------------------------------------------------------------------
-    /**
-     * Recursively goes through an object trying to resolve a path.
-     * <code>
-     *      console.log("name.value", ly.lang.get({"name":{"value":1}}, "name.value"));
-     *      console.log("[name,value]", ly.lang.get({"name":{"value":1}}, ["name","value"]));
-     *      console.log("length", ly.lang.get([1,2], ["length"]));
-     * </code>
-     * @param {Object} scope - The object to traverse (in each recursive call we dig into this object)
-     * @param {string[]} path - An array of property names to traverse one-by-one
-     * @param {number} [pathIndex=0] - The current index in the path array
-     */
-    objects.get = function (scope, path, pathIndex) {
-        if (pathIndex === void 0) { pathIndex = 0; }
-        if (typeof scope !== 'object' || scope === null || scope === undefined) {
-            return '';
-        }
-        path = __WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */].isArray(path) ? path : path.split('.');
-        var varName = path[pathIndex];
-        var value = scope[varName];
-        if (pathIndex === path.length - 1) {
-            // It's a leaf, return whatever it is
-            return value;
-        }
-        return objects.get(value, path, ++pathIndex);
-    };
-    objects.clone = function (obj) {
-        var target = {};
-        for (var field in obj) {
-            if (obj.hasOwnProperty(field)) {
-                target[field] = obj[field];
-            }
-        }
-        return target;
-    };
-    objects.isEmpty = function (value) {
-        if (!!value) {
-            if (value.hasOwnProperty("length")) {
-                return value.length === 0;
-            }
-            else {
-                for (var key in value) {
-                    if (value.hasOwnProperty(key)) {
-                        return false; // not empty
-                    }
-                }
-            }
-        }
-        return true;
-    };
-    return objects;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (objects);
-
-
-/***/ }),
 /* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2195,7 +2231,8 @@ var constants = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Component__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Component__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_console__ = __webpack_require__(2);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -2207,25 +2244,42 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 
+
 var Page = /** @class */ (function (_super) {
     __extends(Page, _super);
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
-    function Page(params) {
+    function Page(route) {
         var _this = _super.call(this) || this;
-        _this._params = params;
+        try {
+            _this._name = _this.uid;
+            if (!!route) {
+                _this._params = route.params;
+                _this._name = route.uid();
+            }
+        }
+        catch (err) {
+            __WEBPACK_IMPORTED_MODULE_1__commons_console__["a" /* default */].error("Page.construcotr", err);
+        }
         return _this;
     }
-    Object.defineProperty(Page.prototype, "params", {
+    Object.defineProperty(Page.prototype, "name", {
         // ------------------------------------------------------------------------
         //                      p u b l i c
         // ------------------------------------------------------------------------
+        get: function () {
+            return this._name;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Page.prototype, "params", {
         /**
          * Return url parameters if any
          */
         get: function () {
-            return this._params;
+            return !!this._params ? this._params : false;
         },
         enumerable: true,
         configurable: true
@@ -2245,7 +2299,7 @@ var Page = /** @class */ (function (_super) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_BaseObject__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_BaseObject__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Main__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_ApplicationController__ = __webpack_require__(37);
@@ -2345,7 +2399,7 @@ launcher.instance().start();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lang__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__strings__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objects__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objects__ = __webpack_require__(10);
 
 
 
@@ -2828,8 +2882,8 @@ var ElementWrapper = /** @class */ (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_events_Events__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_collections_Dictionary__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_BaseObject__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_i18n__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_BaseObject__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_i18n__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_lang__ = __webpack_require__(0);
 var __extends = (this && this.__extends) || (function () {
@@ -3073,7 +3127,6 @@ var Main = /** @class */ (function (_super) {
     Main.prototype.hide = function () {
     };
     Main.prototype.route = function (page) {
-        __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__["a" /* default */].log("route", page);
         page.appendTo(this.element);
     };
     // ------------------------------------------------------------------------
@@ -3163,7 +3216,7 @@ function style(uid, props) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Component__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Component__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Router__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_lang__ = __webpack_require__(0);
@@ -3228,14 +3281,15 @@ var PageController = /** @class */ (function (_super) {
             if (__WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].isFunction(func)) {
                 if (__WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].isConstructor(route.handler)) {
                     // close last page
-                    if (!!this._last_page) {
-                        var page_1 = this._last_page;
-                        page_1.hide();
+                    var last_page_1 = this._last_page;
+                    if (!!last_page_1) {
+                        last_page_1.hide();
                         __WEBPACK_IMPORTED_MODULE_3__commons_lang__["a" /* default */].funcDelay(function () {
-                            page_1.remove();
+                            last_page_1.remove();
                         }, 400);
                     }
-                    this._last_page = new func(params);
+                    this._last_route = route;
+                    this._last_page = new func(route);
                     this.route(this._last_page);
                 }
                 else {
@@ -3268,6 +3322,9 @@ var PageController = /** @class */ (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__browser__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_console__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_lang__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_objects__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_random__ = __webpack_require__(3);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3282,6 +3339,9 @@ var __extends = (this && this.__extends) || (function () {
 
 
 
+
+
+
 var Route = /** @class */ (function () {
     function Route(route, handler) {
         this.path = route;
@@ -3289,6 +3349,15 @@ var Route = /** @class */ (function () {
         this.tokens = this.tokenize(route);
         this.params = false;
     }
+    Route.prototype.uid = function () {
+        try {
+            return __WEBPACK_IMPORTED_MODULE_4__commons_lang__["a" /* default */].className(this.handler) + "." + __WEBPACK_IMPORTED_MODULE_5__commons_objects__["a" /* default */].values(this.params).join('.');
+        }
+        catch (err) {
+            __WEBPACK_IMPORTED_MODULE_3__commons_console__["a" /* default */].error("Route.uid", err);
+        }
+        return __WEBPACK_IMPORTED_MODULE_6__commons_random__["a" /* default */].guid();
+    };
     Route.prototype.isEmpty = function () {
         return !this.handler;
     };
@@ -3363,7 +3432,7 @@ var Router = /** @class */ (function (_super) {
         if (hash === void 0) { hash = _DEF_HASH; }
         var _this = _super.call(this) || this;
         _this._routes = new __WEBPACK_IMPORTED_MODULE_1__commons_collections_Dictionary__["a" /* Dictionary */]();
-        _this._mode = _this.isPushStateAvailable() ? _EVENT_POP_STATE : _this.isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
+        _this._mode = __WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].isPushStateAvailable() ? _EVENT_POP_STATE : __WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
         _this._native_listener = _this.onLocationChange.bind(_this);
         _this._hash = !!hash ? hash : _DEF_HASH;
         _this._use_hash = true;
@@ -3456,17 +3525,8 @@ var Router = /** @class */ (function (_super) {
                 : this.root.replace(/\/$/, '');
         }
         else if (this._use_hash) {
-            this._root = this.location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
+            this._root = __WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
         }
-    };
-    Router.prototype.isPushStateAvailable = function () {
-        return __WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].isPushStateAvailable();
-    };
-    Router.prototype.isHashChangeAvailable = function () {
-        return __WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].isHashChangeAvailable();
-    };
-    Router.prototype.location = function () {
-        return window.location.href;
     };
     Router.prototype.startListen = function () {
         if (__WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].isReady()) {
@@ -3489,7 +3549,7 @@ var Router = /** @class */ (function (_super) {
         }
     };
     Router.prototype.getRoute = function (url) {
-        if (!!url && !this._routes.isEmpty() && !this.paused) {
+        if (!this._routes.isEmpty() && !this.paused) {
             var paths = this._routes.keys();
             for (var _i = 0, paths_1 = paths; _i < paths_1.length; _i++) {
                 var path = paths_1[_i];
@@ -3498,16 +3558,25 @@ var Router = /** @class */ (function (_super) {
                     return route;
                 }
             }
+            return this._home_route; // fallback page is always home page
         }
         return new Route("", null); // empty route
     };
     // https://github.com/krasimir/navigo/blob/master/src/index.js
     Router.prototype.resolve = function (raw_path) {
-        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(this.location());
+        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(__WEBPACK_IMPORTED_MODULE_2__browser__["a" /* default */].location());
         // remove root from url
         var url = raw_path.replace(this.root, '').replace(this.hash, '');
+        var last_uid = !!this._last_route ? this._last_route.uid() : '';
         var route = this.getRoute(url);
         if (!route.isEmpty()) {
+            var curr_uid = route.uid();
+            //console.log("resolve", last_uid, curr_uid);
+            if (last_uid === curr_uid) {
+                // alredy routed
+                return;
+            }
+            this._last_route = route;
             _super.prototype.emit.call(this, EVENT_ON_ROUTE, route);
         }
     };
@@ -3577,8 +3646,8 @@ var Page1 = /** @class */ (function (_super) {
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
-    function Page1(params) {
-        var _this = _super.call(this, "page1") || this;
+    function Page1(route) {
+        var _this = _super.call(this, route) || this;
         _this._content = _super.prototype.getFirst.call(_this, "#" + _this.uid + "_content");
         return _this;
     }
@@ -3671,8 +3740,8 @@ var Page2 = /** @class */ (function (_super) {
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
-    function Page2(params) {
-        var _this = _super.call(this, "page2") || this;
+    function Page2(route) {
+        var _this = _super.call(this, route) || this;
         _this._content = _super.prototype.getFirst.call(_this, "#" + _this.uid + "_content");
         return _this;
     }

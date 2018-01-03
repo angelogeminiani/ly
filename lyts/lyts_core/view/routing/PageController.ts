@@ -18,7 +18,9 @@ abstract class PageController
     // ------------------------------------------------------------------------
 
     private _router: Router;
+
     private _last_page: Page;
+    private _last_route: Route;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -77,15 +79,16 @@ abstract class PageController
             if (lang.isFunction(func)) {
                 if (lang.isConstructor(route.handler)) {
                     // close last page
-                    if (!!this._last_page) {
-                        const page:Page = this._last_page;
-                        page.hide();
+                    const last_page: Page = this._last_page;
+                    if (!!last_page) {
+                        last_page.hide();
                         lang.funcDelay(() => {
-                            page.remove();
+                            last_page.remove();
                         }, 400);
                     }
 
-                    this._last_page = new func(params);
+                    this._last_route= route;
+                    this._last_page = new func(route);
                     this.route(this._last_page);
                 } else {
                     // we have a callback

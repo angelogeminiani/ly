@@ -44,6 +44,10 @@ class browser {
         return this.language().split('-')[0];
     }
 
+    public location():string{
+        return window.location.href;
+    }
+
     public hasStorage(): boolean {
         return (typeof(Storage) !== "undefined");
     }

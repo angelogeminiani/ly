@@ -68,8 +68,6 @@ export default class Main
     }
 
     public route(page: Page) {
-        console.log("route", page);
-
         page.appendTo(this.element);
     }
 

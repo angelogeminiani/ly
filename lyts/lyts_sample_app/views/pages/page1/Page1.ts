@@ -2,6 +2,7 @@ import Page from "../../../../lyts_core/view/components/page/Page";
 import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper";
 import console from "../../../../lyts_core/commons/console";
 import view from "./view";
+import {Route} from "../../../../lyts_core/view/routing/Router";
 
 
 export default class Page1
@@ -19,8 +20,8 @@ export default class Page1
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(params:any) {
-        super("page1");
+    constructor(route:Route) {
+        super(route);
 
         this._content = super.getFirst("#" + this.uid + "_content");
     }

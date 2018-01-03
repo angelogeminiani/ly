@@ -1,4 +1,6 @@
 import Component from "../Component";
+import console from "../../../commons/console";
+import {Route} from "../../routing/Router";
 
 
 abstract class Page
@@ -12,15 +14,24 @@ abstract class Page
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private readonly _params: any; // URL PARAMETERS
+    private readonly _params: any;
+    private readonly _name: string;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(params: any) {
+    constructor(route: Route) {
         super();
-        this._params = params;
+        try {
+            this._name = this.uid;
+            if (!!route) {
+                this._params = route.params;
+                this._name = route.uid();
+            }
+        } catch (err) {
+            console.error("Page.construcotr", err);
+        }
     }
 
     protected abstract render(): string;
@@ -33,11 +44,15 @@ abstract class Page
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get name() {
+        return this._name;
+    }
+
     /**
      * Return url parameters if any
      */
     public get params() {
-        return this._params;
+        return !!this._params ? this._params : false;
     }
 
     // ------------------------------------------------------------------------

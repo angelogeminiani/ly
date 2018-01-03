@@ -45,19 +45,39 @@ export default class objects {
         return target;
     }
 
-    static isEmpty(value: any) {
+    static isEmpty(value: any): boolean {
         if (!!value) {
             if (value.hasOwnProperty("length")) {
                 return value.length === 0;
             } else {
-                for(let key in value){
-                    if(value.hasOwnProperty(key)){
-                       return false; // not empty
+                for (let key in value) {
+                    if (value.hasOwnProperty(key)) {
+                        return false; // not empty
                     }
                 }
             }
         }
         return true;
+    }
+
+    static keys(value: any): string[] {
+        const result: string[] = [];
+        for (let key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(key);
+            }
+        }
+        return result;
+    }
+
+    static values(value: any): any[] {
+        const result: any[] = [];
+        for (let key in value) {
+            if (value.hasOwnProperty(key)) {
+                result.push(value[key]);
+            }
+        }
+        return result;
     }
 
 }
