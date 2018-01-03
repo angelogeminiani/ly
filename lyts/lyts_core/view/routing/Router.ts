@@ -6,6 +6,8 @@ import console from "../../commons/console";
 import lang from "../../commons/lang";
 import objects from "../../commons/objects";
 import random from "../../commons/random";
+import ElementWrapper from "../components/ElementWrapper";
+import dom from "../dom";
 
 class Route {
 
@@ -173,10 +175,15 @@ class Router
     /**
      * START ROUTER
      */
-    public start(): void {
+    public start(elem: ElementWrapper | null): void {
         this.initialize();
         this.startListen();
         this.resolve();
+
+        if (null != elem) {
+            // ready to replace relative links adding current root
+            this.replaceLinks(elem);
+        }
     }
 
     /**
@@ -265,18 +272,34 @@ class Router
         raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(browser.location());
         // remove root from url
         const url = raw_path.replace(this.root, '').replace(this.hash, '');
-        const last_uid = !!this._last_route ? this._last_route.uid(): '';
+        const last_uid = !!this._last_route ? this._last_route.uid() : '';
         const route = this.getRoute(url);
         if (!route.isEmpty()) {
             const curr_uid = route.uid();
             //console.log("resolve", last_uid, curr_uid);
-            if (last_uid===curr_uid) {
+            if (last_uid === curr_uid) {
                 // alredy routed
                 return;
             }
             this._last_route = route;
             super.emit(EVENT_ON_ROUTE, route);
         }
+    }
+
+    private replaceLinks(elem: ElementWrapper): void {
+        const native: HTMLElement | null = elem.htmlElement;
+        if (!!native) {
+            const childs: Array<HTMLElement> = dom.get('[data-router=relative]', native);
+            for (let i = 0; i < childs.length; i++) {
+                const child: HTMLElement = childs[i];
+                const path: string = child.getAttribute('href') || '';
+                if (!!path) {
+                    const new_path = this.root + (this.useHash ? this.hash : '/') + path;
+                    child.setAttribute('href', new_path);
+                }
+            }
+        }
+
     }
 
     static normalize(s: string): string {

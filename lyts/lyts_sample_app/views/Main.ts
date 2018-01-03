@@ -19,6 +19,8 @@ export default class Main
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
+    private readonly _body: ElementWrapper;
+
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
@@ -36,6 +38,8 @@ export default class Main
         super.register('/call', (args: any) => {
             console.log("CALLBACK", "Hello from a callback", args);
         });
+
+        this._body = super.getFirst("#" + this.uid + "_pages");
     }
 
     // ------------------------------------------------------------------------
@@ -68,7 +72,7 @@ export default class Main
     }
 
     public route(page: Page) {
-        page.appendTo(this.element);
+        page.appendTo(this._body);
     }
 
     // ------------------------------------------------------------------------

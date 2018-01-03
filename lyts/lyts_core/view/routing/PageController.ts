@@ -48,7 +48,9 @@ abstract class PageController
     }
 
     protected ready(): void {
-        this._router.start();
+        this._router.start(this.element);
+
+        this._init();
     }
 
     // ------------------------------------------------------------------------
@@ -87,7 +89,7 @@ abstract class PageController
                         }, 400);
                     }
 
-                    this._last_route= route;
+                    this._last_route = route;
                     this._last_page = new func(route);
                     this.route(this._last_page);
                 } else {
