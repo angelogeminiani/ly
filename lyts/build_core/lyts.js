@@ -184,6 +184,14 @@ var lang = /** @class */ (function () {
     lang.isEmail = function (value) {
         return lang.isString(value) && lang._validateEmail(value);
     };
+    lang.isConstructor = function (f) {
+        try {
+            return !!f.prototype && !!f.prototype.constructor.name;
+        }
+        catch (err) {
+            return false;
+        }
+    };
     // ------------------------------------------------------------------------
     //                      u t i l s
     // ------------------------------------------------------------------------
@@ -532,6 +540,15 @@ var browser = /** @class */ (function () {
             return check_1;
         }
         return false;
+    };
+    browser.prototype.isPushStateAvailable = function () {
+        return !!(typeof window !== 'undefined' &&
+            window.history &&
+            window.history.pushState);
+    };
+    browser.prototype.isHashChangeAvailable = function () {
+        return !!(typeof window !== 'undefined' &&
+            ('onhashchange' in window));
     };
     browser.prototype.getParameterByName = function (name, url) {
         url = url || location.search;

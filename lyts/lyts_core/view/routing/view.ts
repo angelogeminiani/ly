@@ -1,4 +1,4 @@
-import style from "./PageStyle";
+import style from "./style";
 
 export default function view(uid: string, props?: any): string {
 

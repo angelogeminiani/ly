@@ -1,5 +1,5 @@
 
-import style from "./MainStyle";
+import style from "./style";
 
 export default function view(uid: string, props?: any): string {
     props = props || {};
@@ -7,7 +7,7 @@ export default function view(uid: string, props?: any): string {
             <div id="${uid}" class="">
                 ${ style(uid, props) }
    
-                MAIN PAGE
+                <h1>PAGE 2</h1>
                         
             </div>
 

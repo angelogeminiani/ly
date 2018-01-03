@@ -12,13 +12,15 @@ abstract class Page
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
+    private readonly _params: any; // URL PARAMETERS
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor() {
+    constructor(params: any) {
         super();
+        this._params = params;
     }
 
     protected abstract render(): string;
@@ -31,6 +33,12 @@ abstract class Page
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    /**
+     * Return url parameters if any
+     */
+    public get params() {
+        return this._params;
+    }
 
     // ------------------------------------------------------------------------
     //                      p r i v a t e

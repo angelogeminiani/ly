@@ -1,33 +1,41 @@
 import view from "./MainView";
-import Component from "../../lyts_core/view/components/Component";
 import console from "../../lyts_core/commons/console";
 import constants from "../constants";
 import ElementWrapper from "../../lyts_core/view/components/ElementWrapper";
 import ly from "../../lyts_core/ly";
 import en from "../model/i18n/en";
 import it from "../model/i18n/it";
+import PageController from "../../lyts_core/view/routing/PageController";
+import Page1 from "./pages/page1/Page1";
+import Page2 from "./pages/page2/Page2";
+import Page from "../../lyts_core/view/components/page/Page";
 
 
 export default class Main
-    extends Component {
+    extends PageController {
 
 
     // ------------------------------------------------------------------------
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private readonly _content: ElementWrapper;
-    private readonly _loader: ElementWrapper;
-
-
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
     constructor() {
-        super();
+        super("");
 
-        this._content = super.getFirst("#" + this.uid + "_content");
+        // customize console
+        console.uid = constants.uid;
+
+        // register pages
+        super.register('/page1', Page1);
+        super.register('/page2/:param1/:param2', Page2);
+        super.register('/page3/:param1/not_a_param', Page2);
+        super.register('/call', (args: any) => {
+            console.log("CALLBACK", "Hello from a callback", args);
+        });
     }
 
     // ------------------------------------------------------------------------
@@ -39,13 +47,15 @@ export default class Main
     }
 
     protected free(): void {
-
+        super.free();
         // release memory
 
         console.log("REMOVED: ", constants.uid);
     }
 
     protected ready(): void {
+        super.ready();
+
         this.init();
     }
 
@@ -55,6 +65,12 @@ export default class Main
 
     public hide(): void {
 
+    }
+
+    public route(page: Page) {
+        console.log("route", page);
+
+        page.appendTo(this.element);
     }
 
     // ------------------------------------------------------------------------
@@ -75,14 +91,9 @@ export default class Main
             // event handlers
             this.initHandlers();
 
-            // customize console
-            console.uid = constants.uid;
 
         } catch (err) {
             console.error("Main.init()", err)
-        } finally {
-            // hide loader
-            this._loader.classAdd('hidden');
         }
 
     }

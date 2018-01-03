@@ -124,6 +124,14 @@ export default class lang {
         return lang.isString(value) && lang._validateEmail(value);
     }
 
+    static isConstructor(f: any): boolean {
+        try {
+            return !!f.prototype && !!f.prototype.constructor.name;
+        } catch (err) {
+            return false;
+        }
+    }
+
     // ------------------------------------------------------------------------
     //                      u t i l s
     // ------------------------------------------------------------------------

@@ -59,6 +59,21 @@ class browser {
         return false;
     }
 
+    public isPushStateAvailable():boolean {
+        return !!(
+            typeof window !== 'undefined' &&
+            window.history &&
+            window.history.pushState
+        );
+    }
+
+    public isHashChangeAvailable():boolean {
+        return !!(
+            typeof window !== 'undefined' &&
+            ('onhashchange' in window)
+        );
+    }
+
     public getParameterByName(name: string, url: string) {
         url = url || location.search;
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
