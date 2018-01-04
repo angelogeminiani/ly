@@ -4,7 +4,7 @@ import constants from "./constants";
 import Main from "./views/Main";
 import ApplicationController from "./controllers/ApplicationController";
 import console from "../lyts_core/commons/console";
-
+import {StyleManager} from "../lyts_core_style/StyleManager";
 
 
 const CONTAINER: string = "#_app_container";
@@ -70,6 +70,8 @@ class launcher
 
         // local i18n
         ly.Application.events.on(this, ly.i18n.EVENT_CHANGE_LANG, this.onLocalChangeLang);
+
+        this.initStyles();
     }
 
     private loadMain(): void {
@@ -82,6 +84,10 @@ class launcher
         if (!!this._global_i18n) {
             this._global_i18n.lang = lang;
         }
+    }
+
+    public initStyles(): void {
+        StyleManager
     }
 
     // ------------------------------------------------------------------------

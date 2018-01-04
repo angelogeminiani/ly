@@ -1,10 +1,8 @@
-export default function style(uid: string, props?: any): string {
+export default function animate(props: any): string {
 
     const main: string = `
         <style>
-            ${uid} {
             
-            }
         </style>
     `;
 

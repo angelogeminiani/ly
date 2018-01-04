@@ -1,6 +1,5 @@
 import Component from "../components/Component";
 import {EVENT_ON_ROUTE, Route, Router} from "./Router";
-import view from "./view";
 import lang from "../../commons/lang";
 import Page from "../components/page/Page";
 import console from "../../commons/console";
@@ -35,10 +34,6 @@ abstract class PageController
     }
 
     protected abstract route(page: Page): void;
-
-    protected render(): string {
-        return view(this.uid, {});
-    }
 
     protected free(): void {
         this._router.stop();

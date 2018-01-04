@@ -190,6 +190,20 @@ export default class dom {
         return doc;
     }
 
+    public static injectStyle(css: string) {
+        const head = document.head || document.getElementsByTagName('head')[0];
+        const style: any = document.createElement('style');
+
+        style.type = 'text/css';
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        head.appendChild(style);
+    }
+
     public static newElement(inner_html: string = '', append_to_selector?: string): HTMLElement {
         let elem;
         if (!!inner_html) {

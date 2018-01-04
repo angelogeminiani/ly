@@ -52,7 +52,7 @@ const config_tests = {
 
 const config_app = {
 
-    entry: './lyts_sample_app/launcher.ts',
+    entry: './lyts_zen_app/launcher.ts',
 
     output: {
         path: path.resolve(__dirname, 'build_sample_app'),
