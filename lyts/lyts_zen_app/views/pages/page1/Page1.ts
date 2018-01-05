@@ -20,7 +20,7 @@ export default class Page1
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(route:Route) {
+    constructor(route: Route) {
         super(route);
 
         this._content = super.getFirst("#" + this.uid + "_content");
@@ -46,11 +46,14 @@ export default class Page1
     }
 
     public show(): void {
-
+        super.show();
+        this.element.children[1].classAdd('animated');
+        this.element.children[1].classAdd('bounce');
     }
 
     public hide(): void {
-
+        super.hide();
+        this.element.classRemove('bounce');
     }
 
     // ------------------------------------------------------------------------

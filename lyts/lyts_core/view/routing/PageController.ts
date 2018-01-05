@@ -86,6 +86,7 @@ abstract class PageController
 
                     this._last_route = route;
                     this._last_page = new func(route);
+                    this._last_page.show();
                     this.route(this._last_page);
                 } else {
                     // we have a callback

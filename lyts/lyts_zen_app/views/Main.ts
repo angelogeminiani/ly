@@ -9,6 +9,7 @@ import PageController from "../../lyts_core/view/routing/PageController";
 import Page1 from "./pages/page1/Page1";
 import Page2 from "./pages/page2/Page2";
 import Page from "../../lyts_core/view/components/page/Page";
+import {StyleManager, StyleModule} from "../../lyts_core_style/StyleManager";
 
 
 export default class Main
@@ -30,6 +31,12 @@ export default class Main
 
         // customize console
         console.uid = constants.uid;
+
+        // initialize Style Manager
+        StyleManager.inject(
+            {},
+            StyleModule.animate
+        );
 
         // register pages
         super.register('/page1', Page1);

@@ -818,6 +818,19 @@ var dom = /** @class */ (function () {
         var doc = parser.parseFromString(text, "text/html");
         return doc;
     };
+    dom.injectStyle = function (css, target) {
+        if (target === void 0) { target = 'head'; }
+        var head = document[target] || document.getElementsByTagName(target)[0];
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+        }
+        else {
+            style.appendChild(document.createTextNode(css));
+        }
+        head.appendChild(style);
+    };
     dom.newElement = function (inner_html, append_to_selector) {
         if (inner_html === void 0) { inner_html = ''; }
         var elem;

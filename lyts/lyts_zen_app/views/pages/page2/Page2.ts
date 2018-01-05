@@ -46,11 +46,14 @@ export default class Page2
     }
 
     public show(): void {
-
+        //super.show();
+        this.element.classAdd('animated');
+        this.element.classAdd('fadeIn');
     }
 
     public hide(): void {
-
+        super.hide();
+        this.element.classRemove('fadeIn');
     }
 
     // ------------------------------------------------------------------------

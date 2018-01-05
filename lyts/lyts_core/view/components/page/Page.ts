@@ -40,6 +40,14 @@ abstract class Page
 
     protected abstract free(): void;
 
+    public show():void{
+        this.element.classRemove('hide');
+    }
+
+    public hide():void{
+        this.element.classAdd('hide');
+    }
+
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------

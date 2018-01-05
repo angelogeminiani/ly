@@ -1,6 +1,7 @@
 import animate from "./styles/animate";
 import dom from "../lyts_core/view/dom";
 
+const DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
 /**
  * Supported modules
  */
@@ -16,16 +17,30 @@ class StyleManagerClass {
 
 
     // ------------------------------------------------------------------------
+    //                      f i e l d s
+    // ------------------------------------------------------------------------
+
+    private _use_one_style_tag: boolean;
+
+    // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
     constructor() {
-
+        this._use_one_style_tag = false;
     }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+
+    public get useOneStyleTag(): boolean {
+        return this._use_one_style_tag;
+    }
+
+    public set useOneStyleTag(value: boolean) {
+        this._use_one_style_tag = value;
+    }
 
     /**
      * Inject style directly to head
@@ -33,12 +48,11 @@ class StyleManagerClass {
      * @param {StyleModule} modules
      */
     public inject(props: any, ...modules: StyleModule[]): void {
-        // creates css directives
-        let css = '';
-        for (let module of modules) {
-            css += this.loadModule(props, module);
+        if (this._use_one_style_tag) {
+            this.injectOne(props, ...modules);
+        } else {
+            this.injectAll(props, ...modules);
         }
-        dom.injectStyle(css);
     }
 
     // ------------------------------------------------------------------------
@@ -52,8 +66,31 @@ class StyleManagerClass {
         } else {
             module_content = '';
         }
-        return module_content.split('<style>').join('\n').split('</style>').join('\n');
+        // console.log(module, module_content);
+        return module_content.split('<style>').join('\n').split('</style>').join('\n').trim();
     }
+
+    private injectOne(props: any, ...modules: StyleModule[]): void {
+        // creates css directives
+        let css = '';
+        for (let module of modules) {
+            css += this.loadModule(props, module);
+        }
+
+        // add line
+        css = '\n' + css + '\n';
+
+        dom.injectStyle(css);
+    }
+
+    private injectAll(props: any, ...modules: StyleModule[]): void {
+        // creates css directives
+        for (let module of modules) {
+            const css = this.loadModule(props, module);
+            dom.injectStyle(css);
+        }
+    }
+
 
     // ------------------------------------------------------------------------
     //                      S I N G L E T O N

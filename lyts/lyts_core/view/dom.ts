@@ -190,8 +190,8 @@ export default class dom {
         return doc;
     }
 
-    public static injectStyle(css: string) {
-        const head = document.head || document.getElementsByTagName('head')[0];
+    public static injectStyle(css: string, target: string = 'head') {
+        const head: any = (document as any)[target] || document.getElementsByTagName(target)[0];
         const style: any = document.createElement('style');
 
         style.type = 'text/css';
