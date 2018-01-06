@@ -3,6 +3,7 @@ import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper
 import console from "../../../../lyts_core/commons/console";
 import view from "./view";
 import {Route} from "../../../../lyts_core/view/routing/Router";
+import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
 
 
 export default class Page2
@@ -20,7 +21,7 @@ export default class Page2
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(route:Route) {
+    constructor(route: Route) {
         super(route);
 
         this._content = super.getFirst("#" + this.uid + "_content");
@@ -46,14 +47,13 @@ export default class Page2
     }
 
     public show(): void {
-        //super.show();
-        this.element.classAdd('animated');
-        this.element.classAdd('fadeIn');
+        Animate.apply(AnimateEffect.fadeIn, this.element, () => {
+            console.log('Page2.show', AnimateEffect.fadeIn + ' animation terminated');
+        });
     }
 
     public hide(): void {
         super.hide();
-        this.element.classRemove('fadeIn');
     }
 
     // ------------------------------------------------------------------------

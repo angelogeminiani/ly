@@ -3,7 +3,7 @@ import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper
 import console from "../../../../lyts_core/commons/console";
 import view from "./view";
 import {Route} from "../../../../lyts_core/view/routing/Router";
-import Animate from "../../../../lyts_core_style/styles/Animate";
+import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
 
 
 export default class Page1
@@ -48,16 +48,13 @@ export default class Page1
 
     public show(): void {
         super.show();
-        //this.element.children[1].classAdd('animated');
-        //this.element.children[1].classAdd('bounce');
-        Animate.bounce(this.element, () => {
-            console.log('Page1.show', 'animation terminated');
+        Animate.apply(AnimateEffect.bouce, this.element, () => {
+            console.log('Page1.show', AnimateEffect.bouce + ' animation terminated');
         });
     }
 
     public hide(): void {
         super.hide();
-        //this.element.classRemove('bounce');
     }
 
     // ------------------------------------------------------------------------

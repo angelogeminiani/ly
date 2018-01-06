@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1409,20 +1409,20 @@ var Events = /** @class */ (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_lang__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_strings__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_objects__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_random__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_browser__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_dom__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_i18n__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_events_EventEmitter__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_components_Component__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__application_Application__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__application_Application__ = __webpack_require__(23);
 //-- static --//
 
 
@@ -1831,7 +1831,7 @@ var BaseObject = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__i18n__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(22);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -2222,129 +2222,6 @@ var Component = /** @class */ (function (_super) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StyleManager; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return StyleModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_animate_css__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__ = __webpack_require__(4);
-
-
-var DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
-/**
- * Supported modules
- */
-var StyleModule;
-(function (StyleModule) {
-    StyleModule[StyleModule["animate"] = 0] = "animate";
-})(StyleModule || (StyleModule = {}));
-/**
- * Singleton manager for application styles.
- * StyleManager allow to inject styles into html head
- */
-var StyleManagerClass = /** @class */ (function () {
-    // ------------------------------------------------------------------------
-    //                      c o n s t r u c t o r
-    // ------------------------------------------------------------------------
-    function StyleManagerClass() {
-        this._use_one_style_tag = false;
-        this._hystory = [];
-    }
-    Object.defineProperty(StyleManagerClass.prototype, "useOneStyleTag", {
-        // ------------------------------------------------------------------------
-        //                      p u b l i c
-        // ------------------------------------------------------------------------
-        get: function () {
-            return this._use_one_style_tag;
-        },
-        set: function (value) {
-            this._use_one_style_tag = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Inject style directly to head
-     * @param props
-     * @param {StyleModule} modules
-     */
-    StyleManagerClass.prototype.inject = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        if (this._use_one_style_tag) {
-            this.injectOne.apply(this, [props].concat(modules));
-        }
-        else {
-            this.injectAll.apply(this, [props].concat(modules));
-        }
-    };
-    // ------------------------------------------------------------------------
-    //                      p r i v a t e
-    // ------------------------------------------------------------------------
-    StyleManagerClass.prototype.loadModule = function (props, module) {
-        var module_content;
-        if (module === StyleModule.animate) {
-            module_content = Object(__WEBPACK_IMPORTED_MODULE_0__styles_animate_css__["a" /* default */])(props);
-        }
-        else {
-            module_content = '';
-        }
-        // console.log(module, module_content);
-        return module_content.split('<style>').join('\n').split('</style>').join('\n').trim();
-    };
-    StyleManagerClass.prototype.injectOne = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        // creates css directives
-        var css = '';
-        for (var _a = 0, modules_1 = modules; _a < modules_1.length; _a++) {
-            var module = modules_1[_a];
-            if (this._hystory.indexOf(module) === -1) {
-                css += this.loadModule(props, module);
-                this._hystory.push(module);
-            }
-        }
-        // add line
-        css = '\n' + css + '\n';
-        __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__["a" /* default */].injectStyle(css);
-    };
-    StyleManagerClass.prototype.injectAll = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        // creates css directives
-        for (var _a = 0, modules_2 = modules; _a < modules_2.length; _a++) {
-            var module = modules_2[_a];
-            if (this._hystory.indexOf(module) === -1) {
-                var css = this.loadModule(props, module);
-                this._hystory.push(module);
-                __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__["a" /* default */].injectStyle(css);
-            }
-        }
-    };
-    StyleManagerClass.instance = function () {
-        if (null == StyleManagerClass.__instance) {
-            StyleManagerClass.__instance = new StyleManagerClass();
-        }
-        return StyleManagerClass.__instance;
-    };
-    return StyleManagerClass;
-}());
-// ------------------------------------------------------------------------
-//                      e x p o r t s
-// ------------------------------------------------------------------------
-var StyleManager = StyleManagerClass.instance();
-
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 var IS_LOCALE = true;
 var HOST_LOCALE = 'https://localhost:4000';
 var HOST = 'https://api.conversacon.com:4000';
@@ -2363,7 +2240,7 @@ var constants = {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2435,18 +2312,310 @@ var Page = /** @class */ (function (_super) {
 
 
 /***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Animate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AnimateEffect; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StyleManager__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__ = __webpack_require__(0);
+
+
+/**
+ * Effects
+ *
+ */
+var AnimateEffect;
+(function (AnimateEffect) {
+    // ATTENTION SEEKER
+    AnimateEffect["bouce"] = "bounce";
+    AnimateEffect["flash"] = "flash";
+    AnimateEffect["pulse"] = "pulse";
+    AnimateEffect["rubberBand"] = "rubberBand";
+    AnimateEffect["shake"] = "shake";
+    AnimateEffect["headShake"] = "headShake";
+    AnimateEffect["swing"] = "swing";
+    AnimateEffect["tada"] = "tada";
+    AnimateEffect["wobble"] = "wobble";
+    AnimateEffect["jello"] = "jello";
+    // BOUNCING ENTRANCES
+    AnimateEffect["bounceIn"] = "bounceIn";
+    AnimateEffect["bounceInDown"] = "bounceInDown";
+    AnimateEffect["bounceInLeft"] = "bounceInLeft";
+    AnimateEffect["bounceInRight"] = "bounceInRight";
+    AnimateEffect["bounceInUp"] = "bounceInUp";
+    // BOUNCING EXIT
+    AnimateEffect["bounceOut"] = "bounceOut";
+    AnimateEffect["bounceOutDown"] = "bounceOutDown";
+    AnimateEffect["bounceOutLeft"] = "bounceOutLeft";
+    AnimateEffect["bounceOutRight"] = "bounceOutRight";
+    AnimateEffect["bounceOutUp"] = "bounceOutUp";
+    // FADE ENTRANCES
+    AnimateEffect["fadeIn"] = "fadeIn";
+    AnimateEffect["fadeInDown"] = "fadeInDown";
+    AnimateEffect["fadeInDownBig"] = "fadeInDownBig";
+    AnimateEffect["fadeInLeft"] = "fadeInLeft";
+    AnimateEffect["fadeInLeftBig"] = "fadeInLeftBig";
+    AnimateEffect["fadeInRight"] = "fadeInRight";
+    AnimateEffect["fadeInRightBig"] = "fadeInRightBig";
+    AnimateEffect["fadeInUp"] = "fadeInUp";
+    AnimateEffect["fadeInUpBig"] = "fadeInUpBig";
+    // FADE EXIT
+    AnimateEffect["fadeOut"] = "fadeOut";
+    AnimateEffect["fadeOutDown"] = "fadeOutDown";
+    AnimateEffect["fadeOutDownBig"] = "fadeOutDownBig";
+    AnimateEffect["fadeOutLeft"] = "fadeOutLeft";
+    AnimateEffect["fadeOutLeftBig"] = "fadeOutLeftBig";
+    AnimateEffect["fadeOutRight"] = "fadeOutRight";
+    AnimateEffect["fadeOutRightBig"] = "fadeOutRightBig";
+    AnimateEffect["fadeOutUp"] = "fadeOutUp";
+    AnimateEffect["fadeOutUpBig"] = "fadeOutUpBig";
+    // FLIPPERS
+    AnimateEffect["flipInX"] = "flipInX";
+    AnimateEffect["flipInY"] = "flipInY";
+    AnimateEffect["flipOutX"] = "flipOutX";
+    AnimateEffect["flipOutY"] = "flipOutY";
+    // LIGHTSPEED
+    AnimateEffect["lightSpeedIn"] = "lightSpeedIn";
+    AnimateEffect["lightSpeedOut"] = "lightSpeedOut";
+    // ROTATING ENTRANCES
+    AnimateEffect["rotateIn"] = "rotateIn";
+    AnimateEffect["rotateInDownLeft"] = "rotateInDownLeft";
+    AnimateEffect["rotateInDownRight"] = "rotateInDownRight";
+    AnimateEffect["rotateInUpLeft"] = "rotateInUpLeft";
+    AnimateEffect["rotateInUpRight"] = "rotateInUpRight";
+    // ROTATING EXIT
+    AnimateEffect["rotateOut"] = "rotateOut";
+    AnimateEffect["rotateOutDownLeft"] = "rotateOutDownLeft";
+    AnimateEffect["rotateOutDownRight"] = "rotateOutDownRight";
+    AnimateEffect["rotateOutUpLeft"] = "rotateOutUpLeft";
+    AnimateEffect["rotateOutUpRight"] = "rotateOutUpRight";
+    // SLIDING ENTRANCES
+    AnimateEffect["slideInDown"] = "slideInDown";
+    AnimateEffect["slideInLeft"] = "slideInLeft";
+    AnimateEffect["slideInRight"] = "slideInRight";
+    AnimateEffect["slideInUp"] = "slideInUp";
+    // SLIDING EXITS
+    AnimateEffect["slideOutDown"] = "slideOutDown";
+    AnimateEffect["slideOutLeft"] = "slideOutLeft";
+    AnimateEffect["slideOutRight"] = "slideOutRight";
+    AnimateEffect["slideOutUp"] = "slideOutUp";
+    // ZOOM ENTRANCES
+    AnimateEffect["zoomIn"] = "zoomIn";
+    AnimateEffect["zoomInDown"] = "zoomInDown";
+    AnimateEffect["zoomInLeft"] = "zoomInLeft";
+    AnimateEffect["zoomInRight"] = "zoomInRight";
+    AnimateEffect["zoomInUp"] = "zoomInUp";
+    // ZOOM EXIT
+    AnimateEffect["zoomOut"] = "zoomOut";
+    AnimateEffect["zoomOutDown"] = "zoomOutDown";
+    AnimateEffect["zoomOutLeft"] = "zoomOutLeft";
+    AnimateEffect["zoomOutRight"] = "zoomOutRight";
+    AnimateEffect["zoomOutUp"] = "zoomOutUp";
+    // SPECIAL
+    AnimateEffect["hinge"] = "hinge";
+    AnimateEffect["jackInTheBox"] = "jackInTheBox";
+    AnimateEffect["rollIn"] = "rollIn";
+    AnimateEffect["rollOut"] = "rollOut";
+})(AnimateEffect || (AnimateEffect = {}));
+var AnimateClass = /** @class */ (function () {
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+    function AnimateClass() {
+        __WEBPACK_IMPORTED_MODULE_0__StyleManager__["a" /* StyleManager */].inject({}, __WEBPACK_IMPORTED_MODULE_0__StyleManager__["b" /* StyleModule */].animate);
+    }
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+    AnimateClass.prototype.apply = function (effect, elem, callback, is_infinite) {
+        this.applyEffect(effect, elem, callback, is_infinite);
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    AnimateClass.prototype.applyEffect = function (effect, elem, callback, is_infinite) {
+        this.animate(elem, function () {
+            elem.classRemove(effect);
+            if (!!is_infinite) {
+                elem.classRemove('infinite');
+            }
+            if (!!callback && __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].isFunction(callback)) {
+                __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].funcInvoke(callback);
+            }
+        });
+        elem.classAdd(effect);
+        if (!!is_infinite) {
+            elem.classAdd('infinite');
+        }
+    };
+    AnimateClass.prototype.animate = function (elem, callback) {
+        this.animationend(elem, function () {
+            elem.classRemove('animated');
+            __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].funcInvoke(callback);
+        });
+        elem.classAdd('animated');
+    };
+    AnimateClass.prototype.animationend = function (elem, callback) {
+        elem.addEventListener('animationend', function (e) {
+            e.preventDefault();
+            // remove listeners
+            elem.removeEventListener('animationend');
+            __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].funcInvoke(callback);
+        });
+    };
+    AnimateClass.instance = function () {
+        if (null == AnimateClass.__instance) {
+            AnimateClass.__instance = new AnimateClass();
+        }
+        return AnimateClass.__instance;
+    };
+    return AnimateClass;
+}());
+// ------------------------------------------------------------------------
+//                      e x p o r t s
+// ------------------------------------------------------------------------
+var Animate = AnimateClass.instance();
+
+
+
+/***/ }),
 /* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StyleManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return StyleModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_animate_animate_css__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__ = __webpack_require__(4);
+
+
+var DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
+/**
+ * Supported modules
+ */
+var StyleModule;
+(function (StyleModule) {
+    StyleModule[StyleModule["animate"] = 0] = "animate";
+})(StyleModule || (StyleModule = {}));
+/**
+ * Singleton manager for application styles.
+ * StyleManager allow to inject styles into html head
+ */
+var StyleManagerClass = /** @class */ (function () {
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+    function StyleManagerClass() {
+        this._use_one_style_tag = false;
+        this._hystory = [];
+    }
+    Object.defineProperty(StyleManagerClass.prototype, "useOneStyleTag", {
+        // ------------------------------------------------------------------------
+        //                      p u b l i c
+        // ------------------------------------------------------------------------
+        get: function () {
+            return this._use_one_style_tag;
+        },
+        set: function (value) {
+            this._use_one_style_tag = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Inject style directly to head
+     * @param props
+     * @param {StyleModule} modules
+     */
+    StyleManagerClass.prototype.inject = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        if (this._use_one_style_tag) {
+            this.injectOne.apply(this, [props].concat(modules));
+        }
+        else {
+            this.injectAll.apply(this, [props].concat(modules));
+        }
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    StyleManagerClass.prototype.loadModule = function (props, module) {
+        var module_content;
+        if (module === StyleModule.animate) {
+            module_content = Object(__WEBPACK_IMPORTED_MODULE_0__styles_animate_animate_css__["a" /* default */])(props);
+        }
+        else {
+            module_content = '';
+        }
+        // console.log(module, module_content);
+        return module_content.split('<style>').join('\n').split('</style>').join('\n').trim();
+    };
+    StyleManagerClass.prototype.injectOne = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        // creates css directives
+        var css = '';
+        for (var _a = 0, modules_1 = modules; _a < modules_1.length; _a++) {
+            var module = modules_1[_a];
+            if (this._hystory.indexOf(module) === -1) {
+                css += this.loadModule(props, module);
+                this._hystory.push(module);
+            }
+        }
+        // add line
+        css = '\n' + css + '\n';
+        __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__["a" /* default */].injectStyle(css);
+    };
+    StyleManagerClass.prototype.injectAll = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        // creates css directives
+        for (var _a = 0, modules_2 = modules; _a < modules_2.length; _a++) {
+            var module = modules_2[_a];
+            if (this._hystory.indexOf(module) === -1) {
+                var css = this.loadModule(props, module);
+                this._hystory.push(module);
+                __WEBPACK_IMPORTED_MODULE_1__lyts_core_view_dom__["a" /* default */].injectStyle(css);
+            }
+        }
+    };
+    StyleManagerClass.instance = function () {
+        if (null == StyleManagerClass.__instance) {
+            StyleManagerClass.__instance = new StyleManagerClass();
+        }
+        return StyleManagerClass.__instance;
+    };
+    return StyleManagerClass;
+}());
+// ------------------------------------------------------------------------
+//                      e x p o r t s
+// ------------------------------------------------------------------------
+var StyleManager = StyleManagerClass.instance();
+
+
+
+/***/ }),
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_BaseObject__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Main__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Main__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_ApplicationController__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lyts_core_commons_console__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_style_StyleManager__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_style_StyleManager__ = __webpack_require__(17);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -2541,7 +2710,7 @@ launcher.instance().start();
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2643,7 +2812,7 @@ var format = /** @class */ (function () {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2710,7 +2879,7 @@ var cookies = /** @class */ (function () {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2827,7 +2996,7 @@ var HttpClient = /** @class */ (function () {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3024,7 +3193,7 @@ var ElementWrapper = /** @class */ (function () {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3202,20 +3371,19 @@ var Application = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainView__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainView__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_ly__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_i18n_en__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_i18n_it__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_view_routing_PageController__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_page1_Page1__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_i18n_en__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_i18n_it__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_view_routing_PageController__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_page1_Page1__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_page2_Page2__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lyts_core_style_StyleManager__ = __webpack_require__(14);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3235,7 +3403,6 @@ var __extends = (this && this.__extends) || (function () {
 
 
 
-
 var Main = /** @class */ (function (_super) {
     __extends(Main, _super);
     // ------------------------------------------------------------------------
@@ -3245,8 +3412,6 @@ var Main = /** @class */ (function (_super) {
         var _this = _super.call(this, "") || this;
         // customize console
         __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__["a" /* default */].uid = __WEBPACK_IMPORTED_MODULE_2__constants__["a" /* default */].uid;
-        // initialize Style Manager
-        __WEBPACK_IMPORTED_MODULE_9__lyts_core_style_StyleManager__["a" /* StyleManager */].inject({}, __WEBPACK_IMPORTED_MODULE_9__lyts_core_style_StyleManager__["b" /* StyleModule */].animate);
         // register pages
         _super.prototype.register.call(_this, '/page1', __WEBPACK_IMPORTED_MODULE_7__pages_page1_Page1__["a" /* default */]);
         _super.prototype.register.call(_this, '/page2/:param1/:param2', __WEBPACK_IMPORTED_MODULE_8__pages_page2_Page2__["a" /* default */]);
@@ -3310,12 +3475,12 @@ var Main = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = view;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainStyle__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainStyle__ = __webpack_require__(26);
 
 function view(uid, props) {
     props = props || {};
@@ -3324,7 +3489,7 @@ function view(uid, props) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3338,7 +3503,7 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3350,7 +3515,7 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3362,12 +3527,12 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Component__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Router__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_lang__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_console__ = __webpack_require__(2);
 var __extends = (this && this.__extends) || (function () {
@@ -3458,7 +3623,7 @@ var PageController = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3762,14 +3927,14 @@ var Router = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_view_components_page_Page__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_view_components_page_Page__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_Animate__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__ = __webpack_require__(16);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3809,15 +3974,12 @@ var Page1 = /** @class */ (function (_super) {
     };
     Page1.prototype.show = function () {
         _super.prototype.show.call(this);
-        //this.element.children[1].classAdd('animated');
-        //this.element.children[1].classAdd('bounce');
-        __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_Animate__["a" /* default */].bounce(this.element, function () {
-            __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__["a" /* default */].log('Page1.show', 'animation terminated');
+        __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["a" /* Animate */].apply(__WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["b" /* AnimateEffect */].bouce, this.element, function () {
+            __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__["a" /* default */].log('Page1.show', __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["b" /* AnimateEffect */].bouce + ' animation terminated');
         });
     };
     Page1.prototype.hide = function () {
         _super.prototype.hide.call(this);
-        //this.element.classRemove('bounce');
     };
     // ------------------------------------------------------------------------
     //                      p u b l i c
@@ -3838,12 +4000,12 @@ var Page1 = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = view;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style__ = __webpack_require__(33);
 
 function view(uid, props) {
     props = props || {};
@@ -3852,7 +4014,7 @@ function view(uid, props) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3863,52 +4025,6 @@ function style(uid, props) {
     return "\n        " + main + "\n           \n    ";
 }
 ;
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StyleManager__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__ = __webpack_require__(0);
-
-
-var AnimateClass = /** @class */ (function () {
-    // ------------------------------------------------------------------------
-    //                      c o n s t r u c t o r
-    // ------------------------------------------------------------------------
-    function AnimateClass() {
-        __WEBPACK_IMPORTED_MODULE_0__StyleManager__["a" /* StyleManager */].inject(__WEBPACK_IMPORTED_MODULE_0__StyleManager__["b" /* StyleModule */].animate);
-    }
-    // ------------------------------------------------------------------------
-    //                      p u b l i c
-    // ------------------------------------------------------------------------
-    AnimateClass.prototype.bounce = function (elem, callback) {
-        elem.addEventListener('animationend', function (e) {
-            e.preventDefault();
-            elem.removeEventListener('animationend');
-            elem.classRemove('bounce');
-            if (!!callback && __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].isFunction(callback)) {
-                __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__["a" /* default */].funcInvoke(callback);
-            }
-        });
-        elem.classAdd('animated');
-        elem.classAdd('bounce');
-    };
-    AnimateClass.instance = function () {
-        if (null == AnimateClass.__instance) {
-            AnimateClass.__instance = new AnimateClass();
-        }
-        return AnimateClass.__instance;
-    };
-    return AnimateClass;
-}());
-// ------------------------------------------------------------------------
-//                      e x p o r t s
-// ------------------------------------------------------------------------
-var Animate = AnimateClass.instance();
-/* harmony default export */ __webpack_exports__["a"] = (Animate);
 
 
 /***/ }),
@@ -3932,9 +4048,10 @@ function animate_css(props) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_view_components_page_Page__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_view_components_page_Page__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__ = __webpack_require__(16);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3945,6 +4062,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
 
 
 
@@ -3972,13 +4090,12 @@ var Page2 = /** @class */ (function (_super) {
         this.init();
     };
     Page2.prototype.show = function () {
-        //super.show();
-        this.element.classAdd('animated');
-        this.element.classAdd('fadeIn');
+        __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["a" /* Animate */].apply(__WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["b" /* AnimateEffect */].fadeIn, this.element, function () {
+            __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__["a" /* default */].log('Page2.show', __WEBPACK_IMPORTED_MODULE_3__lyts_core_style_styles_animate_Animate__["b" /* AnimateEffect */].fadeIn + ' animation terminated');
+        });
     };
     Page2.prototype.hide = function () {
         _super.prototype.hide.call(this);
-        this.element.classRemove('fadeIn');
     };
     // ------------------------------------------------------------------------
     //                      p u b l i c
