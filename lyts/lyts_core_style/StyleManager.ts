@@ -23,6 +23,7 @@ class StyleManagerClass {
     // ------------------------------------------------------------------------
 
     private _use_one_style_tag: boolean;
+    private _hystory: StyleModule[];
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -30,6 +31,7 @@ class StyleManagerClass {
 
     constructor() {
         this._use_one_style_tag = false;
+        this._hystory = [];
     }
 
     // ------------------------------------------------------------------------
@@ -76,7 +78,10 @@ class StyleManagerClass {
         // creates css directives
         let css = '';
         for (let module of modules) {
-            css += this.loadModule(props, module);
+            if (this._hystory.indexOf(module) === -1) {
+                css += this.loadModule(props, module);
+                this._hystory.push(module);
+            }
         }
 
         // add line
@@ -88,8 +93,11 @@ class StyleManagerClass {
     private injectAll(props: any, ...modules: StyleModule[]): void {
         // creates css directives
         for (let module of modules) {
-            const css = this.loadModule(props, module);
-            dom.injectStyle(css);
+            if (this._hystory.indexOf(module) === -1) {
+                const css = this.loadModule(props, module);
+                this._hystory.push(module);
+                dom.injectStyle(css);
+            }
         }
     }
 
