@@ -1,4 +1,4 @@
-import animate from "./styles/animate";
+import animate_css from "./styles/animate_css";
 import dom from "../lyts_core/view/dom";
 
 const DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
@@ -6,7 +6,9 @@ const DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
  * Supported modules
  */
 enum StyleModule {
-    animate,
+
+    animate,   // animate css
+
 }
 
 /**
@@ -62,7 +64,7 @@ class StyleManagerClass {
     private loadModule(props: any, module: StyleModule) {
         let module_content: string;
         if (module === StyleModule.animate) {
-            module_content = animate(props);
+            module_content = animate_css(props);
         } else {
             module_content = '';
         }
