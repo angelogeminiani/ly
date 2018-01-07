@@ -18,7 +18,7 @@ export default function view(uid: string, props?: any): string {
                     </div>
                 </nav>
                 
-                <div id="${uid}_pages">
+                <div id="${uid}_screens">
                 
                 </div>
                         

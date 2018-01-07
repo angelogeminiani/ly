@@ -7,6 +7,7 @@
 import ElementWrapper from "../../../lyts_core/view/components/ElementWrapper";
 import {StyleManager, StyleModule} from "../../StyleManager";
 import lang from "../../../lyts_core/commons/lang";
+import animate_css from "./animate_css";
 
 /**
  * Effects
@@ -127,7 +128,9 @@ class AnimateClass {
     // ------------------------------------------------------------------------
 
     constructor() {
-        StyleManager.inject({}, StyleModule.animate);
+        StyleManager
+            .register(StyleModule.animate, animate_css)
+            .inject({}, StyleModule.animate);
     }
 
     // ------------------------------------------------------------------------

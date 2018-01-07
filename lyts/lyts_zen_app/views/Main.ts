@@ -5,14 +5,14 @@ import ElementWrapper from "../../lyts_core/view/components/ElementWrapper";
 import ly from "../../lyts_core/ly";
 import en from "../model/i18n/en";
 import it from "../model/i18n/it";
-import PageController from "../../lyts_core/view/routing/PageController";
-import Page1 from "./pages/page1/Page1";
-import Page2 from "./pages/page2/Page2";
-import Page from "../../lyts_core/view/components/page/Page";
+import ScreenController from "../../lyts_core/view/screens/ScreenController";
+import Screen1 from "./screens/screen1/Screen1";
+import Screen2 from "./screens/screen2/Screen2";
+import Screen from "../../lyts_core/view/screens/screen/Screen";
 
 
 export default class Main
-    extends PageController {
+    extends ScreenController {
 
 
     // ------------------------------------------------------------------------
@@ -28,18 +28,17 @@ export default class Main
     constructor() {
         super("");
 
+        // set debug mode
+        this.debugMode = true;
+
         // customize console
         console.uid = constants.uid;
 
-        // register pages
-        super.register('/page1', Page1);
-        super.register('/page2/:param1/:param2', Page2);
-        super.register('/page3/:param1/not_a_param', Page2);
-        super.register('/call', (args: any) => {
-            console.log("CALLBACK", "Hello from a callback", args);
-        });
+        // register screens
+        super.register('/screen1', Screen1);
+        super.register('/screen2', Screen2);
 
-        this._body = super.getFirst("#" + this.uid + "_pages");
+        this._body = super.getFirst("#" + this.uid + "_screens");
     }
 
     // ------------------------------------------------------------------------
@@ -54,7 +53,7 @@ export default class Main
         super.free();
         // release memory
 
-        console.log("REMOVED: ", constants.uid);
+        console.log("REMOVED MAIN: ", constants.uid);
     }
 
     protected ready(): void {
@@ -71,8 +70,8 @@ export default class Main
 
     }
 
-    public route(page: Page) {
-        page.appendTo(this._body);
+    public route(screen: Screen) {
+        screen.appendTo(this._body);
     }
 
     // ------------------------------------------------------------------------

@@ -1,12 +1,10 @@
-import Page from "../../../../lyts_core/view/pages/page/Page";
-import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper";
-import console from "../../../../lyts_core/commons/console";
+import Page from "../../../../../../lyts_core/view/pages/page/Page";
+import ElementWrapper from "../../../../../../lyts_core/view/components/ElementWrapper";
+import {Route} from "../../../../../../lyts_core/view/Router";
 import view from "./view";
-import {Route} from "../../../../lyts_core/view/Router";
-import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
 
 
-export default class Page2
+export default class PageLogin
     extends Page {
 
 
@@ -39,7 +37,7 @@ export default class Page2
 
         // release memory
 
-        console.log("REMOVED:", this.uid);
+        console.log("REMOVED PAGELOGIN:", this.uid);
     }
 
     protected ready(): void {
@@ -47,9 +45,8 @@ export default class Page2
     }
 
     public show(): void {
-        Animate.apply(AnimateEffect.fadeIn, this.element, () => {
-            console.log('Page2.show', AnimateEffect.fadeIn + ' animation terminated');
-        });
+        super.show();
+
     }
 
     public hide(): void {
@@ -70,7 +67,7 @@ export default class Page2
 
 
         } catch (err) {
-            console.error("Page2.init()", err)
+            console.error("PageLogin.init()", err)
         }
     }
 

@@ -1,6 +1,6 @@
-import Component from "../Component";
 import console from "../../../commons/console";
-import {Route} from "../../routing/Router";
+import {Route} from "../../Router";
+import Component from "../../components/Component";
 
 
 abstract class Page
@@ -40,11 +40,11 @@ abstract class Page
 
     protected abstract free(): void;
 
-    public show():void{
+    public show(): void {
         this.element.classRemove('hide');
     }
 
-    public hide():void{
+    public hide(): void {
         this.element.classAdd('hide');
     }
 

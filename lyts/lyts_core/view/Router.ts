@@ -1,14 +1,13 @@
-import EventEmitter from "../../commons/events/EventEmitter";
-import Page from "../components/page/Page";
-import {Dictionary} from "../../commons/collections/Dictionary";
-import browser from "../browser";
-import console from "../../commons/console";
-import lang from "../../commons/lang";
-import objects from "../../commons/objects";
-import random from "../../commons/random";
-import ElementWrapper from "../components/ElementWrapper";
-import dom from "../dom";
+import ly from "../ly";
+import {Dictionary} from "../commons/collections/Dictionary";
+import EventEmitter from "../commons/events/EventEmitter";
+import ElementWrapper from "./components/ElementWrapper";
+import console from "../commons/console";
 
+/**
+ * Route wrapper.
+ * Utility class to wrap route properties.
+ */
 class Route {
 
     constructor(route: string, handler: Function | null) {
@@ -25,11 +24,11 @@ class Route {
 
     public uid(): string {
         try {
-            return lang.className(this.handler) + "." + objects.values(this.params).join('.');
+            return ly.lang.className(this.handler) + "." + ly.objects.values(this.params).join('.');
         } catch (err) {
             console.error("Route.uid", err);
         }
-        return random.guid();
+        return ly.random.guid();
     }
 
     public isEmpty(): boolean {
@@ -120,6 +119,7 @@ class Router
     private _hash: string;
     private _use_hash: boolean;
     private _paused: boolean;
+    private _debug_mode: boolean;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -127,9 +127,10 @@ class Router
 
     constructor(root: string = '', hash: string = _DEF_HASH) {
         super();
+
         this._routes = new Dictionary<Route>();
 
-        this._mode = browser.isPushStateAvailable() ? _EVENT_POP_STATE : browser.isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
+        this._mode = ly.browser.isPushStateAvailable() ? _EVENT_POP_STATE : ly.browser.isHashChangeAvailable() ? _EVENT_HASH_CHANGE : _EMPTY;
         this._native_listener = this.onLocationChange.bind(this);
 
         this._hash = !!hash ? hash : _DEF_HASH;
@@ -137,7 +138,21 @@ class Router
 
         this._root = root;
 
+        this._paused = false;
+        this._debug_mode = false;
+
         this.initialize();
+    }
+
+    public toString(): string {
+        return JSON.stringify({
+            uid: this.uid,
+            root: this.root,
+            hash: this.hash,
+            useHash: this.useHash,
+            paused: this.paused,
+            routes: this._routes
+        });
     }
 
     // ------------------------------------------------------------------------
@@ -168,6 +183,14 @@ class Router
         this._paused = value;
     }
 
+    public get debugMode(): boolean {
+        return this._debug_mode;
+    }
+
+    public set debugMode(value: boolean) {
+        this._debug_mode = value;
+    }
+
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
@@ -184,6 +207,8 @@ class Router
             // ready to replace relative links adding current root
             this.replaceLinks(elem);
         }
+
+        this.debug("start", this);
     }
 
     /**
@@ -221,18 +246,24 @@ class Router
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
+    private debug(method_name: string, ...args: any[]): void {
+        if (this._debug_mode) {
+            console.log(`[${this.uid}] Router.` + method_name, ...args)
+        }
+    }
+
     private initialize(): void {
         if (!!this._root) {
             this._root = this._use_hash
                 ? this.root.replace(/\/$/, '/' + this._hash)
                 : this.root.replace(/\/$/, '');
         } else if (this._use_hash) {
-            this._root = browser.location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
+            this._root = ly.browser.location().split(this._hash)[0].replace(/\/$/, '/' + this._hash);
         }
     }
 
     private startListen(): void {
-        if (browser.isReady()) {
+        if (ly.browser.isReady()) {
             const event_name: string = this._mode;
             window.addEventListener(event_name, this._native_listener);
         } else {
@@ -241,24 +272,27 @@ class Router
     }
 
     private stopListen(): void {
-        if (browser.isReady()) {
+        if (ly.browser.isReady()) {
             const event_name: string = this._mode;
             window.removeEventListener(event_name, this._native_listener);
         }
     }
 
-    private onLocationChange(current: any) {
+    private onLocationChange() {
+        this.debug('onLocationChange');
         if (!this.paused) {
             this.resolve();
         }
     }
 
     private getRoute(url: string): Route {
+        this.debug('getRoute', url);
         if (!this._routes.isEmpty() && !this.paused) {
             const paths: string[] = this._routes.keys();
             for (let path of paths) {
                 const route: Route = this._routes.get(path);
                 if (route.match(url)) {
+                    this.debug('getRoute#found', route);
                     return route;
                 }
             }
@@ -269,7 +303,7 @@ class Router
 
     // https://github.com/krasimir/navigo/blob/master/src/index.js
     private resolve(raw_path?: string): void {
-        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(browser.location());
+        raw_path = !!raw_path ? Router.normalize(raw_path) : Router.normalize(ly.browser.location());
         // remove root from url
         const url = raw_path.replace(this.root, '').replace(this.hash, '');
         const last_uid = !!this._last_route ? this._last_route.uid() : '';
@@ -289,17 +323,17 @@ class Router
     private replaceLinks(elem: ElementWrapper): void {
         const native: HTMLElement | null = elem.htmlElement;
         if (!!native) {
-            const childs: Array<HTMLElement> = dom.get('[data-router=relative]', native);
+            const childs: Array<HTMLElement> = ly.dom.get('[data-router=relative]', native);
             for (let i = 0; i < childs.length; i++) {
                 const child: HTMLElement = childs[i];
                 const path: string = child.getAttribute('href') || '';
                 if (!!path) {
                     const new_path = this.root + (this.useHash ? this.hash : '/') + path;
                     child.setAttribute('href', new_path);
+                    this.debug('replaceLinks', '"' + path + '"', '"' + new_path + '"');
                 }
             }
         }
-
     }
 
     static normalize(s: string): string {

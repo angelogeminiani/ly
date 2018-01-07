@@ -1,13 +1,14 @@
-import Page from "../../../../lyts_core/view/pages/page/Page";
 import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper";
 import console from "../../../../lyts_core/commons/console";
 import view from "./view";
 import {Route} from "../../../../lyts_core/view/Router";
 import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
+import Screen from "../../../../lyts_core/view/screens/screen/Screen";
+import Page from "../../../../lyts_core/view/pages/page/Page";
 
 
-export default class Page2
-    extends Page {
+export default class Screen2
+    extends Screen {
 
 
     // ------------------------------------------------------------------------
@@ -31,6 +32,11 @@ export default class Page2
     //                      o v e r r i d e
     // ------------------------------------------------------------------------
 
+    protected route(page: Page): void {
+
+
+    }
+
     protected render(): string {
         return view(this.uid, {});
     }
@@ -39,7 +45,7 @@ export default class Page2
 
         // release memory
 
-        console.log("REMOVED:", this.uid);
+        console.log("REMOVED SCREEN2:", this.uid);
     }
 
     protected ready(): void {
@@ -47,8 +53,9 @@ export default class Page2
     }
 
     public show(): void {
-        Animate.apply(AnimateEffect.fadeIn, this.element, () => {
-            console.log('Page2.show', AnimateEffect.fadeIn + ' animation terminated');
+        super.show();
+        Animate.apply(AnimateEffect.bouce, this.element, () => {
+            console.log('Screen2.show', AnimateEffect.bouce + ' animation terminated');
         });
     }
 
@@ -70,7 +77,7 @@ export default class Page2
 
 
         } catch (err) {
-            console.error("Page2.init()", err)
+            console.error("Screen2.init()", err)
         }
     }
 

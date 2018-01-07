@@ -1,13 +1,12 @@
-import animate_css from "./styles/animate/animate_css";
-import dom from "../lyts_core/view/dom";
+import ly from "../lyts_core/ly";
+import {Dictionary} from "../lyts_core/commons/collections/Dictionary";
 
-const DEF_CHARSET = 'UTF-8'; // @charset "UTF-8";
 /**
  * Supported modules
  */
 enum StyleModule {
 
-    animate,   // animate css
+    animate = 'animate',   // animate css
 
 }
 
@@ -22,14 +21,17 @@ class StyleManagerClass {
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
+    private readonly _registered_modules: Dictionary<string | Function>;
+
     private _use_one_style_tag: boolean;
-    private _hystory: StyleModule[];
+    private _hystory: string[];
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
     constructor() {
+        this._registered_modules = new Dictionary<string | Function>();
         this._use_one_style_tag = false;
         this._hystory = [];
     }
@@ -47,11 +49,21 @@ class StyleManagerClass {
     }
 
     /**
+     * Register a style module content or proxy (function called when content is required)
+     * @param {string} module Module name
+     * @param {string | Function} proxy CSS Content or function reference
+     */
+    public register(module: string, proxy: string | Function): StyleManagerClass {
+        this._registered_modules.put(module, proxy);
+        return this;
+    }
+
+    /**
      * Inject style directly to head
      * @param props
      * @param {StyleModule} modules
      */
-    public inject(props: any, ...modules: StyleModule[]): void {
+    public inject(props: any, ...modules: string[]): void {
         if (this._use_one_style_tag) {
             this.injectOne(props, ...modules);
         } else {
@@ -63,19 +75,19 @@ class StyleManagerClass {
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private loadModule(props: any, module: StyleModule) {
-        let module_content: string;
-        // register supported modules
-        if (module === StyleModule.animate) {
-            module_content = animate_css(props);
-        } else {
-            module_content = '';
+    private loadModule(props: any, module: string): string {
+        const proxy: string | Function = this._registered_modules.get(module);
+        const module_content: string = ly.lang.isFunction(proxy) ? (proxy as Function)(props) : proxy;
+        if (!!module_content) {
+            return module_content
+                .split('<style>').join('\n')
+                .split('</style>').join('\n')
+                .trim();
         }
-        // console.log(module, module_content);
-        return module_content.split('<style>').join('\n').split('</style>').join('\n').trim();
+        return '';
     }
 
-    private injectOne(props: any, ...modules: StyleModule[]): void {
+    private injectOne(props: any, ...modules: string[]): void {
         // creates css directives
         let css = '';
         for (let module of modules) {
@@ -88,16 +100,16 @@ class StyleManagerClass {
         // add line
         css = '\n' + css + '\n';
 
-        dom.injectStyle(css);
+        ly.dom.injectStyle(css);
     }
 
-    private injectAll(props: any, ...modules: StyleModule[]): void {
+    private injectAll(props: any, ...modules: string[]): void {
         // creates css directives
         for (let module of modules) {
             if (this._hystory.indexOf(module) === -1) {
                 const css = this.loadModule(props, module);
                 this._hystory.push(module);
-                dom.injectStyle(css);
+                ly.dom.injectStyle(css);
             }
         }
     }

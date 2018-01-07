@@ -1,11 +1,10 @@
+import {EVENT_ON_ROUTE, Route, Router} from "../Router";
 import Component from "../components/Component";
-import {EVENT_ON_ROUTE, Route, Router} from "./Router";
-import lang from "../../commons/lang";
-import Page from "../components/page/Page";
-import console from "../../commons/console";
+import ly from "../../ly";
+import Screen from "./screen/Screen";
 
 
-abstract class PageController
+abstract class ScreenController
     extends Component {
 
     // ------------------------------------------------------------------------
@@ -18,7 +17,7 @@ abstract class PageController
 
     private _router: Router;
 
-    private _last_page: Page;
+    private _last_screen: Screen;
     private _last_route: Route;
 
     // ------------------------------------------------------------------------
@@ -33,12 +32,12 @@ abstract class PageController
         this._router.on(this, EVENT_ON_ROUTE, this.onRoute);
     }
 
-    protected abstract route(page: Page): void;
+    protected abstract route(page: Screen): void;
 
     protected free(): void {
         this._router.stop();
-        if (!!this._last_page) {
-            this._last_page.remove();
+        if (!!this._last_screen) {
+            this._last_screen.remove();
         }
     }
 
@@ -52,12 +51,29 @@ abstract class PageController
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get paused(): boolean {
+        return this._router.paused;
+    }
+
+    public set paused(value: boolean) {
+        this._router.paused = value;
+    }
+
+    public get debugMode(): boolean {
+        return this._router.debugMode;
+    }
+
+    public set debugMode(value: boolean) {
+        this._router.debugMode = value;
+    }
+
+
     public register(route: string, handler: Function): void {
         this._router.register(route, handler);
     }
 
-    public current(): Page {
-        return this._last_page;
+    public current(): Screen {
+        return this._last_screen;
     }
 
     // ------------------------------------------------------------------------
@@ -73,21 +89,21 @@ abstract class PageController
             const params: any = route.params;
             const func: any = route.handler;
 
-            if (lang.isFunction(func)) {
-                if (lang.isConstructor(route.handler)) {
+            if (ly.lang.isFunction(func)) {
+                if (ly.lang.isConstructor(route.handler)) {
                     // close last page
-                    const last_page: Page = this._last_page;
+                    const last_page: Screen = this._last_screen;
                     if (!!last_page) {
                         last_page.hide();
-                        lang.funcDelay(() => {
+                        ly.lang.funcDelay(() => {
                             last_page.remove();
                         }, 400);
                     }
 
                     this._last_route = route;
-                    this._last_page = new func(route);
-                    this._last_page.show();
-                    this.route(this._last_page);
+                    this._last_screen = new func(route);
+                    this._last_screen.show();
+                    this.route(this._last_screen);
                 } else {
                     // we have a callback
                     func(params);
@@ -104,4 +120,4 @@ abstract class PageController
 //                      e x p o r t s
 // ------------------------------------------------------------------------
 
-export default PageController;
+export default ScreenController;
