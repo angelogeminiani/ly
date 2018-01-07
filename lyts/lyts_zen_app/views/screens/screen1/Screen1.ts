@@ -24,8 +24,8 @@ export default class Screen1
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(route: Route) {
-        super(route);
+    constructor(root:string, route:Route) {
+        super(root, route);
 
         this.debugMode = true;
 
@@ -63,7 +63,7 @@ export default class Screen1
 
     public show(): void {
         super.show();
-        Animate.apply(AnimateEffect.bouce, this.element, () => {
+        Animate.apply(AnimateEffect.slideInDown, this.element, () => {
             console.log('Screen1.show', AnimateEffect.bouce + ' animation terminated');
         });
     }

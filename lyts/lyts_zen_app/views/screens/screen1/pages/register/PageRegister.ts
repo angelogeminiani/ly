@@ -2,6 +2,8 @@ import Page from "../../../../../../lyts_core/view/pages/page/Page";
 import ElementWrapper from "../../../../../../lyts_core/view/components/ElementWrapper";
 import {Route} from "../../../../../../lyts_core/view/Router";
 import view from "./view";
+import {Animate, AnimateEffect} from "../../../../../../lyts_core_style/styles/animate/Animate";
+import console from "../../../../../../lyts_core/commons/console";
 
 
 export default class PageRegister
@@ -46,7 +48,9 @@ export default class PageRegister
 
     public show(): void {
         super.show();
-
+        Animate.apply(AnimateEffect.fadeIn, this.element, () => {
+            console.log('PageRegister.show', AnimateEffect.bouce + ' animation terminated');
+        });
     }
 
     public hide(): void {

@@ -5,6 +5,8 @@ import {Route} from "../../../../lyts_core/view/Router";
 import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
 import Screen from "../../../../lyts_core/view/screens/screen/Screen";
 import Page from "../../../../lyts_core/view/pages/page/Page";
+import Page1 from "./pages/page1/Page1";
+import Page2 from "./pages/page2/Page2";
 
 
 export default class Screen2
@@ -15,17 +17,21 @@ export default class Screen2
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private readonly _content: ElementWrapper;
+    private readonly _pages: ElementWrapper;
 
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(route: Route) {
-        super(route);
+    constructor(root: string, route: Route) {
+        super(root, route);
 
-        this._content = super.getFirst("#" + this.uid + "_content");
+        // register internal screen pages
+        super.register('/page1', Page1);
+        super.register('/page2/:param1/:param2', Page2);
+
+        this._pages = super.getFirst("#" + this.uid + "_pages");
     }
 
     // ------------------------------------------------------------------------
@@ -33,8 +39,8 @@ export default class Screen2
     // ------------------------------------------------------------------------
 
     protected route(page: Page): void {
-
-
+        console.log('Screen2.route', page);
+        page.appendTo(this._pages);
     }
 
     protected render(): string {
@@ -49,12 +55,14 @@ export default class Screen2
     }
 
     protected ready(): void {
+        super.ready();
+
         this.init();
     }
 
     public show(): void {
         super.show();
-        Animate.apply(AnimateEffect.bouce, this.element, () => {
+        Animate.apply(AnimateEffect.slideInRight, this.element, () => {
             console.log('Screen2.show', AnimateEffect.bouce + ' animation terminated');
         });
     }

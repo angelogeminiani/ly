@@ -1,9 +1,7 @@
-import Page from "../../../../lyts_core/view/pages/page/Page";
-import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper";
-import console from "../../../../lyts_core/commons/console";
+import ElementWrapper from "../../../../../../lyts_core/view/components/ElementWrapper";
+import {Route} from "../../../../../../lyts_core/view/Router";
 import view from "./view";
-import {Route} from "../../../../lyts_core/view/Router";
-import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
+import Page from "../../../../../../lyts_core/view/pages/page/Page";
 
 
 export default class Page1
@@ -48,9 +46,7 @@ export default class Page1
 
     public show(): void {
         super.show();
-        Animate.apply(AnimateEffect.bouce, this.element, () => {
-            console.log('Page1.show', AnimateEffect.bouce + ' animation terminated');
-        });
+
     }
 
     public hide(): void {

@@ -9,7 +9,13 @@ export default function view(uid: string, props?: any): string {
                 <div class="container">
                    <h1>REGISTER</h1>
                    
-                   <a href="login" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>login</a>
+                   <div class="col">
+                        <a data-router="relative" href="screen1/login" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>login</a>
+                   </div>
+                   <br>
+                    <div class="col">
+                        <a data-router="relative" href="screen2/page1" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>NEXT PAGE</a>
+                    </div>
                 </div>
                         
             </div>

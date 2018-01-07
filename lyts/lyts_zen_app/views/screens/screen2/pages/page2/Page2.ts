@@ -1,9 +1,9 @@
-import Page from "../../../../lyts_core/view/pages/page/Page";
-import ElementWrapper from "../../../../lyts_core/view/components/ElementWrapper";
-import console from "../../../../lyts_core/commons/console";
+import Page from "../../../../../../lyts_core/view/pages/page/Page";
+import ElementWrapper from "../../../../../../lyts_core/view/components/ElementWrapper";
+import console from "../../../../../../lyts_core/commons/console";
+import {Route} from "../../../../../../lyts_core/view/Router";
+import {Animate, AnimateEffect} from "../../../../../../lyts_core_style/styles/animate/Animate";
 import view from "./view";
-import {Route} from "../../../../lyts_core/view/Router";
-import {Animate, AnimateEffect} from "../../../../lyts_core_style/styles/animate/Animate";
 
 
 export default class Page2

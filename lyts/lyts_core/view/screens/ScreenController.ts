@@ -51,6 +51,14 @@ abstract class ScreenController
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get root(): string {
+        return this._router.root;
+    }
+
+    public get isSolved(): boolean {
+        return this._router.isSolved;
+    }
+
     public get paused(): boolean {
         return this._router.paused;
     }
@@ -67,9 +75,8 @@ abstract class ScreenController
         this._router.debugMode = value;
     }
 
-
     public register(route: string, handler: Function): void {
-        this._router.register(route, handler);
+        this._router.register(route + '/*', handler);
     }
 
     public current(): Screen {
@@ -101,9 +108,13 @@ abstract class ScreenController
                     }
 
                     this._last_route = route;
-                    this._last_screen = new func(route);
-                    this._last_screen.show();
-                    this.route(this._last_screen);
+                    this._last_screen = new func(this.root, route); // screen ctr
+
+                    if(!this._last_screen.isSolved){
+                        this._last_screen.show();
+                        this.route(this._last_screen);
+                    }
+
                 } else {
                     // we have a callback
                     func(params);

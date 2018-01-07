@@ -42,14 +42,24 @@ abstract class PageController
     }
 
     protected ready(): void {
-        this._router.start(this.element);
+        this.start();
+    }
 
-        this._init();
+    protected start(): void {
+        this._router.start(this.element);
     }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+
+    public get root(): string {
+        return this._router.root;
+    }
+
+    public get isSolved(): boolean {
+        return this._router.isSolved;
+    }
 
     public get paused(): boolean {
         return this._router.paused;
@@ -79,10 +89,6 @@ abstract class PageController
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private _init(): void {
-
-    }
-
     private onRoute(route: Route): void {
         try {
             const params: any = route.params;
@@ -102,6 +108,7 @@ abstract class PageController
                     this._last_route = route;
                     this._last_page = new func(route);
                     this._last_page.show();
+                    this._router.relink(this._last_page.element);
                     this.route(this._last_page);
                 } else {
                     // we have a callback
