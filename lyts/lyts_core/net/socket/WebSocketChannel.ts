@@ -1,5 +1,6 @@
 import ly from "../../ly";
 import EventEmitter from "../../commons/events/EventEmitter";
+import console from "../../commons/console";
 
 
 const DEF_HOST = 'ws://localhost:8181/websocket';
@@ -18,9 +19,9 @@ class WebSocketChannel
     // ------------------------------------------------------------------------
 
     private readonly _host: string;
-    private _ready: boolean;
+    private _initialized: boolean;
     private _active: boolean;
-    private _web_socket: WebSocket;
+    private _web_socket: WebSocket | null;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -32,7 +33,7 @@ class WebSocketChannel
      */
     constructor(params: any) {
         super();
-        this._ready = false;
+        this._initialized = false;
         this._active = false;
         this._host = params.host || DEF_HOST;
     }
@@ -42,10 +43,30 @@ class WebSocketChannel
     // ------------------------------------------------------------------------
 
     /**
+     * Use this to pass a callback and enable message send when
+     * socket is ready to send.
+     */
+    public ready(callback: Function): void {
+        if (this._initialized) {
+            if (this._active) {
+                ly.lang.funcInvoke(callback, true);
+            } else {
+                this.on(this, EVENT_OPEN, () => {
+                    this.off(this);
+                    ly.lang.funcInvoke(callback, true);
+                });
+            }
+        } else {
+            // exit not ready
+            ly.lang.funcInvoke(callback, false);
+        }
+    }
+
+    /**
      * Socket is properly configured
      */
-    public get ready(): boolean {
-        return this._ready;
+    public get initialized(): boolean {
+        return this._initialized;
     }
 
     /**
@@ -63,9 +84,9 @@ class WebSocketChannel
         try {
             this._web_socket = this.createWs();
             if (this.handle(this._web_socket)) {
-                this._ready = true;
+                this._initialized = true;
             } else {
-                this._ready = false;
+                this._initialized = false;
             }
         } catch (err) {
             console.error('WebSocketChannel.open', err);
@@ -75,8 +96,12 @@ class WebSocketChannel
     public close(): void {
         try {
             if (this._active) {
+                this._initialized = false;
                 this._active = false;
-                this._web_socket.close();
+                if (!!this._web_socket) {
+                    this._web_socket.close();
+                    this.free();
+                }
             }
         } catch (err) {
             console.error('WebSocketChannel.close', err);
@@ -86,8 +111,14 @@ class WebSocketChannel
     public send(message: any) {
         try {
             if (this._active
+                && !!this._web_socket
                 && this._web_socket.readyState === this._web_socket.OPEN) {
+                // ready to send
                 this._web_socket.send(ly.lang.toString(message));
+            } else {
+                console.warn('WebSocketChannel.send',
+                    'Socket is not ready to send message.',
+                    this._web_socket, message);
             }
         } catch (err) {
             console.error('WebSocketChannel.send', err);
@@ -100,19 +131,27 @@ class WebSocketChannel
 
     private createWs(): WebSocket {
         const WS_native: any = ly.window['WebSocket'] || ly.window['MozWebSocket'];
-        return new WS_native();
+        return new WS_native(this._host);
+    }
+
+    private free(): void {
+        if (!!this._web_socket) {
+            this._web_socket = null;
+        }
     }
 
     private handle(ws: WebSocket): boolean {
         if (!!ws) {
-            ws.onmessage = this._on_message;
-            ws.onopen = this._on_open;
-            ws.onclose = this._on_close;
-            ws.onerror = this._on_error;
+            ws.onmessage = this._on_message.bind(this);
+            ws.onopen = this._on_open.bind(this);
+            ws.onclose = this._on_close.bind(this);
+            ws.onerror = this._on_error.bind(this);
 
             return true;
+        } else {
+            console.warn('WebSocketChannel.handle', 'WebSocket not found', ws);
+            return false;
         }
-        return false;
     }
 
     private _on_open(ev: Event): void {

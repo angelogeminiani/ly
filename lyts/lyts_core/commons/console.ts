@@ -20,7 +20,7 @@ class console_ext {
     // ------------------------------------------------------------------------
 
     private constructor() {
-
+        this._uid = random.guid();
     }
 
     // ------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class console_ext {
     };
 
     public warn(scope: string, ...args: any[]): void {
-        console.error("[" + this.uid + "] " + scope, ...args);
+        console.warn("[" + this.uid + "] " + scope, ...args);
     };
 
     public log(scope: string, ...args: any[]): void {

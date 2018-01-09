@@ -91,6 +91,59 @@ class ElementWrapper {
         return '';
     }
 
+    public set scrollTop(value: number) {
+        if (!!this._element) {
+            this._element.scrollTop = value;
+        }
+    }
+
+    public get scrollTop(): number {
+        if (!!this._element) {
+            return this._element.scrollTop;
+        }
+        return 0;
+    }
+
+    public set scrollLeft(value: number) {
+        if (!!this._element) {
+            this._element.scrollLeft = value;
+        }
+    }
+
+    public get scrollLeft(): number {
+        if (!!this._element) {
+            return this._element.scrollLeft;
+        }
+        return 0;
+    }
+
+    public get scrollWidth(): number {
+        if (!!this._element) {
+            return this._element.scrollWidth;
+        }
+        return 0;
+    }
+
+    public get scrollHeight(): number {
+        if (!!this._element) {
+            return this._element.scrollHeight;
+        }
+        return 0;
+    }
+
+    public scrollBy(x: number, y: number): void {
+        if (!!this._element) {
+            return this._element.scrollBy(x, y);
+        }
+    }
+
+    public scrollTo(x: number, y: number): void {
+        if (!!this._element) {
+            return this._element.scrollTo(x, y);
+        }
+    }
+
+
     public get children(): Array<ElementWrapper> {
         let response: Array<ElementWrapper> = [];
         if (!!this._element) {
