@@ -1,6 +1,9 @@
 import console from "../console";
 import ly from "../../ly";
 
+/**
+ * Generic persistence storage collection using localStorage if available.
+ */
 class StorageCollection {
 
     // ------------------------------------------------------------------------
