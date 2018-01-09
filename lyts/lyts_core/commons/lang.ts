@@ -6,6 +6,16 @@ import random from "./random";
 export default class lang {
 
 
+    static parse(value: any): any {
+        try {
+            if (lang.isString(value)) {
+                return JSON.parse(value);
+            }
+        } catch (err) {
+        }
+        return value;
+    }
+
     // ------------------------------------------------------------------------
     //                      t o
     // ------------------------------------------------------------------------

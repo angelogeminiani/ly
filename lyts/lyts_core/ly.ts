@@ -18,11 +18,15 @@ import Component from "./view/components/Component";
 //-- singleton --//
 import Application from "./application/Application";
 
+const root: any = window;
+
 // ------------------------------------------------------------------------
 //                      l y
 // ------------------------------------------------------------------------
 
 const ly = {
+
+    window:root,
 
     lang: lang,
     format: format,
