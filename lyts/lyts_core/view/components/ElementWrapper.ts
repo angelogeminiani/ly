@@ -143,23 +143,51 @@ class ElementWrapper {
         }
     }
 
-    public get offsetWidth():number{
+    public get offsetWidth(): number {
         if (!!this._element) {
             return this._element.offsetWidth;
         }
         return 0;
     }
 
-    public get offsetHeight():number{
+    public get offsetHeight(): number {
         if (!!this._element) {
             return this._element.offsetHeight;
         }
         return 0;
     }
 
-    public get offsetTop():number{
+    public get offsetTop(): number {
         if (!!this._element) {
             return this._element.offsetTop;
+        }
+        return 0;
+    }
+
+    public get clientWidth(): number {
+        if (!!this._element) {
+            return this._element.clientWidth;
+        }
+        return 0;
+    }
+
+    public get clientHeight(): number {
+        if (!!this._element) {
+            return this._element.clientHeight;
+        }
+        return 0;
+    }
+
+    public get clientLeft(): number {
+        if (!!this._element) {
+            return this._element.clientLeft;
+        }
+        return 0;
+    }
+
+    public get clientTop(): number {
+        if (!!this._element) {
+            return this._element.clientTop;
         }
         return 0;
     }
