@@ -204,6 +204,10 @@ export default class dom {
         head.appendChild(style);
     }
 
+    public static createAttribute(name: string): Attr {
+        return document.createAttribute(name);
+    }
+
     public static newElement(inner_html: string = '', append_to_selector?: string): HTMLElement {
         let elem;
         if (!!inner_html) {

@@ -265,6 +265,14 @@ class ElementWrapper {
         }
     }
 
+    public createAttribute(name: string): void {
+        if (!!this._element) {
+            if (!this._element.hasAttribute(name)) {
+                this._element.setAttributeNode(dom.createAttribute(name));
+            }
+        }
+    }
+
     public value(value?: any): any {
         try {
             if (!!this._element) {
