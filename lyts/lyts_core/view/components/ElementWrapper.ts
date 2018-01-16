@@ -259,6 +259,12 @@ class ElementWrapper {
         return "";
     }
 
+    public removeAttribute(name: string): void {
+        if (!!this._element) {
+            this._element.removeAttribute(name);
+        }
+    }
+
     public value(value?: any): any {
         try {
             if (!!this._element) {
