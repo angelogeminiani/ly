@@ -68,6 +68,8 @@ class launcher
         // init application scope
         BaseObject.PREFIX = constants.uid + "_"; // application uid become component prefix.
 
+        console.uid = constants.uid;
+
         // local i18n
         ly.Application.events.on(this, ly.i18n.EVENT_CHANGE_LANG, this.onLocalChangeLang);
 

@@ -318,6 +318,7 @@ class langClass {
         };
 
         const func_key = this._getFuncKey(context, func);
+        console.log('lang.funcDebounce', 'func_key=' + func_key);
         const response_func = self._debounced_func.containsKey(func_key)
             ? self._debounced_func.get(func_key)
             : function () {
@@ -373,6 +374,7 @@ class langClass {
         if (!!context && !!func) {
             const uid: string = !!context.uid ? context.uid : this.toString(context);
             const func_name: string = this.funcName(func);
+            console.log('lang._getFuncKey', 'uid=' + uid, 'func_name=' + func_name);
             if (!!uid && !!func_name) {
                 return uid + '.' + func_name;
             }
