@@ -2,13 +2,31 @@
  * Utility class
  */
 import random from "./random";
+import {Dictionary} from "./collections/Dictionary";
 
-export default class lang {
+class langClass {
 
+    // ------------------------------------------------------------------------
+    //                      f i e l d s
+    // ------------------------------------------------------------------------
 
-    static parse(value: any): any {
+    private readonly _debounced_func: Dictionary<Function>;
+
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+
+    constructor() {
+        this._debounced_func = new Dictionary<Function>();
+    }
+
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+
+    public parse(value: any): any {
         try {
-            if (lang.isString(value)) {
+            if (this.isString(value)) {
                 return JSON.parse(value);
             }
         } catch (err) {
@@ -20,7 +38,7 @@ export default class lang {
     //                      t o
     // ------------------------------------------------------------------------
 
-    static toString(value: any): string {
+    public toString(value: any): string {
         switch (typeof value) {
             case 'string':
             case 'number':
@@ -40,36 +58,36 @@ export default class lang {
         }
     }
 
-    static toArray<T>(value: any | any[]) {
+    public toArray<T>(value: any | any[]) {
         return !!value
-            ? lang.isArray(value) ? value as Array<T> : [value as T]
+            ? this.isArray(value) ? value as Array<T> : [value as T]
             : [];
     }
 
-    static toBoolean(value: any, def_val: boolean): boolean {
+    public toBoolean(value: any, def_val: boolean): boolean {
         return !!value
             ? value !== 'false' && value !== '0'
             : def_val;
     }
 
-    static toFloat(value: any, def_value: number = 0.0, min?: number, max?: number): number {
+    public toFloat(value: any, def_value: number = 0.0, min?: number, max?: number): number {
         try {
             let result = parseFloat(value.replace(/,/g, '.'));
-            result = lang.isNaN(result) ? def_value : result;
-            if (!lang.isNaN(max) && result > (max || 0)) result = max || 0;
-            if (!lang.isNaN(min) && result < (min || 0)) result = min || 0;
+            result = this.isNaN(result) ? def_value : result;
+            if (!this.isNaN(max) && result > (max || 0)) result = max || 0;
+            if (!this.isNaN(min) && result < (min || 0)) result = min || 0;
             return result;
         } catch (err) {
             return def_value;
         }
     }
 
-    static toInt(value: any, def_value: number = 0, min?: number, max?: number): number {
+    public toInt(value: any, def_value: number = 0, min?: number, max?: number): number {
         try {
             let result = parseInt(value);
-            result = lang.isNaN(result) ? def_value : result;
-            if (!lang.isNaN(max) && result > (max || 0)) result = max || 0;
-            if (!lang.isNaN(min) && result < (min || 0)) result = min || 0;
+            result = this.isNaN(result) ? def_value : result;
+            if (!this.isNaN(max) && result > (max || 0)) result = max || 0;
+            if (!this.isNaN(min) && result < (min || 0)) result = min || 0;
             return result;
         } catch (err) {
             return def_value;
@@ -80,41 +98,41 @@ export default class lang {
     //                      i s
     // ------------------------------------------------------------------------
 
-    static isFunction(value: any): boolean {
+    public isFunction(value: any): boolean {
         return typeof value == 'function';
     }
 
-    static isObject(value: any): boolean {
+    public isObject(value: any): boolean {
         return value === Object(value);
     }
 
-    static isArray(value: any): boolean {
+    public isArray(value: any): boolean {
         return !!Array.isArray
             ? Array.isArray(value)
             : value && typeof value == 'object' && typeof value.length == 'number' && toString.call(value) == '[object Array]' || false;
     }
 
-    static isArguments(value: any): boolean {
+    public isArguments(value: any): boolean {
         return value && typeof value == 'object' && typeof value.length == 'number' &&
             toString.call(value) == '[object Arguments]' || false;
     }
 
-    static isBoolean(value: any): boolean {
+    public isBoolean(value: any): boolean {
         return value === true || value === false ||
             value && typeof value == 'object' && toString.call(value) == '[object Boolean]' || false;
     }
 
-    static isString(value: any): boolean {
+    public isString(value: any): boolean {
         return typeof value == 'string' ||
             value && typeof value == 'object' && toString.call(value) == '[object String]' || false;
     }
 
-    static isNumber(value: any): boolean {
+    public isNumber(value: any): boolean {
         return typeof value == 'number' ||
             value && typeof value == 'object' && toString.call(value) == '[object Number]' || false;
     }
 
-    static isNaN(value: any): boolean {
+    public isNaN(value: any): boolean {
         return isNaN(value);
     }
 
@@ -122,19 +140,19 @@ export default class lang {
         return value && typeof value == 'object' && toString.call(value) == '[object Date]' || false;
     }
 
-    static isUndefined(value: any): boolean {
+    public isUndefined(value: any): boolean {
         return typeof value == 'undefined';
     }
 
-    static isRegExp(value: any) {
+    public isRegExp(value: any) {
         return value && typeof value == 'object' && toString.call(value) == '[object RegExp]' || false;
     }
 
-    static isEmail(value: any): boolean {
-        return lang.isString(value) && lang._validateEmail(value);
+    public isEmail(value: any): boolean {
+        return this.isString(value) && this._validateEmail(value);
     }
 
-    static isConstructor(f: any): boolean {
+    public isConstructor(f: any): boolean {
         try {
             return !!f.prototype && !!f.prototype.constructor.name;
         } catch (err) {
@@ -142,13 +160,27 @@ export default class lang {
         }
     }
 
-    static className(item: any): string {
+    public className(item: any): string {
         try {
             if (!!item) {
                 if (!!item.prototype && !!item.prototype.constructor) {
                     return item.prototype.constructor.name;
                 } else if (!!item.constructor) {
                     return item.constructor.name;
+                }
+            }
+        } catch (err) {
+        }
+        return '';
+    }
+
+    public funcName(func: any): string {
+        try {
+            if (!!func) {
+                if (!!func.name) {
+                    return func.name;
+                } else if (!!func.prototype && !!func.prototype.name) {
+                    return func.prototype.name;
                 }
             }
         } catch (err) {
@@ -165,14 +197,14 @@ export default class lang {
      * @param text
      * @return {*}
      */
-    static evalScript(text: string): any {
+    public evalScript(text: string): any {
         if (!!text && !!eval) {
             return eval.call(this, text);
         }
         return {};
     }
 
-    static noCacheLink(url: string): string {
+    public noCacheLink(url: string): string {
         if (url.indexOf("?") === -1)
             url += "?no_cache=" + new Date().getTime();
         else
@@ -183,8 +215,8 @@ export default class lang {
     /**
      * Invoke a function. Shortcut for "func.call(this, ...args)"
      */
-    static funcInvoke(func: Function, ...args: any[]): any {
-        if (lang.isFunction(func)) {
+    public funcInvoke(func: Function, ...args: any[]): any {
+        if (this.isFunction(func)) {
             if (args.length === 0) {
                 return func.call(this);
             } else {
@@ -199,7 +231,7 @@ export default class lang {
      * it with the arguments supplied.
      * NOTE: user "clearTimeout" with funcDelay response to
      */
-    static funcDelay(func: Function, wait: number, ...args: any[]): any {
+    public funcDelay(func: Function, wait: number, ...args: any[]): any {
         return setTimeout(function () {
             return func.call(null, ...args);
         }, wait);
@@ -210,7 +242,7 @@ export default class lang {
      * Sample usage:
      * <code>
      *    var count = 0;
-     *    ly.lang.funcLoop(function () {
+     *    ly.this.funcLoop(function () {
      *       count++;
      *       console.log(count);
      *       return count == 3; // exit
@@ -223,13 +255,13 @@ export default class lang {
      * @param args
      * @return promise {{done: done}}
      */
-    static funcLoop(func: Function, wait: number, ...args: any[]): any {
+    public funcLoop(func: Function, wait: number, ...args: any[]): any {
         let callback: Function;
         let timer = setInterval(function () {
             let exit = !!func.apply(null, args);
             if (exit) {
                 clearInterval(timer);
-                lang.funcInvoke(callback);
+                this.funcInvoke(callback);
             }
         }, wait || 300);
 
@@ -244,7 +276,7 @@ export default class lang {
      * Returns a function that will be executed at most one time, no matter how
      * often you call it. Useful for lazy initialization.
      */
-    static funcOnce(func: Function, ...args: any[]): any {
+    public funcOnce(func: Function, ...args: any[]): any {
         let ran: boolean = false;
         let memo: any;
         return function () {
@@ -261,7 +293,9 @@ export default class lang {
      * N milliseconds.
      * If `immediate` is passed, trigger the function on the leading edge, instead of the trailing.
      */
-    static funcDebounce(context: any, func: Function, wait: number, immediate: boolean = false, ...args: any[]): any {
+    public funcDebounce(context: any, func: Function, wait: number, immediate: boolean = false, ...args: any[]): any {
+        const self = this;
+
         let timeout: any;
         //let context: any;
         let timestamp: number;
@@ -275,26 +309,38 @@ export default class lang {
             } else {
                 timeout = null;
                 if (!immediate) {
+                    // remove function from dictionary
+                    self._removeDebounced(func_key);
+
                     result = func.apply(context, args);
-                    //context = null;
                 }
             }
         };
 
-        return function () {
-            //context = this;
-            timestamp = random.now();
-            let callNow = immediate && !timeout;
-            if (!timeout) {
-                timeout = setTimeout(later, wait);
-            }
-            if (callNow) {
-                result = func.apply(context, args);
-                //context = null;
-            }
+        const func_key = this._getFuncKey(context, func);
+        const response_func = self._debounced_func.containsKey(func_key)
+            ? self._debounced_func.get(func_key)
+            : function () {
+                //context = this;
+                timestamp = random.now();
+                let callNow = immediate && !timeout;
+                if (!timeout) {
+                    timeout = setTimeout(later, wait);
+                }
+                if (callNow) {
+                    // remove function from dictionary
+                    self._removeDebounced(func_key);
 
-            return result;
-        };
+                    // execute function
+                    result = func.apply(context, args);
+                }
+
+                return result;
+            };
+
+        this._addDebounced(func_key, response_func);
+
+        return response_func;
     }
 
 
@@ -302,7 +348,7 @@ export default class lang {
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private static _validateEmail(email: string): boolean {
+    private _validateEmail(email: string): boolean {
         try {
             let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
@@ -311,7 +357,50 @@ export default class lang {
         }
     }
 
+    private _removeDebounced(func_key: string) {
+        if (this._debounced_func.containsKey(func_key)) {
+            this._debounced_func.remove(func_key);
+        }
+    }
+
+    private _addDebounced(func_key: string, func: Function) {
+        if (!!func_key && !!func) {
+            this._debounced_func.put(func_key, func);
+        }
+    }
+
+    private _getFuncKey(context: any, func: Function): string {
+        if (!!context && !!func) {
+            const uid: string = !!context.uid ? context.uid : this.toString(context);
+            const func_name: string = this.funcName(func);
+            if (!!uid && !!func_name) {
+                return uid + '.' + func_name;
+            }
+        }
+        return '';
+    }
+
+    // ------------------------------------------------------------------------
+    //                      S I N G L E T O N
+    // ------------------------------------------------------------------------
+
+    private static __instance: langClass;
+
+    public static instance(): langClass {
+        if (null == langClass.__instance) {
+            langClass.__instance = new langClass();
+        }
+        return langClass.__instance;
+    }
+
 
 }
+
+// ------------------------------------------------------------------------
+//                      e x p o r t
+// ------------------------------------------------------------------------
+
+const lang: langClass = langClass.instance();
+export default lang;
 
 

@@ -69,17 +69,36 @@
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__random__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__collections_Dictionary__ = __webpack_require__(1);
 /**
  * Utility class
  */
 
-var lang = /** @class */ (function () {
-    function lang() {
+
+var langClass = /** @class */ (function () {
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+    function langClass() {
+        this._debounced_func = new __WEBPACK_IMPORTED_MODULE_1__collections_Dictionary__["a" /* Dictionary */]();
     }
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+    langClass.prototype.parse = function (value) {
+        try {
+            if (this.isString(value)) {
+                return JSON.parse(value);
+            }
+        }
+        catch (err) {
+        }
+        return value;
+    };
     // ------------------------------------------------------------------------
     //                      t o
     // ------------------------------------------------------------------------
-    lang.toString = function (value) {
+    langClass.prototype.toString = function (value) {
         switch (typeof value) {
             case 'string':
             case 'number':
@@ -99,24 +118,24 @@ var lang = /** @class */ (function () {
                 return '';
         }
     };
-    lang.toArray = function (value) {
+    langClass.prototype.toArray = function (value) {
         return !!value
-            ? lang.isArray(value) ? value : [value]
+            ? this.isArray(value) ? value : [value]
             : [];
     };
-    lang.toBoolean = function (value, def_val) {
+    langClass.prototype.toBoolean = function (value, def_val) {
         return !!value
             ? value !== 'false' && value !== '0'
             : def_val;
     };
-    lang.toFloat = function (value, def_value, min, max) {
+    langClass.prototype.toFloat = function (value, def_value, min, max) {
         if (def_value === void 0) { def_value = 0.0; }
         try {
             var result = parseFloat(value.replace(/,/g, '.'));
-            result = lang.isNaN(result) ? def_value : result;
-            if (!lang.isNaN(max) && result > (max || 0))
+            result = this.isNaN(result) ? def_value : result;
+            if (!this.isNaN(max) && result > (max || 0))
                 result = max || 0;
-            if (!lang.isNaN(min) && result < (min || 0))
+            if (!this.isNaN(min) && result < (min || 0))
                 result = min || 0;
             return result;
         }
@@ -124,14 +143,14 @@ var lang = /** @class */ (function () {
             return def_value;
         }
     };
-    lang.toInt = function (value, def_value, min, max) {
+    langClass.prototype.toInt = function (value, def_value, min, max) {
         if (def_value === void 0) { def_value = 0; }
         try {
             var result = parseInt(value);
-            result = lang.isNaN(result) ? def_value : result;
-            if (!lang.isNaN(max) && result > (max || 0))
+            result = this.isNaN(result) ? def_value : result;
+            if (!this.isNaN(max) && result > (max || 0))
                 result = max || 0;
-            if (!lang.isNaN(min) && result < (min || 0))
+            if (!this.isNaN(min) && result < (min || 0))
                 result = min || 0;
             return result;
         }
@@ -142,49 +161,49 @@ var lang = /** @class */ (function () {
     // ------------------------------------------------------------------------
     //                      i s
     // ------------------------------------------------------------------------
-    lang.isFunction = function (value) {
+    langClass.prototype.isFunction = function (value) {
         return typeof value == 'function';
     };
-    lang.isObject = function (value) {
+    langClass.prototype.isObject = function (value) {
         return value === Object(value);
     };
-    lang.isArray = function (value) {
+    langClass.prototype.isArray = function (value) {
         return !!Array.isArray
             ? Array.isArray(value)
             : value && typeof value == 'object' && typeof value.length == 'number' && toString.call(value) == '[object Array]' || false;
     };
-    lang.isArguments = function (value) {
+    langClass.prototype.isArguments = function (value) {
         return value && typeof value == 'object' && typeof value.length == 'number' &&
             toString.call(value) == '[object Arguments]' || false;
     };
-    lang.isBoolean = function (value) {
+    langClass.prototype.isBoolean = function (value) {
         return value === true || value === false ||
             value && typeof value == 'object' && toString.call(value) == '[object Boolean]' || false;
     };
-    lang.isString = function (value) {
+    langClass.prototype.isString = function (value) {
         return typeof value == 'string' ||
             value && typeof value == 'object' && toString.call(value) == '[object String]' || false;
     };
-    lang.isNumber = function (value) {
+    langClass.prototype.isNumber = function (value) {
         return typeof value == 'number' ||
             value && typeof value == 'object' && toString.call(value) == '[object Number]' || false;
     };
-    lang.isNaN = function (value) {
+    langClass.prototype.isNaN = function (value) {
         return isNaN(value);
     };
-    lang.isDate = function (value) {
+    langClass.isDate = function (value) {
         return value && typeof value == 'object' && toString.call(value) == '[object Date]' || false;
     };
-    lang.isUndefined = function (value) {
+    langClass.prototype.isUndefined = function (value) {
         return typeof value == 'undefined';
     };
-    lang.isRegExp = function (value) {
+    langClass.prototype.isRegExp = function (value) {
         return value && typeof value == 'object' && toString.call(value) == '[object RegExp]' || false;
     };
-    lang.isEmail = function (value) {
-        return lang.isString(value) && lang._validateEmail(value);
+    langClass.prototype.isEmail = function (value) {
+        return this.isString(value) && this._validateEmail(value);
     };
-    lang.isConstructor = function (f) {
+    langClass.prototype.isConstructor = function (f) {
         try {
             return !!f.prototype && !!f.prototype.constructor.name;
         }
@@ -192,7 +211,7 @@ var lang = /** @class */ (function () {
             return false;
         }
     };
-    lang.className = function (item) {
+    langClass.prototype.className = function (item) {
         try {
             if (!!item) {
                 if (!!item.prototype && !!item.prototype.constructor) {
@@ -200,6 +219,21 @@ var lang = /** @class */ (function () {
                 }
                 else if (!!item.constructor) {
                     return item.constructor.name;
+                }
+            }
+        }
+        catch (err) {
+        }
+        return '';
+    };
+    langClass.prototype.funcName = function (func) {
+        try {
+            if (!!func) {
+                if (!!func.name) {
+                    return func.name;
+                }
+                else if (!!func.prototype && !!func.prototype.name) {
+                    return func.prototype.name;
                 }
             }
         }
@@ -215,13 +249,13 @@ var lang = /** @class */ (function () {
      * @param text
      * @return {*}
      */
-    lang.evalScript = function (text) {
+    langClass.prototype.evalScript = function (text) {
         if (!!text && !!eval) {
             return eval.call(this, text);
         }
         return {};
     };
-    lang.noCacheLink = function (url) {
+    langClass.prototype.noCacheLink = function (url) {
         if (url.indexOf("?") === -1)
             url += "?no_cache=" + new Date().getTime();
         else
@@ -231,12 +265,12 @@ var lang = /** @class */ (function () {
     /**
      * Invoke a function. Shortcut for "func.call(this, ...args)"
      */
-    lang.funcInvoke = function (func) {
+    langClass.prototype.funcInvoke = function (func) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (lang.isFunction(func)) {
+        if (this.isFunction(func)) {
             if (args.length === 0) {
                 return func.call(this);
             }
@@ -251,7 +285,7 @@ var lang = /** @class */ (function () {
      * it with the arguments supplied.
      * NOTE: user "clearTimeout" with funcDelay response to
      */
-    lang.funcDelay = function (func, wait) {
+    langClass.prototype.funcDelay = function (func, wait) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
@@ -265,7 +299,7 @@ var lang = /** @class */ (function () {
      * Sample usage:
      * <code>
      *    var count = 0;
-     *    ly.lang.funcLoop(function () {
+     *    ly.this.funcLoop(function () {
      *       count++;
      *       console.log(count);
      *       return count == 3; // exit
@@ -278,7 +312,7 @@ var lang = /** @class */ (function () {
      * @param args
      * @return promise {{done: done}}
      */
-    lang.funcLoop = function (func, wait) {
+    langClass.prototype.funcLoop = function (func, wait) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
@@ -288,7 +322,7 @@ var lang = /** @class */ (function () {
             var exit = !!func.apply(null, args);
             if (exit) {
                 clearInterval(timer);
-                lang.funcInvoke(callback);
+                this.funcInvoke(callback);
             }
         }, wait || 300);
         return {
@@ -301,7 +335,7 @@ var lang = /** @class */ (function () {
      * Returns a function that will be executed at most one time, no matter how
      * often you call it. Useful for lazy initialization.
      */
-    lang.funcOnce = function (func) {
+    langClass.prototype.funcOnce = function (func) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -322,12 +356,13 @@ var lang = /** @class */ (function () {
      * N milliseconds.
      * If `immediate` is passed, trigger the function on the leading edge, instead of the trailing.
      */
-    lang.funcDebounce = function (context, func, wait, immediate) {
+    langClass.prototype.funcDebounce = function (context, func, wait, immediate) {
         if (immediate === void 0) { immediate = false; }
         var args = [];
         for (var _i = 4; _i < arguments.length; _i++) {
             args[_i - 4] = arguments[_i];
         }
+        var self = this;
         var timeout;
         //let context: any;
         var timestamp;
@@ -340,29 +375,37 @@ var lang = /** @class */ (function () {
             else {
                 timeout = null;
                 if (!immediate) {
+                    // remove function from dictionary
+                    self._removeDebounced(func_key);
                     result = func.apply(context, args);
-                    //context = null;
                 }
             }
         };
-        return function () {
-            //context = this;
-            timestamp = __WEBPACK_IMPORTED_MODULE_0__random__["a" /* default */].now();
-            var callNow = immediate && !timeout;
-            if (!timeout) {
-                timeout = setTimeout(later, wait);
-            }
-            if (callNow) {
-                result = func.apply(context, args);
-                //context = null;
-            }
-            return result;
-        };
+        var func_key = this._getFuncKey(context, func);
+        var response_func = self._debounced_func.containsKey(func_key)
+            ? self._debounced_func.get(func_key)
+            : function () {
+                //context = this;
+                timestamp = __WEBPACK_IMPORTED_MODULE_0__random__["a" /* default */].now();
+                var callNow = immediate && !timeout;
+                if (!timeout) {
+                    timeout = setTimeout(later, wait);
+                }
+                if (callNow) {
+                    // remove function from dictionary
+                    self._removeDebounced(func_key);
+                    // execute function
+                    result = func.apply(context, args);
+                }
+                return result;
+            };
+        this._addDebounced(func_key, response_func);
+        return response_func;
     };
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
-    lang._validateEmail = function (email) {
+    langClass.prototype._validateEmail = function (email) {
         try {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
@@ -371,8 +414,38 @@ var lang = /** @class */ (function () {
             return false;
         }
     };
-    return lang;
+    langClass.prototype._removeDebounced = function (func_key) {
+        if (this._debounced_func.containsKey(func_key)) {
+            this._debounced_func.remove(func_key);
+        }
+    };
+    langClass.prototype._addDebounced = function (func_key, func) {
+        if (!!func_key && !!func) {
+            this._debounced_func.put(func_key, func);
+        }
+    };
+    langClass.prototype._getFuncKey = function (context, func) {
+        if (!!context && !!func) {
+            var uid = !!context.uid ? context.uid : this.toString(context);
+            var func_name = this.funcName(func);
+            if (!!uid && !!func_name) {
+                return uid + '.' + func_name;
+            }
+        }
+        return '';
+    };
+    langClass.instance = function () {
+        if (null == langClass.__instance) {
+            langClass.__instance = new langClass();
+        }
+        return langClass.__instance;
+    };
+    return langClass;
 }());
+// ------------------------------------------------------------------------
+//                      e x p o r t
+// ------------------------------------------------------------------------
+var lang = langClass.instance();
 /* harmony default export */ __webpack_exports__["a"] = (lang);
 
 
@@ -830,6 +903,9 @@ var dom = /** @class */ (function () {
             style.appendChild(document.createTextNode(css));
         }
         head.appendChild(style);
+    };
+    dom.createAttribute = function (name) {
+        return document.createAttribute(name);
     };
     dom.newElement = function (inner_html, append_to_selector) {
         if (inner_html === void 0) { inner_html = ''; }
@@ -1721,10 +1797,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 //-- singleton --//
 
+var root = window;
 // ------------------------------------------------------------------------
 //                      l y
 // ------------------------------------------------------------------------
 var ly = {
+    window: root,
     lang: __WEBPACK_IMPORTED_MODULE_0__commons_lang__["a" /* default */],
     format: __WEBPACK_IMPORTED_MODULE_1__commons_format__["a" /* default */],
     strings: __WEBPACK_IMPORTED_MODULE_2__commons_strings__["a" /* default */],
@@ -2514,6 +2592,136 @@ var ElementWrapper = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ElementWrapper.prototype, "scrollTop", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.scrollTop;
+            }
+            return 0;
+        },
+        set: function (value) {
+            if (!!this._element) {
+                this._element.scrollTop = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "scrollLeft", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.scrollLeft;
+            }
+            return 0;
+        },
+        set: function (value) {
+            if (!!this._element) {
+                this._element.scrollLeft = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "scrollWidth", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.scrollWidth;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "scrollHeight", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.scrollHeight;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ElementWrapper.prototype.scrollBy = function (x, y) {
+        if (!!this._element) {
+            return this._element.scrollBy(x, y);
+        }
+    };
+    ElementWrapper.prototype.scrollTo = function (x, y) {
+        if (!!this._element) {
+            return this._element.scrollTo(x, y);
+        }
+    };
+    Object.defineProperty(ElementWrapper.prototype, "offsetWidth", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.offsetWidth;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "offsetHeight", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.offsetHeight;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "offsetTop", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.offsetTop;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "clientWidth", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.clientWidth;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "clientHeight", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.clientHeight;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "clientLeft", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.clientLeft;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElementWrapper.prototype, "clientTop", {
+        get: function () {
+            if (!!this._element) {
+                return this._element.clientTop;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ElementWrapper.prototype, "children", {
         get: function () {
             var _this = this;
@@ -2579,6 +2787,18 @@ var ElementWrapper = /** @class */ (function () {
             return this._element.getAttribute(name) || "";
         }
         return "";
+    };
+    ElementWrapper.prototype.removeAttribute = function (name) {
+        if (!!this._element) {
+            this._element.removeAttribute(name);
+        }
+    };
+    ElementWrapper.prototype.createAttribute = function (name) {
+        if (!!this._element) {
+            if (!this._element.hasAttribute(name)) {
+                this._element.setAttributeNode(__WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].createAttribute(name));
+            }
+        }
     };
     ElementWrapper.prototype.value = function (value) {
         try {
