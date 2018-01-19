@@ -66,24 +66,16 @@ export default class Page1
     private init(): void {
         try {
 
-            this._button.addEventListener('click', this.onButtonClick);
+            // call debounced function
+            this._button.addEventListener('click', ly.lang.funcDebounce(this, this.onButtonClick, 1000, true, 'param1'));
 
         } catch (err) {
             console.error("Page1.init()", err)
         }
     }
 
-    private onButtonClick(ev: Event) {
-        try{
-            ev.preventDefault();
-            console.log("Page1.onButtonClick", "DEBOUNCING 'this.doLogAction'");
-            ly.lang.funcDebounce(this, this.doLogAction, 1000, false, ev);
-        }catch(err){
-            console.error("Page1.onButtonClick", err);
-        }
-    }
-
-    private doLogAction(param: any) {
-        console.log("Page1.doLogAction", param);
+    private onButtonClick(ev: Event, param1: string) {
+        ev.preventDefault();
+        console.log("Page1.doLogAction", ev, param1);
     }
 }

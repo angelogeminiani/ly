@@ -2,7 +2,6 @@
  * Utility class
  */
 import random from "./random";
-import {Dictionary} from "./collections/Dictionary";
 
 class langClass {
 
@@ -10,14 +9,13 @@ class langClass {
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
-    private readonly _debounced_func: Dictionary<Function>;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
     constructor() {
-        this._debounced_func = new Dictionary<Function>();
+
     }
 
     // ------------------------------------------------------------------------
@@ -175,17 +173,19 @@ class langClass {
     }
 
     public funcName(func: any): string {
+        let response: string = '';
         try {
             if (!!func) {
                 if (!!func.name) {
-                    return func.name;
+                    response = func.name;
                 } else if (!!func.prototype && !!func.prototype.name) {
-                    return func.prototype.name;
+                    response = func.prototype.name;
                 }
             }
         } catch (err) {
         }
-        return '';
+
+        return response;
     }
 
     // ------------------------------------------------------------------------
@@ -276,7 +276,7 @@ class langClass {
      * Returns a function that will be executed at most one time, no matter how
      * often you call it. Useful for lazy initialization.
      */
-    public funcOnce(func: Function, ...args: any[]): any {
+    public funcOnce(func: Function, ...args: any[]): Function {
         let ran: boolean = false;
         let memo: any;
         return function () {
@@ -294,8 +294,6 @@ class langClass {
      * If `immediate` is passed, trigger the function on the leading edge, instead of the trailing.
      */
     public funcDebounce(context: any, func: Function, wait: number, immediate: boolean = false, ...args: any[]): any {
-        const self = this;
-
         let timeout: any;
         //let context: any;
         let timestamp: number;
@@ -303,47 +301,34 @@ class langClass {
 
         const later = function () {
             let last = random.now() - timestamp;
+            const full_args = Array.prototype.slice.call(arguments).concat(args);
 
             if (last < wait && last > 0) {
-                timeout = setTimeout(later, wait - last);
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait - last, ...full_args);
             } else {
                 timeout = null;
+                clearTimeout(timeout);
                 if (!immediate) {
-                    // remove function from dictionary
-                    self._removeDebounced(func_key);
-
-                    result = func.apply(context, args);
+                    result = func.apply(context, full_args);
                 }
             }
         };
 
-        const func_key = this._getFuncKey(context, func);
-        console.log('lang.funcDebounce', 'func_key=' + func_key);
-        const response_func = self._debounced_func.containsKey(func_key)
-            ? self._debounced_func.get(func_key)
-            : function () {
-                //context = this;
-                timestamp = random.now();
-                let callNow = immediate && !timeout;
-                if (!timeout) {
-                    timeout = setTimeout(later, wait);
-                }
-                if (callNow) {
-                    // remove function from dictionary
-                    self._removeDebounced(func_key);
+        return function () {
+            timestamp = random.now();
+            let callNow = immediate && !timeout;
+            const full_args = Array.prototype.slice.call(arguments).concat(args);
+            if (!timeout) {
+                timeout = setTimeout(later, wait, ...full_args);
+            }
+            if (callNow) {
+                result = func.apply(context, full_args);
+            }
 
-                    // execute function
-                    result = func.apply(context, args);
-                }
-
-                return result;
-            };
-
-        this._addDebounced(func_key, response_func);
-
-        return response_func;
+            return result;
+        };
     }
-
 
     // ------------------------------------------------------------------------
     //                      p r i v a t e
@@ -356,30 +341,6 @@ class langClass {
         } catch (err) {
             return false;
         }
-    }
-
-    private _removeDebounced(func_key: string) {
-        if (this._debounced_func.containsKey(func_key)) {
-            this._debounced_func.remove(func_key);
-        }
-    }
-
-    private _addDebounced(func_key: string, func: Function) {
-        if (!!func_key && !!func) {
-            this._debounced_func.put(func_key, func);
-        }
-    }
-
-    private _getFuncKey(context: any, func: Function): string {
-        if (!!context && !!func) {
-            const uid: string = !!context.uid ? context.uid : this.toString(context);
-            const func_name: string = this.funcName(func);
-            console.log('lang._getFuncKey', 'uid=' + uid, 'func_name=' + func_name);
-            if (!!uid && !!func_name) {
-                return uid + '.' + func_name;
-            }
-        }
-        return '';
     }
 
     // ------------------------------------------------------------------------

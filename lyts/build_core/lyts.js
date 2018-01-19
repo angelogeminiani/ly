@@ -69,18 +69,18 @@
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__random__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__collections_Dictionary__ = __webpack_require__(1);
 /**
  * Utility class
  */
 
-
 var langClass = /** @class */ (function () {
+    // ------------------------------------------------------------------------
+    //                      f i e l d s
+    // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
     function langClass() {
-        this._debounced_func = new __WEBPACK_IMPORTED_MODULE_1__collections_Dictionary__["a" /* Dictionary */]();
     }
     // ------------------------------------------------------------------------
     //                      p u b l i c
@@ -227,19 +227,20 @@ var langClass = /** @class */ (function () {
         return '';
     };
     langClass.prototype.funcName = function (func) {
+        var response = '';
         try {
             if (!!func) {
                 if (!!func.name) {
-                    return func.name;
+                    response = func.name;
                 }
                 else if (!!func.prototype && !!func.prototype.name) {
-                    return func.prototype.name;
+                    response = func.prototype.name;
                 }
             }
         }
         catch (err) {
         }
-        return '';
+        return response;
     };
     // ------------------------------------------------------------------------
     //                      u t i l s
@@ -362,46 +363,37 @@ var langClass = /** @class */ (function () {
         for (var _i = 4; _i < arguments.length; _i++) {
             args[_i - 4] = arguments[_i];
         }
-        var self = this;
         var timeout;
         //let context: any;
         var timestamp;
         var result;
         var later = function () {
             var last = __WEBPACK_IMPORTED_MODULE_0__random__["a" /* default */].now() - timestamp;
+            var full_args = Array.prototype.slice.call(arguments).concat(args);
             if (last < wait && last > 0) {
-                timeout = setTimeout(later, wait - last);
+                clearTimeout(timeout);
+                timeout = setTimeout.apply(void 0, [later, wait - last].concat(full_args));
             }
             else {
                 timeout = null;
+                clearTimeout(timeout);
                 if (!immediate) {
-                    // remove function from dictionary
-                    self._removeDebounced(func_key);
-                    result = func.apply(context, args);
+                    result = func.apply(context, full_args);
                 }
             }
         };
-        var func_key = this._getFuncKey(context, func);
-        console.log('lang.funcDebounce', 'func_key=' + func_key);
-        var response_func = self._debounced_func.containsKey(func_key)
-            ? self._debounced_func.get(func_key)
-            : function () {
-                //context = this;
-                timestamp = __WEBPACK_IMPORTED_MODULE_0__random__["a" /* default */].now();
-                var callNow = immediate && !timeout;
-                if (!timeout) {
-                    timeout = setTimeout(later, wait);
-                }
-                if (callNow) {
-                    // remove function from dictionary
-                    self._removeDebounced(func_key);
-                    // execute function
-                    result = func.apply(context, args);
-                }
-                return result;
-            };
-        this._addDebounced(func_key, response_func);
-        return response_func;
+        return function () {
+            timestamp = __WEBPACK_IMPORTED_MODULE_0__random__["a" /* default */].now();
+            var callNow = immediate && !timeout;
+            var full_args = Array.prototype.slice.call(arguments).concat(args);
+            if (!timeout) {
+                timeout = setTimeout.apply(void 0, [later, wait].concat(full_args));
+            }
+            if (callNow) {
+                result = func.apply(context, full_args);
+            }
+            return result;
+        };
     };
     // ------------------------------------------------------------------------
     //                      p r i v a t e
@@ -414,27 +406,6 @@ var langClass = /** @class */ (function () {
         catch (err) {
             return false;
         }
-    };
-    langClass.prototype._removeDebounced = function (func_key) {
-        if (this._debounced_func.containsKey(func_key)) {
-            this._debounced_func.remove(func_key);
-        }
-    };
-    langClass.prototype._addDebounced = function (func_key, func) {
-        if (!!func_key && !!func) {
-            this._debounced_func.put(func_key, func);
-        }
-    };
-    langClass.prototype._getFuncKey = function (context, func) {
-        if (!!context && !!func) {
-            var uid = !!context.uid ? context.uid : this.toString(context);
-            var func_name = this.funcName(func);
-            console.log('lang._getFuncKey', 'uid=' + uid, 'func_name=' + func_name);
-            if (!!uid && !!func_name) {
-                return uid + '.' + func_name;
-            }
-        }
-        return '';
     };
     langClass.instance = function () {
         if (null == langClass.__instance) {
