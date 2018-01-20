@@ -2,6 +2,7 @@ import browser from "./browser";
 
 import strings from "../commons/strings";
 import lang from "../commons/lang";
+import ly from "../ly";
 
 
 export enum SelectorType { ID, CLASS, TAG, ATTR }
@@ -178,40 +179,122 @@ export class SelectorParser {
 /**
  * Default Export class.
  */
-export default class dom {
+const doc: any = document;
+const win: any = window;
+
+class domClass {
+
+    // ------------------------------------------------------------------------
+    //                      f i e l d s
+    // ------------------------------------------------------------------------
+
+    private _ready: boolean;
+    private _readyList: Function[];
+
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+
+    constructor() {
+        this._readyList = [];
+        this._ready = (doc.readyState === "complete" || (!doc.attachEvent && doc.readyState === "interactive"));
+        if (!this._ready) {
+            if (doc.addEventListener) {
+                // first choice is DOMContentLoaded event
+                doc.addEventListener("DOMContentLoaded", this.onDocumentReady.bind(this), false);
+                // backup is window load event
+                win.addEventListener("load", this.onDocumentReady.bind(this), false);
+            } else {
+                // must be IE
+                doc.attachEvent("onreadystatechange", this.onDocumentReadyStateChange.bind(this));
+                win.attachEvent("onload", this.onDocumentReady.bind(this));
+            }
+        }
+    }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
-    public static parse(text: string): Node {
+    public ready(callback: Function, bind_context: any): void {
+        if (ly.lang.isFunction(callback)) {
+            const callback_to_invoke: Function = callback.bind(bind_context || this);
+            if (dom._ready) {
+                ly.lang.funcDelay(callback_to_invoke, 1);
+            } else {
+                dom._readyList.push(callback_to_invoke);
+            }
+        }
+    }
+
+    public parse(text: string): Node {
         let parser: DOMParser = new DOMParser();
         let doc: HTMLDocument = parser.parseFromString(text, "text/html");
         return doc;
     }
 
-    public static injectStyle(css: string, target: string = 'head') {
-        const head: any = (document as any)[target] || document.getElementsByTagName(target)[0];
-        const style: any = document.createElement('style');
+    public getElementById(id: string): HTMLElement | null {
+        return doc.getElementById(id);
+    }
+
+    public getElementsByTagName(tag_name: string): Element[] {
+        const response: Element[] = [];
+        const list: NodeListOf<Element> = doc.getElementsByTagName(tag_name);
+        const count = list.length;
+        for (let i = 0; i < count; i++) {
+            response.push(list.item(i));
+        }
+        return response;
+    }
+
+    public getElementsByClassName(class_name: string): Element[] {
+        const response: Element[] = [];
+        const list: NodeListOf<Element> = doc.getElementsByClassName(class_name);
+        const count = list.length;
+        for (let i = 0; i < count; i++) {
+            response.push(list.item(i));
+        }
+        return response;
+    }
+
+    public createElement(tag: string = 'div', target: string | HTMLElement = 'body'): HTMLElement {
+        let parent: HTMLElement | null = null;
+        if (target instanceof HTMLElement) {
+            parent = target;
+        } else if (ly.lang.isString(target)) {
+            parent = (doc as any)[target] || doc.getElementsByTagName(target)[0];
+        }
+
+        const element: HTMLElement = doc.createElement(tag);
+        if (!!parent) {
+            parent.appendChild(element);
+        }
+
+        return element;
+    }
+
+    public injectStyle(css: string, target: string = 'head'): void {
+        const head: any = (doc as any)[target] || doc.getElementsByTagName(target)[0];
+        const style: any = doc.createElement('style');
 
         style.type = 'text/css';
         if (style.styleSheet) {
             style.styleSheet.cssText = css;
         } else {
-            style.appendChild(document.createTextNode(css));
+            style.appendChild(doc.createTextNode(css));
         }
 
         head.appendChild(style);
     }
 
-    public static createAttribute(name: string): Attr {
-        return document.createAttribute(name);
+    public createAttribute(name: string): Attr {
+        return doc.createAttribute(name);
     }
 
-    public static newElement(inner_html: string = '', append_to_selector?: string): HTMLElement {
+    public newElement(inner_html: string = '', append_to_selector?: string): HTMLElement {
         let elem;
         if (!!inner_html) {
-            let wrapper = document.createElement("div");
+            let wrapper = doc.createElement("div");
             wrapper.innerHTML = inner_html;
             if (wrapper.childElementCount > 1) {
                 elem = wrapper;
@@ -220,10 +303,10 @@ export default class dom {
             }
         }
 
-        elem = elem || document.createElement("div");
+        elem = elem || doc.createElement("div");
 
         if (!!append_to_selector) {
-            const parent: Array<HTMLElement> = dom.get(append_to_selector);
+            const parent: Array<HTMLElement> = this.get(append_to_selector);
             if (parent.length > 0) {
                 parent[0].appendChild(elem);
             }
@@ -232,29 +315,29 @@ export default class dom {
         return elem;
     }
 
-    public static getFirst(selector: string = '', target?: HTMLElement): HTMLElement | null {
-        const response: Array<HTMLElement> = dom.get(selector, target);
+    public getFirst(selector: string = '', target?: HTMLElement): HTMLElement | null {
+        const response: Array<HTMLElement> = this.get(selector, target);
         return response.length > 0 ? response[0] : null;
     }
 
-    public static getLast(selector: string = '', target?: HTMLElement): HTMLElement | null {
-        const response: Array<HTMLElement> = dom.get(selector, target);
+    public getLast(selector: string = '', target?: HTMLElement): HTMLElement | null {
+        const response: Array<HTMLElement> = this.get(selector, target);
         return response.length > 0 ? response[response.length - 1] : null;
     }
 
-    public static get(selector: string = '', target?: HTMLElement): Array<HTMLElement> {
+    public get(selector: string = '', target?: HTMLElement): Array<HTMLElement> {
         if (!!selector) {
             const selector_parser: SelectorParser = new SelectorParser(selector);
             if (!!target) {
-                return dom.getElementFromParent(target, selector_parser);
+                return this.getElementFromParent(target, selector_parser);
             } else {
-                return dom.getElementFromDocument(selector_parser);
+                return this.getElementFromDocument(selector_parser);
             }
         }
         return [];
     }
 
-    public static forEachChild(elem: HTMLElement, func: (child: HTMLElement) => void, deep: boolean = false): void {
+    public forEachChild(elem: HTMLElement, func: (child: HTMLElement) => void, deep: boolean = false): void {
         if (lang.isFunction(func) && !!elem && !!elem.children) {
             const count = elem.children.length;
             for (let i = 0; i < count; i++) {
@@ -263,14 +346,14 @@ export default class dom {
                     func(child);
                     if (deep && child.children.length > 0) {
                         // recursive
-                        dom.forEachChild(child, func, deep);
+                        this.forEachChild(child, func, deep);
                     }
                 }
             }
         }
     }
 
-    public static map(elem: HTMLElement, func: (child: HTMLElement) => boolean, deep: boolean = false): HTMLElement[] {
+    public map(elem: HTMLElement, func: (child: HTMLElement) => boolean, deep: boolean = false): HTMLElement[] {
         const response = new Array<HTMLElement>();
         if (lang.isFunction(func) && !!elem) {
             const count = elem.children.length;
@@ -282,7 +365,7 @@ export default class dom {
                     }
                     if (deep && child.children.length > 0) {
                         // recursive
-                        response.push(...dom.map(child, func, deep));
+                        response.push(...this.map(child, func, deep));
                     }
                 }
             }
@@ -290,39 +373,39 @@ export default class dom {
         return response;
     }
 
-    public static isInput(elem: Element | null) {
+    public isInput(elem: Element | null) {
         return !!elem
             ? elem.tagName.toLowerCase() === "input"
             : false;
     }
 
-    public static isInputButton(elem: Element | null) {
+    public isInputButton(elem: Element | null) {
         return !!elem
-            ? dom.isInput(elem) && elem.getAttribute("type") === "button"
+            ? this.isInput(elem) && elem.getAttribute("type") === "button"
             : false;
     }
 
-    public static isInputText(elem: HTMLElement | null) {
+    public isInputText(elem: HTMLElement | null) {
         return !!elem
-            ? dom.isInput(elem) && elem.getAttribute("type") === "text"
+            ? this.isInput(elem) && elem.getAttribute("type") === "text"
             : false;
     }
 
-    public static isInputCheck(elem: HTMLElement | null) {
+    public isInputCheck(elem: HTMLElement | null) {
         return !!elem
-            ? dom.isInput(elem) && elem.getAttribute("type") === "checkbox"
+            ? this.isInput(elem) && elem.getAttribute("type") === "checkbox"
             : false;
     }
 
-    public static isTextArea(elem: Element | null) {
+    public isTextArea(elem: Element | null) {
         return !!elem
             ? elem.tagName.toLowerCase() === "textarea"
             : false;
     }
 
-    public static getValue(elem: HTMLElement | null): any {
+    public getValue(elem: HTMLElement | null): any {
         if (!!elem) {
-            if (dom.isInput(elem)) {
+            if (this.isInput(elem)) {
                 const e = elem as HTMLInputElement;
                 if (!!e) {
                     const type = e.getAttribute("type");
@@ -332,7 +415,7 @@ export default class dom {
                         return e.value;
                     }
                 }
-            } else if (dom.isTextArea(elem)) {
+            } else if (this.isTextArea(elem)) {
                 const e = elem as HTMLTextAreaElement;
                 return !!e ? e.value : null;
             }
@@ -340,9 +423,9 @@ export default class dom {
         return null;
     }
 
-    public static setValue(elem: HTMLElement | null, value: any): void {
+    public setValue(elem: HTMLElement | null, value: any): void {
         if (!!elem) {
-            if (dom.isInput(elem)) {
+            if (this.isInput(elem)) {
                 const e = elem as HTMLInputElement;
                 if (!!e) {
                     const type = e.getAttribute("type");
@@ -352,7 +435,7 @@ export default class dom {
                         e.value = value;
                     }
                 }
-            } else if (dom.isTextArea(elem)) {
+            } else if (this.isTextArea(elem)) {
                 const e = elem as HTMLTextAreaElement;
                 e.value = value;
             } else {
@@ -361,7 +444,7 @@ export default class dom {
         }
     }
 
-    public static classAdd(elem: HTMLElement | null, class_name: string | string[]): boolean {
+    public classAdd(elem: HTMLElement | null, class_name: string | string[]): boolean {
         if (!!elem && !!elem.classList) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -374,7 +457,7 @@ export default class dom {
         return false;
     }
 
-    public static classRemove(elem: HTMLElement | null, class_name: string | string[]): boolean {
+    public classRemove(elem: HTMLElement | null, class_name: string | string[]): boolean {
         if (!!elem && !!elem.classList) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -391,31 +474,45 @@ export default class dom {
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private static getElementFromDocument(selector: SelectorParser): Array<HTMLElement> {
+    private onDocumentReadyStateChange(): void {
+        if (doc.readyState === "complete") {
+            this.onDocumentReady();
+        }
+    }
+
+    private onDocumentReady(): void {
+        this._ready = true;
+        this._readyList.forEach((callback) => {
+            ly.lang.funcDelay(callback, 1000);
+        });
+        this._readyList = [];
+    }
+
+    private getElementFromDocument(selector: SelectorParser): Array<HTMLElement> {
         const list = [];
         if (!!selector && browser.isReady()) {
             if (selector.type === SelectorType.ID) {
-                const result: any = document.getElementById(selector.value);
+                const result: any = doc.getElementById(selector.value);
                 if (!!result) {
                     list.push(result);
                 }
             } else if (selector.type === SelectorType.CLASS) {
-                const result: HTMLCollectionOf<Element> = document.getElementsByClassName(selector.value);
+                const result: HTMLCollectionOf<Element> = doc.getElementsByClassName(selector.value);
                 const count = result.length;
                 for (let i = 0; i < count; i++) {
                     list.push(result.item(i));
                 }
             } else if (selector.type === SelectorType.TAG) {
-                const result: NodeListOf<Element> = document.getElementsByTagName(selector.value);
+                const result: NodeListOf<Element> = doc.getElementsByTagName(selector.value);
                 const count = result.length;
                 for (let i = 0; i < count; i++) {
                     list.push(result.item(i));
                 }
             } else if (selector.type === SelectorType.ATTR) {
-                const children: HTMLCollection = document.body.children;
+                const children: HTMLCollection = doc.body.children;
                 for (let i = 0; i < children.length; i++) {
                     const elem: HTMLElement = children.item(i) as HTMLElement;
-                    const found: Array<HTMLElement> = dom.getElementFromParent(elem, selector);
+                    const found: Array<HTMLElement> = this.getElementFromParent(elem, selector);
                     if (found.length > 0) {
                         list.push(...found);
                     }
@@ -426,15 +523,30 @@ export default class dom {
         return list;
     }
 
-    private static getElementFromParent(elem: HTMLElement, selector: SelectorParser): Array<HTMLElement> {
+    private getElementFromParent(elem: HTMLElement, selector: SelectorParser): Array<HTMLElement> {
         const list = new Array<HTMLElement>();
         if (!!selector && browser.isReady()) {
-            list.push(...dom.map(elem, (child) => {
+            list.push(...this.map(elem, (child) => {
                 return selector.match(child);
             }, true));
         }
         return list;
     }
 
+    // ------------------------------------------------------------------------
+    //                      S I N G L E T O N
+    // ------------------------------------------------------------------------
+
+    private static __instance: domClass;
+
+    public static instance(): domClass {
+        if (null == domClass.__instance) {
+            domClass.__instance = new domClass();
+        }
+        return domClass.__instance;
+    }
 
 }
+
+const dom: domClass = domClass.instance();
+export default dom;

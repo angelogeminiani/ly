@@ -4,6 +4,7 @@ import view from "./view";
 import Page from "../../../../../../lyts_core/view/pages/page/Page";
 import ly from "../../../../../../lyts_core/ly";
 import console from "../../../../../../lyts_core/commons/console";
+import DomCollection from "../../../../../../lyts_core/commons/storage/DomCollection";
 
 
 export default class Page1
@@ -15,6 +16,9 @@ export default class Page1
     // ------------------------------------------------------------------------
 
     private readonly _button: ElementWrapper;
+    private readonly _image: ElementWrapper;
+
+    private readonly _dom_collection: DomCollection;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -24,6 +28,9 @@ export default class Page1
         super(route);
 
         this._button = super.getFirst("#" + this.uid + "_button");
+        this._image = super.getFirst("#" + this.uid + "_image");
+
+        this._dom_collection = new DomCollection("images");
     }
 
     // ------------------------------------------------------------------------
@@ -64,6 +71,7 @@ export default class Page1
     // ------------------------------------------------------------------------
 
     private init(): void {
+
         try {
 
             // call debounced function
@@ -77,5 +85,19 @@ export default class Page1
     private onButtonClick(ev: Event, param1: string) {
         ev.preventDefault();
         console.log("Page1.doLogAction", ev, param1);
+
+        ly.dom.ready(function () {
+            const len: number = this._dom_collection.length;
+            console.log('Page1.init', 'DomCollection length', len);
+            if (len > 0) {
+                const item: any = this._dom_collection.get("IMG_USER");
+                const src:string = item.value;
+                if(!!src){
+                    this._image.setAttribute('src', src);
+                } else {
+                    console.warn('Page1.init()', 'item', item);
+                }
+            }
+        }, this);
     }
 }
