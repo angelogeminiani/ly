@@ -216,11 +216,12 @@ class langClass {
      * Invoke a function. Shortcut for "func.call(this, ...args)"
      */
     public funcInvoke(func: Function, ...args: any[]): any {
-        if (this.isFunction(func)) {
+        const self = this;
+        if (self.isFunction(func)) {
             if (args.length === 0) {
-                return func.call(this);
+                return func.call(self);
             } else {
-                return func.call(this, ...args);
+                return func.call(self, ...args);
             }
         }
         return null;
@@ -256,12 +257,13 @@ class langClass {
      * @return promise {{done: done}}
      */
     public funcLoop(func: Function, wait: number, ...args: any[]): any {
+        const self = this;
         let callback: Function;
         let timer = setInterval(function () {
             let exit = !!func.apply(null, args);
             if (exit) {
                 clearInterval(timer);
-                this.funcInvoke(callback);
+                self.funcInvoke.bind(self)(callback); // call with bind
             }
         }, wait || 300);
 
@@ -277,12 +279,13 @@ class langClass {
      * often you call it. Useful for lazy initialization.
      */
     public funcOnce(func: Function, ...args: any[]): Function {
+        const self = this;
         let ran: boolean = false;
         let memo: any;
         return function () {
             if (ran) return memo;
             ran = true;
-            memo = func.call(this, ...args);
+            memo = func.call(self, ...args);
             return memo;
         };
     }
