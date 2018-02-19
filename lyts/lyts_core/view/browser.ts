@@ -86,6 +86,28 @@ class browser {
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
+    public getParameters(query: string = ''): any {
+        query = query || location.search;
+        query = query.split('?').length > 1 ? query.split('?')[1] : query;
+        const vars = query.split("&");
+        const query_string: any = {};
+        for (let i = 0; i < vars.length; i++) {
+            const pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                const arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    }
+
     // ------------------------------------------------------------------------
     //                      e v e n t s
     // ------------------------------------------------------------------------

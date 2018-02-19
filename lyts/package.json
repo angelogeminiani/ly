@@ -1,6 +1,6 @@
 {
   "name": "lyts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple Typescript Framework that just 'Love You'.",
   "main": "ly.ts",
   "scripts": {

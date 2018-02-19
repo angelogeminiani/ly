@@ -271,12 +271,13 @@ var langClass = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (this.isFunction(func)) {
+        var self = this;
+        if (self.isFunction(func)) {
             if (args.length === 0) {
-                return func.call(this);
+                return func.call(self);
             }
             else {
-                return func.call.apply(func, [this].concat(args));
+                return func.call.apply(func, [self].concat(args));
             }
         }
         return null;
@@ -318,12 +319,13 @@ var langClass = /** @class */ (function () {
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
+        var self = this;
         var callback;
         var timer = setInterval(function () {
             var exit = !!func.apply(null, args);
             if (exit) {
                 clearInterval(timer);
-                this.funcInvoke(callback);
+                self.funcInvoke.bind(self)(callback); // call with bind
             }
         }, wait || 300);
         return {
@@ -341,13 +343,14 @@ var langClass = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
+        var self = this;
         var ran = false;
         var memo;
         return function () {
             if (ran)
                 return memo;
             ran = true;
-            memo = func.call.apply(func, [this].concat(args));
+            memo = func.call.apply(func, [self].concat(args));
             return memo;
         };
     };
@@ -619,6 +622,30 @@ var browser = /** @class */ (function () {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(url);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
+    browser.prototype.getParameters = function (query) {
+        if (query === void 0) { query = ''; }
+        query = query || location.search;
+        query = query.split('?').length > 1 ? query.split('?')[1] : query;
+        var vars = query.split("&");
+        var query_string = {};
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            }
+            else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            }
+            else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
     };
     // ------------------------------------------------------------------------
     //                      e v e n t s
