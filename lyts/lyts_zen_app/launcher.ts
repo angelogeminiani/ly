@@ -89,7 +89,7 @@ class launcher
     }
 
     public initStyles(): void {
-        StyleManager
+        //StyleManager
     }
 
     // ------------------------------------------------------------------------

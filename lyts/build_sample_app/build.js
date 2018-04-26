@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -142,20 +142,20 @@ var console_ext = /** @class */ (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_lang__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_format__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_strings__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_objects__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_random__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_browser__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_cookies__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_dom__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__view_i18n__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_collections_Dictionary__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_events_Events__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_events_EventEmitter__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__net_HttpClient__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_components_Component__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__application_Application__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__application_Application__ = __webpack_require__(24);
 //-- static --//
 
 
@@ -809,7 +809,7 @@ var EventEmitter = /** @class */ (function (_super) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Animate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AnimateEffect; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StyleManager__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StyleManager__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_lang__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__animate_css__ = __webpack_require__(35);
 
@@ -1822,7 +1822,7 @@ var Events = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_collections_Dictionary__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_events_EventEmitter__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__i18n__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ElementWrapper__ = __webpack_require__(23);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3040,138 +3040,6 @@ var Router = /** @class */ (function (_super) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StyleManager; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return StyleModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_collections_Dictionary__ = __webpack_require__(3);
-
-
-/**
- * Supported modules
- */
-var StyleModule;
-(function (StyleModule) {
-    StyleModule["animate"] = "animate";
-})(StyleModule || (StyleModule = {}));
-/**
- * Singleton manager for application styles.
- * StyleManager allow to inject styles into html head
- */
-var StyleManagerClass = /** @class */ (function () {
-    // ------------------------------------------------------------------------
-    //                      c o n s t r u c t o r
-    // ------------------------------------------------------------------------
-    function StyleManagerClass() {
-        this._registered_modules = new __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_collections_Dictionary__["a" /* Dictionary */]();
-        this._use_one_style_tag = false;
-        this._hystory = [];
-    }
-    Object.defineProperty(StyleManagerClass.prototype, "useOneStyleTag", {
-        // ------------------------------------------------------------------------
-        //                      p u b l i c
-        // ------------------------------------------------------------------------
-        get: function () {
-            return this._use_one_style_tag;
-        },
-        set: function (value) {
-            this._use_one_style_tag = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Register a style module content or proxy (function called when content is required)
-     * @param {string} module Module name
-     * @param {string | Function} proxy CSS Content or function reference
-     */
-    StyleManagerClass.prototype.register = function (module, proxy) {
-        this._registered_modules.put(module, proxy);
-        return this;
-    };
-    /**
-     * Inject style directly to head
-     * @param props
-     * @param {StyleModule} modules
-     */
-    StyleManagerClass.prototype.inject = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        if (this._use_one_style_tag) {
-            this.injectOne.apply(this, [props].concat(modules));
-        }
-        else {
-            this.injectAll.apply(this, [props].concat(modules));
-        }
-    };
-    // ------------------------------------------------------------------------
-    //                      p r i v a t e
-    // ------------------------------------------------------------------------
-    StyleManagerClass.prototype.loadModule = function (props, module) {
-        var proxy = this._registered_modules.get(module);
-        var module_content = __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].lang.isFunction(proxy) ? proxy(props) : proxy;
-        if (!!module_content) {
-            return module_content
-                .split('<style>').join('\n')
-                .split('</style>').join('\n')
-                .trim();
-        }
-        return '';
-    };
-    StyleManagerClass.prototype.injectOne = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        // creates css directives
-        var css = '';
-        for (var _a = 0, modules_1 = modules; _a < modules_1.length; _a++) {
-            var module = modules_1[_a];
-            if (this._hystory.indexOf(module) === -1) {
-                css += this.loadModule(props, module);
-                this._hystory.push(module);
-            }
-        }
-        // add line
-        css = '\n' + css + '\n';
-        __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].dom.injectStyle(css);
-    };
-    StyleManagerClass.prototype.injectAll = function (props) {
-        var modules = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            modules[_i - 1] = arguments[_i];
-        }
-        // creates css directives
-        for (var _a = 0, modules_2 = modules; _a < modules_2.length; _a++) {
-            var module = modules_2[_a];
-            if (this._hystory.indexOf(module) === -1) {
-                var css = this.loadModule(props, module);
-                this._hystory.push(module);
-                __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].dom.injectStyle(css);
-            }
-        }
-    };
-    StyleManagerClass.instance = function () {
-        if (null == StyleManagerClass.__instance) {
-            StyleManagerClass.__instance = new StyleManagerClass();
-        }
-        return StyleManagerClass.__instance;
-    };
-    return StyleManagerClass;
-}());
-// ------------------------------------------------------------------------
-//                      e x p o r t s
-// ------------------------------------------------------------------------
-var StyleManager = StyleManagerClass.instance();
-
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_console__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_PageController__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_paths__ = __webpack_require__(37);
@@ -3268,7 +3136,7 @@ var Screen = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3276,10 +3144,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_BaseObject__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Main__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Main__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_ApplicationController__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lyts_core_commons_console__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_style_StyleManager__ = __webpack_require__(18);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3290,7 +3157,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
 
 
 
@@ -3358,7 +3224,7 @@ var launcher = /** @class */ (function (_super) {
         }
     };
     launcher.prototype.initStyles = function () {
-        __WEBPACK_IMPORTED_MODULE_6__lyts_core_style_StyleManager__["a" /* StyleManager */];
+        //StyleManager
     };
     launcher.instance = function () {
         if (null == launcher.__instance) {
@@ -3375,7 +3241,7 @@ launcher.instance().start();
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3477,7 +3343,7 @@ var format = /** @class */ (function () {
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3544,7 +3410,7 @@ var cookies = /** @class */ (function () {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3661,7 +3527,7 @@ var HttpClient = /** @class */ (function () {
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4000,7 +3866,7 @@ var ElementWrapper = /** @class */ (function () {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4178,18 +4044,18 @@ var Application = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainView__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainView__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_console__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_ly__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_i18n_en__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_i18n_it__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_view_screens_ScreenController__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__screens_screen1_Screen1__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_i18n_en__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_i18n_it__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lyts_core_view_screens_ScreenController__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__screens_screen1_Screen1__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__screens_screen2_Screen2__ = __webpack_require__(44);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -4280,12 +4146,12 @@ var Main = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = view;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainStyle__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MainStyle__ = __webpack_require__(27);
 
 function view(uid, props) {
     props = props || {};
@@ -4294,7 +4160,7 @@ function view(uid, props) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4308,7 +4174,7 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4320,7 +4186,7 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4332,7 +4198,7 @@ function style(uid, props) {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4468,14 +4334,14 @@ var ScreenController = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_commons_console__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__view__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__view__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lyts_core_style_styles_animate_Animate__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_view_screens_screen_Screen__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_view_screens_screen_Screen__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_PageLogin__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_register_PageRegister__ = __webpack_require__(41);
 var __extends = (this && this.__extends) || (function () {
@@ -4553,12 +4419,12 @@ var Screen1 = /** @class */ (function (_super) {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = view;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style__ = __webpack_require__(33);
 
 function view(uid, props) {
     props = props || {};
@@ -4567,7 +4433,7 @@ function view(uid, props) {
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4578,6 +4444,138 @@ function style(uid, props) {
     return "\n        " + main + "\n           \n    ";
 }
 ;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StyleManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return StyleModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_collections_Dictionary__ = __webpack_require__(3);
+
+
+/**
+ * Supported modules
+ */
+var StyleModule;
+(function (StyleModule) {
+    StyleModule["animate"] = "animate";
+})(StyleModule || (StyleModule = {}));
+/**
+ * Singleton manager for application styles.
+ * StyleManager allow to inject styles into html head
+ */
+var StyleManagerClass = /** @class */ (function () {
+    // ------------------------------------------------------------------------
+    //                      c o n s t r u c t o r
+    // ------------------------------------------------------------------------
+    function StyleManagerClass() {
+        this._registered_modules = new __WEBPACK_IMPORTED_MODULE_1__lyts_core_commons_collections_Dictionary__["a" /* Dictionary */]();
+        this._use_one_style_tag = false;
+        this._hystory = [];
+    }
+    Object.defineProperty(StyleManagerClass.prototype, "useOneStyleTag", {
+        // ------------------------------------------------------------------------
+        //                      p u b l i c
+        // ------------------------------------------------------------------------
+        get: function () {
+            return this._use_one_style_tag;
+        },
+        set: function (value) {
+            this._use_one_style_tag = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Register a style module content or proxy (function called when content is required)
+     * @param {string} module Module name
+     * @param {string | Function} proxy CSS Content or function reference
+     */
+    StyleManagerClass.prototype.register = function (module, proxy) {
+        this._registered_modules.put(module, proxy);
+        return this;
+    };
+    /**
+     * Inject style directly to head
+     * @param props
+     * @param {StyleModule} modules
+     */
+    StyleManagerClass.prototype.inject = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        if (this._use_one_style_tag) {
+            this.injectOne.apply(this, [props].concat(modules));
+        }
+        else {
+            this.injectAll.apply(this, [props].concat(modules));
+        }
+    };
+    // ------------------------------------------------------------------------
+    //                      p r i v a t e
+    // ------------------------------------------------------------------------
+    StyleManagerClass.prototype.loadModule = function (props, module) {
+        var proxy = this._registered_modules.get(module);
+        var module_content = __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].lang.isFunction(proxy) ? proxy(props) : proxy;
+        if (!!module_content) {
+            return module_content
+                .split('<style>').join('\n')
+                .split('</style>').join('\n')
+                .trim();
+        }
+        return '';
+    };
+    StyleManagerClass.prototype.injectOne = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        // creates css directives
+        var css = '';
+        for (var _a = 0, modules_1 = modules; _a < modules_1.length; _a++) {
+            var module = modules_1[_a];
+            if (this._hystory.indexOf(module) === -1) {
+                css += this.loadModule(props, module);
+                this._hystory.push(module);
+            }
+        }
+        // add line
+        css = '\n' + css + '\n';
+        __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].dom.injectStyle(css);
+    };
+    StyleManagerClass.prototype.injectAll = function (props) {
+        var modules = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            modules[_i - 1] = arguments[_i];
+        }
+        // creates css directives
+        for (var _a = 0, modules_2 = modules; _a < modules_2.length; _a++) {
+            var module = modules_2[_a];
+            if (this._hystory.indexOf(module) === -1) {
+                var css = this.loadModule(props, module);
+                this._hystory.push(module);
+                __WEBPACK_IMPORTED_MODULE_0__lyts_core_ly__["a" /* default */].dom.injectStyle(css);
+            }
+        }
+    };
+    StyleManagerClass.instance = function () {
+        if (null == StyleManagerClass.__instance) {
+            StyleManagerClass.__instance = new StyleManagerClass();
+        }
+        return StyleManagerClass.__instance;
+    };
+    return StyleManagerClass;
+}());
+// ------------------------------------------------------------------------
+//                      e x p o r t s
+// ------------------------------------------------------------------------
+var StyleManager = StyleManagerClass.instance();
+
 
 
 /***/ }),
@@ -4960,7 +4958,7 @@ function style(uid, props) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lyts_core_commons_console__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__view__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lyts_core_style_styles_animate_Animate__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_view_screens_screen_Screen__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lyts_core_view_screens_screen_Screen__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_page1_Page1__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_page2_Page2__ = __webpack_require__(52);
 var __extends = (this && this.__extends) || (function () {
