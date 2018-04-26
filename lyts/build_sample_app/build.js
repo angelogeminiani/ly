@@ -4352,6 +4352,12 @@ var __extends = (this && this.__extends) || (function () {
 
 
 
+/**
+ * Control screens.
+ * Screens can contain Pages.
+ * Sample screen url: ./#!screen1
+ * Sample screen url with page: ./#!screen1/page1 or ./#!screen1/page2
+ */
 var ScreenController = /** @class */ (function (_super) {
     __extends(ScreenController, _super);
     // ------------------------------------------------------------------------
@@ -4450,7 +4456,7 @@ var ScreenController = /** @class */ (function (_super) {
             }
         }
         catch (err) {
-            console.error("PageController.onRoute", err);
+            console.error("ScreenController.onRoute", err);
         }
     };
     return ScreenController;

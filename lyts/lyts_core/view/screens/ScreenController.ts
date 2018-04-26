@@ -4,6 +4,12 @@ import ly from "../../ly";
 import Screen from "./screen/Screen";
 
 
+/**
+ * Control screens.
+ * Screens can contain Pages.
+ * Sample screen url: ./#!screen1
+ * Sample screen url with page: ./#!screen1/page1 or ./#!screen1/page2
+ */
 abstract class ScreenController
     extends Component {
 
@@ -121,7 +127,7 @@ abstract class ScreenController
                 }
             }
         } catch (err) {
-            console.error("PageController.onRoute", err);
+            console.error("ScreenController.onRoute", err);
         }
     }
 
