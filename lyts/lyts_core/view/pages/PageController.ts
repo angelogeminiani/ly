@@ -41,10 +41,6 @@ abstract class PageController
         }
     }
 
-    protected ready(): void {
-        this.start();
-    }
-
     protected start(): void {
         this._router.start(this.element);
     }

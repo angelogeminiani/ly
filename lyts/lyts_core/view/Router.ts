@@ -3,7 +3,6 @@ import {Dictionary} from "../commons/collections/Dictionary";
 import EventEmitter from "../commons/events/EventEmitter";
 import ElementWrapper from "./components/ElementWrapper";
 import console from "../commons/console";
-import paths from "../commons/paths";
 
 const WILDCHAR: string = '*';
 
@@ -281,6 +280,12 @@ class Router
         this._routes.put(path, route);
 
         return this;
+    }
+
+    public goto(path: string): void {
+        if (!!window) {
+            window.location.href = this._hash + path;
+        }
     }
 
     // ------------------------------------------------------------------------

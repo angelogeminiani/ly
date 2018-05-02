@@ -45,10 +45,6 @@ abstract class Screen
         this.start();
     }
 
-    protected start() {
-        super.start();
-    }
-
     public register(route: string, handler: Function): void {
         super.register(this.concatParent(route), handler);
     }
