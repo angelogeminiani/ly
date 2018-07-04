@@ -14,6 +14,7 @@ class browser {
     // ------------------------------------------------------------------------
 
     private _on_resize_callback: (w: number, h: number) => void;
+
     private _debounce_wait: number;
     private _debounce_func: any;
 
@@ -44,7 +45,7 @@ class browser {
         return this.language().split('-')[0];
     }
 
-    public location():string{
+    public location(): string {
         return window.location.href;
     }
 
@@ -63,7 +64,7 @@ class browser {
         return false;
     }
 
-    public isPushStateAvailable():boolean {
+    public isPushStateAvailable(): boolean {
         return !!(
             typeof window !== 'undefined' &&
             window.history &&
@@ -71,7 +72,7 @@ class browser {
         );
     }
 
-    public isHashChangeAvailable():boolean {
+    public isHashChangeAvailable(): boolean {
         return !!(
             typeof window !== 'undefined' &&
             ('onhashchange' in window)
@@ -113,11 +114,11 @@ class browser {
     // ------------------------------------------------------------------------
 
     public onResize(callback: (w: number, h: number) => void, debounce: number = 200): void {
-        this._on_resize_callback = callback;
-        this._debounce_wait = debounce;
-
         //-- event hooks --//
         if (!!window) {
+            this._on_resize_callback = callback;
+            this._debounce_wait = debounce;
+
             if (!!this._debounce_func) {
                 window.removeEventListener("resize", this._debounce_func);
             }

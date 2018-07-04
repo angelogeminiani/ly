@@ -5,6 +5,7 @@ import strings from "./commons/strings";
 import objects from "./commons/objects";
 import random from "./commons/random";
 import browser from "./view/browser";
+import installer from "./view/installer";
 import cookies from "./view/cookies";
 import dom from "./view/dom";
 import i18n from "./view/i18n";
@@ -26,7 +27,7 @@ const root: any = window;
 
 const ly = {
 
-    window:root,
+    window: root,
 
     lang: lang,
     format: format,
@@ -34,6 +35,7 @@ const ly = {
     objects: objects,
     random: random,
     browser: browser,
+    installer: installer,
     cookies: cookies,
     dom: dom,
     i18n: i18n,
