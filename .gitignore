@@ -6,3 +6,4 @@ bundle.js
 lyts/node_modules
 lyts/tests
 lyts.iml
+lyts_app/node_modules
