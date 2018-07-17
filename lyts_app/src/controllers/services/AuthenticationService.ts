@@ -51,13 +51,11 @@ export default class AuthenticationService
         });
     }
 
-    public register(email: string, password: string, type: string, company_id: string, callback: ServiceCallback): void {
+    public register(email: string, password: string, callback: ServiceCallback): void {
         let data = {
             'app_token': this.app_token,
             'email': email,
-            'password': password,
-            'type': type,
-            'company_id': company_id
+            'password': password
         };
         super.post(PATH + "register", data).then((req_resp) => {
             super.invoke(callback, req_resp);

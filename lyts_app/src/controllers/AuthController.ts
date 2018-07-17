@@ -113,10 +113,10 @@ export default class AuthController {
         }
     }
 
-    public register(username: string, password: string, type: string, company_id: string, callback?: ServiceCallback) {
+    public register(username: string, password: string, callback?: ServiceCallback) {
         if (!!callback && !!username && !!password) {
             try {
-                this.services.account.register(username, password, type, company_id, (error: any, response: any) => {
+                this.services.account.register(username, password, (error: any, response: any) => {
                     if (!error) {
                         // save cookies
                         this.store(response);

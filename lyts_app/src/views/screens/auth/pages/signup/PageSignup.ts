@@ -1,44 +1,51 @@
 /**
  * Sample link:
- * http://localhost:63342/_landing_bot_dashboard/index.html#!company_auth/signin
+ * http://localhost:63342/_landing_bot_dashboard/index.html#!landing/signin
  */
+import Page from "../../../../../../vendor/lyts_core/view/pages/page/Page";
 import ElementWrapper from "../../../../../../vendor/lyts_core/view/components/ElementWrapper";
 import {Route, Router} from "../../../../../../vendor/lyts_core/view/Router";
+import view from "./view";
+import globals from "../../../../../globals";
 import ly from "../../../../../../vendor/lyts_core/ly";
 import constants from "../../../../../constants";
 import {Listener} from "../../../../../../vendor/lyts_core/commons/events/Events";
-import globals from "../../../../../globals";
-import view from "./view";
-import console from "../../../../../../vendor/lyts_core/commons/console";
-import Page from "../../../../../../vendor/lyts_core/view/pages/page/Page";
-import ToastController from "../../../../../controllers/ToastController";
 import AuthController from "../../../../../controllers/AuthController";
+import ToastController from "../../../../../controllers/ToastController";
+import ModelAccount from "../../../../../model/ModelAccount";
+import console from "../../../../../../vendor/lyts_core/commons/console";
+import ServiceController from "../../../../../controllers/ServiceController";
+import errors from "../../../../../controllers/utils/errors";
 
 
-export default class PageSignin
+export default class PageSignup
     extends Page {
+
 
     // ------------------------------------------------------------------------
     //                      c o n s t
     // ------------------------------------------------------------------------
 
-    private readonly ROUTE_MAIN = 'generic/main';
+    private readonly ROUTE_MAIN = 'generic/';
     private readonly ROUTE_HOME = 'home/';
-    private readonly ROUTE_SIGNUP = 'auth/signup';
-    private readonly ROUTE_RESET_PASSWORD = 'auth/reset_password';
+    private readonly ROUTE_SIGNIN = 'auth/signin';
 
     // ------------------------------------------------------------------------
     //                      f i e l d s
     // ------------------------------------------------------------------------
+
     private _email: string;
     private _password: string;
+    private _repassword: string;
+    private _company_id: string;
 
     private readonly _fld_logo: ElementWrapper;
     private readonly _fld_email: ElementWrapper;
     private readonly _fld_password: ElementWrapper;
-    private readonly _btn_forgot_password: ElementWrapper;
+    private readonly _fld_repassword: ElementWrapper;
+
+    private readonly _btn_goto_login: ElementWrapper;
     private readonly _btn_register: ElementWrapper;
-    private readonly _btn_signin: ElementWrapper;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -49,14 +56,15 @@ export default class PageSignin
 
         this._email = '';
         this._password = '';
+        this._repassword = '';
 
         this._fld_logo = super.getFirst('#' + this.uid + '_fld_logo');
         this._fld_email = super.getFirst('#' + this.uid + '_fld_email');
         this._fld_password = super.getFirst('#' + this.uid + '_fld_password');
-        this._btn_forgot_password = super.getFirst('#' + this.uid + '_btn_forgot_password');
-        this._btn_register = super.getFirst('#' + this.uid + '_btn_register');
-        this._btn_signin = super.getFirst('#' + this.uid + '_btn_signin');
+        this._fld_repassword = super.getFirst('#' + this.uid + '_fld_repassword');
 
+        this._btn_goto_login = super.getFirst('#' + this.uid + '_btn_goto_login');
+        this._btn_register = super.getFirst('#' + this.uid + '_btn_register');
     }
 
     // ------------------------------------------------------------------------
@@ -68,10 +76,8 @@ export default class PageSignin
     }
 
     protected free(): void {
-
-        // release memory
         this.removeListeners();
-        console.log('PageSignin.free', this.uid);
+        console.log('PageSignup.free', this.uid);
     }
 
     protected ready(): void {
@@ -80,9 +86,8 @@ export default class PageSignin
 
     public show(): void {
         super.show();
-
         /*Animate.apply(AnimateEffect.fadeIn, this.element, () => {
-            console.log('PageSignin.show', AnimateEffect.fadeIn + ' animation terminated');
+            console.log('PageSignup.show', AnimateEffect.fadeIn + ' animation terminated');
         });*/
     }
 
@@ -101,13 +106,23 @@ export default class PageSignin
 
     private init(): void {
         try {
+            this.getUrlParams();
             this.initData();
             this.initListeners();
+            this.initView();
             this.setView();
 
             globals.Materialize.updateTextFields();
         } catch (err) {
-            console.error("PageSignin.init", err);
+            console.error("PageSignup.init", err);
+        }
+    }
+
+    private getUrlParams(): void {
+        try {
+            // this._company_id = ly.browser.getParameterByName(constants.URL_PARAM_COMPANY_ID, '');
+        } catch (err) {
+            console.error("PageSignup.initCompanyId", err);
         }
     }
 
@@ -115,8 +130,9 @@ export default class PageSignin
         try {
             this._email = this._fld_email.value();
             this._password = this._fld_password.value();
+            this._repassword = this._fld_repassword.value();
         } catch (err) {
-            console.error("PageSignin.initData", err);
+            console.error("PageSignup.initValues", err);
         }
     }
 
@@ -128,15 +144,15 @@ export default class PageSignin
             this._fld_email.addEventListener('change', this.onFldEmailUpdate);
             this._fld_password.addEventListener('keyup', this.onFldPasswordUpdate);
             this._fld_password.addEventListener('change', this.onFldPasswordUpdate);
-            this._btn_forgot_password.addEventListener('click', ly.lang.funcDebounce(this,
-                this.onFldForgotPasswordClick, constants.DEBOUNCE_TIME_MS, true))
-            this._btn_register.addEventListener('click', ly.lang.funcDebounce(this,
-                this.onFldRegisterClick, constants.DEBOUNCE_TIME_MS, true))
+            this._fld_repassword.addEventListener('keyup', this.onFldRepasswordUpdate);
+            this._fld_repassword.addEventListener('change', this.onFldRepasswordUpdate);
+            this._btn_goto_login.addEventListener('click', ly.lang.funcDebounce(this,
+                this.onFldGotoLoginClick, constants.DEBOUNCE_TIME_MS, true))
 
-            this._btn_signin.addEventListener('click', ly.lang.funcDebounce(this,
-                this.onBtnSigninClick, constants.DEBOUNCE_TIME_MS, true));
+            this._btn_register.addEventListener('click',
+                ly.lang.funcDebounce(this, this.onBtnRegisterClick, constants.DEBOUNCE_TIME_MS, true));
         } catch (err) {
-            console.error("PageSignin.initListeners", err);
+            console.error("PageSignup.initListeners", err);
         }
     }
 
@@ -145,15 +161,17 @@ export default class PageSignin
             this._fld_logo.removeEventListener();
             this._fld_email.removeEventListener();
             this._fld_password.removeEventListener();
-            this._btn_forgot_password.removeEventListener();
-            this._btn_register.removeEventListener();
+            this._fld_repassword.removeEventListener();
 
-            this._btn_signin.removeEventListener();
+            this._btn_goto_login.removeEventListener();
+
+            this._btn_register.removeEventListener();
         } catch (err) {
-            console.error("PageSignin.removeListeners", err);
+            console.error("PageSignup.removeListeners", err);
         }
     }
 
+    // validation
     private hasEmail(): boolean {
         return !!this._email;
     }
@@ -162,18 +180,42 @@ export default class PageSignin
         return !!this._password;
     }
 
+    private hasRepassword(): boolean {
+        return !!this._repassword;
+    }
+
     private isValidEmail(): boolean {
         return ly.lang.isEmail(this._email);
     }
 
+    private passwordAndRepasswordMatch(): boolean {
+        return this._password === this._repassword;
+    }
+
+    private initView(): void {
+        try {
+
+        } catch (err) {
+            console.error("PageSignup.initView", err);
+        }
+    }
+
     private setView(): void {
         try {
+            // email
             this._fld_email.classRemove('invalid');
             if (this.hasEmail() && !this.isValidEmail()) {
                 this._fld_email.classAdd('invalid');
             }
+
+            // repassword
+            this._fld_repassword.classRemove('invalid');
+            if (this.hasPassword() && this.hasRepassword() && !this.passwordAndRepasswordMatch()) {
+                this._fld_repassword.classAdd('invalid');
+            }
+
         } catch (err) {
-            console.error("PageSignin.setView", err);
+            console.error("PageSignup.setView", err);
         }
     }
 
@@ -183,7 +225,7 @@ export default class PageSignin
             // goto main
             Router.instance().goto(this.ROUTE_MAIN);
         } catch (err) {
-            console.error("PageSignin.onBtnCompanyClick()", err)
+            console.error("PageSignup.onBtnCompanyClick()", err)
         }
     }
 
@@ -195,9 +237,10 @@ export default class PageSignin
             this._email = this._fld_email.value() || '';
             this.setView();
         } catch (err) {
-            console.error("PageSignin.onFldEmailUpdate", err)
+            console.error("PageSignup.onFldEmailUpdate", err);
         }
     }
+
 
     private onFldPasswordUpdate(e: Event): void {
         try {
@@ -207,79 +250,81 @@ export default class PageSignin
             this._password = this._fld_password.value() || '';
             this.setView();
         } catch (err) {
-            console.error("PageSignin.onFldPasswordUpdate", err)
+            console.error("PageSignup.onFldPasswordUpdate", err);
         }
     }
 
-    private onFldForgotPasswordClick(e: Event): void {
+    private onFldRepasswordUpdate(e: Event): void {
         try {
             if (!!e) {
                 e.preventDefault();
             }
-
-            // goto reset password
-            Router.instance().goto(this.ROUTE_RESET_PASSWORD);
-
+            this._repassword = this._fld_repassword.value() || '';
+            this.setView();
         } catch (err) {
-            console.error("PageSignin.onFldForgotPasswordClick", err)
+            console.error("PageSignup.onFldRepasswordUpdate", err);
         }
     }
 
-    private onFldRegisterClick(e: Event): void {
+    private onFldGotoLoginClick(e: Event): void {
         try {
             if (!!e) {
                 e.preventDefault();
             }
 
             // goto register
-            Router.instance().goto(this.ROUTE_SIGNUP);
+            Router.instance().goto(this.ROUTE_SIGNIN);
 
         } catch (err) {
-            console.error("PageSignin.onFldRegisterClick", err)
+            console.error("PageSignup.onFldGotoLoginClick", err)
         }
     }
 
-    private onBtnSigninClick(e: Event): void {
+    private onBtnRegisterClick(e: Event): void {
         try {
             if (!!e) {
                 e.preventDefault();
             }
-
-            if (!this.hasEmail() || !this.hasPassword()) {
+            if (!this.hasEmail() || !this.hasPassword() || !this.hasRepassword()) {
                 ToastController.instance().showError(ly.i18n.get('msg_email_and_password_required'));
             } else if (!this.isValidEmail()) {
                 ToastController.instance().showError(ly.i18n.get('msg_email_not_valid'));
+            } else if (!this.passwordAndRepasswordMatch()) {
+                ToastController.instance().showError(ly.i18n.get('msg_password_and_repassword_not_match'));
             } else {
-                this.signin((error, user) => {
+
+                this.signup((error, user) => {
                     if (!!error) {
                         ToastController.instance().showError(error);
                     } else if (!!user) {
                         Router.instance().goto(this.ROUTE_HOME);
                     }
                 });
+
+
             }
 
         } catch (err) {
-            console.error("PageSignin.onBtnSigninClick", err)
+            console.error("PageSignup.onBtnRegisterClick", err);
         }
     }
 
-    private signin(callback: Listener): void {
+    private signup(callback: Listener): void {
 
-        if (!!this._email && !!this._password) {
-            AuthController.instance().authenticate(
+        if (!!this._email && !!this._password && !!this._repassword) {
+            AuthController.instance().register(
                 this._email,
                 this._password,
                 (error, user) => {
                     try {
                         if (!!error) {
-                            console.error("PageSignin.signin#api", error);
+                            console.error("PageSignup.register#api", error);
                             ly.lang.funcInvoke(callback, error, false);
                         } else {
                             ly.lang.funcInvoke(callback, false, user);
                         }
                     } catch (err) {
-                        console.error("PageSignin.signin", err);
+                        console.error("PageSignup.register", err);
                         ly.lang.funcInvoke(callback, err, false);
                     }
                 });

@@ -5,8 +5,8 @@ import {Route} from "../../../../vendor/lyts_core/view/Router";
 import {Animate, AnimateEffect} from "../../../../vendor/lyts_core_style/styles/animate/Animate";
 import Screen from "../../../../vendor/lyts_core/view/screens/screen/Screen";
 import Page from "../../../../vendor/lyts_core/view/pages/page/Page";
-import PageRegister from "./pages/register/PageRegister";
 import PageSignin from "./pages/signin/PageSignin";
+import PageSignup from "./pages/signup/PageSignup";
 
 
 export default class AuthScreen
@@ -31,7 +31,7 @@ export default class AuthScreen
 
         // register internal screen pages
         super.register('/signin', PageSignin);
-        super.register('/signup', PageRegister);
+        super.register('/signup', PageSignup);
 
         this._pages = super.getFirst("#" + this.uid + "_pages");
     }
