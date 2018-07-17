@@ -7,3 +7,4 @@ lyts/node_modules
 lyts/tests
 lyts.iml
 lyts_app/node_modules
+lyts_app/.tmp
