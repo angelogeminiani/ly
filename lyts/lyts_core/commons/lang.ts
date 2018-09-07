@@ -275,6 +275,50 @@ class langClass {
     }
 
     /**
+     *
+     * @param array
+     * @param func_callback
+     * @param wait
+     * @param immediate
+     */
+    public funcForEach(array: Array<any>,
+                       func_callback: Function,
+                       wait: number = 300,
+                       immediate: boolean = true): any {
+        // console.log('lang.funcForEach', array);
+        const self = this;
+        let count = 0;
+        let func_done: Function;
+        let timer: number = 0;
+        const intervalFunction = function () {
+            try {
+                clearInterval(timer);
+                count++;
+                let exit = (count > array.length);
+                if (exit) {
+                    self.funcInvoke.bind(self)(func_done); // call with bind
+                } else {
+                    func_callback.call(null, array[count - 1]); // call with bind
+                    timer = setInterval(intervalFunction, wait);
+                }
+            } catch (err) {
+                clearInterval(timer);
+                console.error('lang.funcForEach#setInterval', err);
+            }
+        };
+
+        // start timer
+        timer = setInterval(intervalFunction, (count === 0 && immediate) ? 300 : wait);
+
+
+        return {
+            done: function (done_callback: Function): void {
+                func_done = done_callback;
+            }
+        };
+    }
+    
+    /**
      * Returns a function that will be executed at most one time, no matter how
      * often you call it. Useful for lazy initialization.
      */
