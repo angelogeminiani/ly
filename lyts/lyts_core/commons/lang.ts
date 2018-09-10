@@ -294,7 +294,7 @@ class langClass {
             try {
                 clearInterval(timer);
                 count++;
-                let exit = (count > array.length);
+                const exit = (count > array.length);
                 if (exit) {
                     self.funcInvoke.bind(self)(func_done); // call with bind
                 } else {
