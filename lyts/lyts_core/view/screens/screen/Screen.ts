@@ -51,12 +51,12 @@ abstract class Screen
 
     public show(): void {
         this.paused = false;
-        this.element.classRemove('hide');
+        this.element.classRemove('hidden');
     }
 
     public hide(): void {
         this.paused = true; // pause page controller
-        this.element.classAdd('hide');
+        this.element.classAdd('hidden');
     }
 
     // ------------------------------------------------------------------------
