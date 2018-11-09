@@ -83,11 +83,11 @@ abstract class Component
         return this._hash(this._element);
     }
 
-    public hide(): void {
+    public hide(animate?:boolean): void {
         dom.classAdd(this._element, 'hidden');
     }
 
-    public show(): void {
+    public show(animate?:boolean): void {
         dom.classRemove(this._element, 'hidden');
     }
 
