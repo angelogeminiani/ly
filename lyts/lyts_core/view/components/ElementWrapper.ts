@@ -239,6 +239,10 @@ class ElementWrapper {
         return dom.classRemove(this._element, class_name);
     }
 
+    public classHas(class_name: string | string[]): boolean {
+        return dom.classHas(this._element, class_name);
+    }
+    
     public hasAttribute(name: string): boolean {
         if (!!this._element) {
             return this._element.hasAttribute(name);

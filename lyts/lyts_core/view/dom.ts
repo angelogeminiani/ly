@@ -470,6 +470,18 @@ class domClass {
         return false;
     }
 
+    public classHas(elem: HTMLElement | null, class_name: string | string[]): boolean {
+        if (!!elem && !!elem.classList) {
+            let classes: string[] = lang.toArray<string>(class_name);
+            for (let aclass of classes) {
+                if (elem.classList.contains(aclass)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
