@@ -4,7 +4,7 @@ import constants from "./constants";
 import Main from "./views/Main";
 import ApplicationController from "./controllers/ApplicationController";
 import console from "../lyts_core/commons/console";
-import {StyleManager} from "../lyts_core_style/StyleManager";
+// import {StyleManager} from "../lyts_core_style/StyleManager";
 
 
 const CONTAINER: string = "#_app_container";

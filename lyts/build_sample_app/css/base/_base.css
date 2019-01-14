@@ -15,7 +15,7 @@ section {
 
 }
 
-.hidden {
+.hidden, .hide {
     display: none !important;
 }
 
