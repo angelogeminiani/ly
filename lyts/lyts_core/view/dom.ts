@@ -355,7 +355,7 @@ class domClass {
 
     public map(elem: HTMLElement, func: (child: HTMLElement) => boolean, deep: boolean = false): HTMLElement[] {
         const response = new Array<HTMLElement>();
-        if (lang.isFunction(func) && !!elem) {
+        if (lang.isFunction(func) && !!elem && !!elem.children) {
             const count = elem.children.length;
             for (let i = 0; i < count; i++) {
                 const child: HTMLElement = elem.children.item(i) as HTMLElement;
