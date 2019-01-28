@@ -32,7 +32,7 @@ class DomCollection
     //                      p r o t e c t e d
     // ------------------------------------------------------------------------
 
-    protected save(): void {
+    public save(): void {
         try {
             const value: string = JSON.stringify(this.items());
             this.write(value);

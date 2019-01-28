@@ -32,6 +32,20 @@ export class Dictionary<T> {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public putAll(data: Dictionary<T> | Items<T>) {
+        let items;
+        if (data instanceof Dictionary) {
+            items = data._items;
+        } else {
+            items = data;
+        }
+        for (let key in items) {
+            if (items.hasOwnProperty(key)) {
+                this.put(key, items[key]);
+            }
+        }
+    }
+
     public put(key: string, value: T) {
         this._items[key] = value;
         this._count++;

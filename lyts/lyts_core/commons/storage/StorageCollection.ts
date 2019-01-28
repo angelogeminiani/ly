@@ -28,7 +28,7 @@ class StorageCollection
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    protected save(): void {
+    public save(): void {
         try {
             localStorage[this.name] = JSON.stringify(this.items());
         } catch (err) {

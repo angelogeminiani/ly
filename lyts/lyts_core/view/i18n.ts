@@ -73,13 +73,17 @@ class i18n
     }
 
     public register(lang: string, dictionary: Dictionary<string> | Items): void {
-        let dic: Dictionary<string> = (dictionary instanceof Dictionary) ? dictionary as Dictionary<string> : new Dictionary(dictionary);
-        this._dictionaries.put(lang, dic);
+        if (this._dictionaries.containsKey(lang)) {
+            let dic: Dictionary<string> = this._dictionaries.get(lang);
+            dic.putAll(dictionary);
+        } else {
+            let dic: Dictionary<string> = (dictionary instanceof Dictionary) ? dictionary as Dictionary<string> : new Dictionary(dictionary);
+            this._dictionaries.put(lang, dic);
+        }
     }
 
     public registerDefault(dictionary: Dictionary<string> | Items): void {
-        let dic: Dictionary<string> = (dictionary instanceof Dictionary) ? dictionary as Dictionary<string> : new Dictionary(dictionary);
-        this._dictionaries.put(i18n._DEF_LANG, dic);
+        this.register(i18n._DEF_LANG, dictionary);
     }
 
     public get(label: string, def_val?: string): string {

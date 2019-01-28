@@ -129,7 +129,7 @@ abstract class AbstractCollection {
     //                      p r o t e c t e d
     // ------------------------------------------------------------------------
 
-    protected abstract save(): void;
+    public abstract save(): void;
 
     protected abstract load(): void;
 
