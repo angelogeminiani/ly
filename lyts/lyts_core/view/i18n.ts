@@ -131,7 +131,7 @@ class i18n
                 if (!!value) {
                     // console.log("i18n._localize", data_i18n, value);
                     // ready to set i18n text or placeholder
-                    if (dom.isInput(elem)) {
+                    if (dom.isInput(elem) || dom.isTextArea(elem)) {
                         if (dom.isInputButton(elem)) {
                             dom.setValue(elem, value);
                         } else if (elem.hasAttribute("placeholder")) {
