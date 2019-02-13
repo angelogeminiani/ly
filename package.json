@@ -1,0 +1,21 @@
+{
+  "name": "lyts",
+  "version": "1.0.4",
+  "description": "Simple Typescript Framework that just 'Love You'.",
+  "main": "ly.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Gian Angelo Geminiani",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.9.2",
+    "webpack": "^3.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angelogeminiani/lyts.git"
+  }
+}
