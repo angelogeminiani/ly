@@ -493,6 +493,20 @@ var Dictionary = /** @class */ (function () {
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+    Dictionary.prototype.putAll = function (data) {
+        var items;
+        if (data instanceof Dictionary) {
+            items = data._items;
+        }
+        else {
+            items = data;
+        }
+        for (var key in items) {
+            if (items.hasOwnProperty(key)) {
+                this.put(key, items[key]);
+            }
+        }
+    };
     Dictionary.prototype.put = function (key, value) {
         this._items[key] = value;
         this._count++;
@@ -1082,7 +1096,7 @@ var domClass = /** @class */ (function () {
     domClass.prototype.map = function (elem, func, deep) {
         if (deep === void 0) { deep = false; }
         var response = new Array();
-        if (__WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].isFunction(func) && !!elem) {
+        if (__WEBPACK_IMPORTED_MODULE_2__commons_lang__["a" /* default */].isFunction(func) && !!elem && !!elem.children) {
             var count = elem.children.length;
             for (var i = 0; i < count; i++) {
                 var child = elem.children.item(i);
@@ -1692,12 +1706,17 @@ var i18n = /** @class */ (function (_super) {
         configurable: true
     });
     i18n.prototype.register = function (lang, dictionary) {
-        var dic = (dictionary instanceof __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */]) ? dictionary : new __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */](dictionary);
-        this._dictionaries.put(lang, dic);
+        if (this._dictionaries.containsKey(lang)) {
+            var dic = this._dictionaries.get(lang);
+            dic.putAll(dictionary);
+        }
+        else {
+            var dic = (dictionary instanceof __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */]) ? dictionary : new __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */](dictionary);
+            this._dictionaries.put(lang, dic);
+        }
     };
     i18n.prototype.registerDefault = function (dictionary) {
-        var dic = (dictionary instanceof __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */]) ? dictionary : new __WEBPACK_IMPORTED_MODULE_0__commons_collections_Dictionary__["a" /* Dictionary */](dictionary);
-        this._dictionaries.put(i18n._DEF_LANG, dic);
+        this.register(i18n._DEF_LANG, dictionary);
     };
     i18n.prototype.get = function (label, def_val) {
         if (this._dictionaries.containsKey(this._lang)) {
@@ -1742,7 +1761,7 @@ var i18n = /** @class */ (function (_super) {
                 if (!!value) {
                     // console.log("i18n._localize", data_i18n, value);
                     // ready to set i18n text or placeholder
-                    if (__WEBPACK_IMPORTED_MODULE_3__dom__["a" /* default */].isInput(elem)) {
+                    if (__WEBPACK_IMPORTED_MODULE_3__dom__["a" /* default */].isInput(elem) || __WEBPACK_IMPORTED_MODULE_3__dom__["a" /* default */].isTextArea(elem)) {
                         if (__WEBPACK_IMPORTED_MODULE_3__dom__["a" /* default */].isInputButton(elem)) {
                             __WEBPACK_IMPORTED_MODULE_3__dom__["a" /* default */].setValue(elem, value);
                         }
