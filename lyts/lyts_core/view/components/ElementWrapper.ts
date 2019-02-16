@@ -2,6 +2,7 @@ import {Listener} from "../../commons/events/Events";
 import random from "../../commons/random";
 import dom from "../dom";
 import Component from "./Component";
+import ly from "../../ly";
 
 /**
  * Wrap a native HTMLElement to expose at Component methods.
@@ -231,6 +232,33 @@ class ElementWrapper {
         }
     }
 
+    /**
+     * Shortcut to add "debounced" click event handler
+     * @param handler binded handler
+     * @param context optional context (required if handler has no bind)
+     */
+    public onClick(handler: Function, context?: any): void {
+        this.addEventListener("click", ly.lang.funcDebounce(!!context ? context : this, handler, 500, true));
+    }
+
+    /**
+     * Remove click event handler
+     */
+    public offClick(): void {
+        this.removeEventListener("click");
+    }
+
+    public onEnterKey(handler: Function, context?: any): void {
+        const _self: any = !!context ? context : this;
+        this.addEventListener("keyup", (e: KeyboardEvent) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                e.stopPropagation();
+                handler.call(_self, e);
+            }
+        });
+    }
+
     public classAdd(class_name: string | string[]): boolean {
         return dom.classAdd(this._element, class_name);
     }
@@ -242,7 +270,7 @@ class ElementWrapper {
     public classHas(class_name: string | string[]): boolean {
         return dom.classHas(this._element, class_name);
     }
-    
+
     public hasAttribute(name: string): boolean {
         if (!!this._element) {
             return this._element.hasAttribute(name);
