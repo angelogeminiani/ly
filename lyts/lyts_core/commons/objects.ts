@@ -35,6 +35,26 @@ export default class objects {
         return objects.get(value, path, ++pathIndex);
     }
 
+    static set(scope: any, path: any, value: any): void {
+        if (typeof scope !== 'object' || scope === null || scope === undefined) {
+            return;
+        }
+        const paths: Array<string> = lang.isArray(path) ? path : path.split('.');
+        let count: number = 0;
+        paths.forEach((attr: string) => {
+            const is_last: boolean = count === paths.length - 1;
+            if (!scope.hasOwnProperty(attr)) {
+                scope[attr] = {};
+            }
+            if (is_last) {
+                scope[attr] = value;
+            } else {
+                scope = scope[attr];
+            }
+            count++;
+        });
+    }
+
     static clone<T>(obj: T): T {
         let target = <T>{};
         for (const field in obj) {
