@@ -1,4 +1,5 @@
 //-- static --//
+import console from "./commons/console";
 import lang from "./commons/lang";
 import format from "./commons/format";
 import strings from "./commons/strings";
@@ -29,6 +30,7 @@ const ly = {
 
     window: root,
 
+    console: console,
     lang: lang,
     format: format,
     strings: strings,
