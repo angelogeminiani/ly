@@ -37,6 +37,10 @@ class ElementWrapper {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get hash(): string {
+        return this.getAttribute(ElementWrapper.HASH_ATTRIBUTE);
+    }
+
     /**
      * Warning: do not attach events to this object.
      * Use instead "addEventListener" method.
@@ -203,6 +207,14 @@ class ElementWrapper {
         return response;
     }
 
+    public forEachChild(func: (child: ElementWrapper) => void, deep: boolean = false): void {
+        if (!!this._element) {
+            dom.forEachChild(this._element, (elem: HTMLElement) => {
+                const child: ElementWrapper = new ElementWrapper(this._owner, elem);
+                func(child);
+            }, deep);
+        }
+    }
 
     public addEventListener(event_name: string, listener: Listener): void {
         if (null != this._element && !!this._owner) {

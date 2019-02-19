@@ -418,6 +418,13 @@ class domClass {
             } else if (this.isTextArea(elem)) {
                 const e = elem as HTMLTextAreaElement;
                 return !!e ? e.value : null;
+            } else {
+                const tag_name:string = elem.tagName.toLowerCase();
+                if (tag_name === "img") {
+                    return elem.getAttribute("src");
+                } else {
+                    return elem.innerHTML;
+                }
             }
         }
         return null;
@@ -439,7 +446,12 @@ class domClass {
                 const e = elem as HTMLTextAreaElement;
                 e.value = value;
             } else {
-                elem.innerHTML = value;
+                const tag_name:string = elem.tagName.toLowerCase();
+                if (tag_name === "img" && !!value) {
+                    elem.setAttribute("src", value);
+                } else {
+                    elem.innerHTML = value;
+                }
             }
         }
     }
