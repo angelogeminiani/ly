@@ -25,6 +25,8 @@ class DataBinding {
     private readonly _owner: Component;
     private _entity: any;
     private _registry: Dictionary<ElementWrapper>;
+    // options
+    private _auto_trim: boolean;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -34,11 +36,21 @@ class DataBinding {
         this._owner = owner;
         this._entity = false;
         this._registry = new Dictionary<ElementWrapper>();
+
+        this._auto_trim = true;
     }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+
+    public set autoTrim(value: boolean) {
+        this._auto_trim = value;
+    }
+
+    public get autoTrim(): boolean {
+        return this._auto_trim;
+    }
 
     public set entity(value: any) {
         this._entity = value;
@@ -76,7 +88,7 @@ class DataBinding {
             const field_name: string = root.getAttribute(ATTR_DATA_FIELD) || "";
             if (!!field_name) {
                 // set entity
-                ly.objects.set(this._entity, field_name, value);
+                ly.objects.set(this._entity, field_name, DataBinding._validate(value));
                 // set dom and attach event if any
                 this._bind(root);
             }
@@ -106,7 +118,7 @@ class DataBinding {
         if (!!key && !this._registry.containsKey(key)) {
             this._registry.put(key, elem);
             // event
-            elem.addEventListener(ON_FOCUSOUT, this.onChanged);
+            elem.addEventListener(ON_FOCUSOUT, this.onChanged.bind(this));
         }
     }
 
@@ -118,11 +130,17 @@ class DataBinding {
             const field: string = elem.getAttribute(ATTR_DATA_FIELD) || "";
             const value: string = ly.dom.getValue(elem);
             if (!!field) {
-                ly.objects.set(this._entity, field, value);
+                ly.objects.set(this._entity, field, DataBinding._validate(value));
             }
         }
     }
 
+    private static _validate(value: any): any {
+        if (ly.lang.isString(value)) {
+            return value.toString().trim();
+        }
+        return value;
+    }
 
 }
 

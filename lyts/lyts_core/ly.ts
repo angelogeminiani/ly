@@ -2,8 +2,10 @@
 import console from "./commons/console";
 import lang from "./commons/lang";
 import format from "./commons/format";
+import arrays from "./commons/arrays";
 import strings from "./commons/strings";
 import objects from "./commons/objects";
+import MD5 from "./commons/MD5";
 import random from "./commons/random";
 import browser from "./view/browser";
 import installer from "./view/installer";
@@ -20,6 +22,7 @@ import Component from "./view/components/Component";
 //-- singleton --//
 import Application from "./application/Application";
 
+
 const root: any = window;
 
 // ------------------------------------------------------------------------
@@ -33,8 +36,10 @@ const ly = {
     console: console,
     lang: lang,
     format: format,
+    arrays: arrays,
     strings: strings,
     objects: objects,
+    MD5: MD5,
     random: random,
     browser: browser,
     installer: installer,
