@@ -12,6 +12,11 @@ const WILDCHAR: string = '*';
  */
 class Route {
 
+    public path: string;
+    public handler: Function | null;
+    public tokens: string[];
+    public params: any;
+
     constructor(route: string, handler: Function | null) {
         this.path = route;
         this.handler = handler;
@@ -19,14 +24,10 @@ class Route {
         this.params = false;
     }
 
-    public path: string;
-    public handler: Function | null;
-    public tokens: string[];
-    public params: any;
-
     public uid(): string {
         try {
-            return ly.lang.className(this.handler) + "." + ly.objects.values(this.params).join('.');
+            const uid:string = this.path; // ly.lang.className(this.handler) + "." + ly.objects.values(this.params).join('.');
+            return uid;
         } catch (err) {
             console.error("Route.uid", err);
         }
@@ -284,7 +285,9 @@ class Router
 
     public goto(path: string): void {
         if (!!window) {
-            window.location.href = this._hash + path;
+            const target:string =  this._hash + path;
+            window.location.href = target;
+            this.debug("goto", target);
         }
     }
 
@@ -325,9 +328,11 @@ class Router
     }
 
     private onLocationChange() {
-        this.debug('onLocationChange');
+        this.debug('onLocationChange', window.location.href);
         if (!this.paused) {
             this.resolve();
+        } else {
+            this.debug('onLocationChange', "PAUSED");
         }
     }
 
@@ -369,10 +374,14 @@ class Router
             //console.log("resolve", last_uid, curr_uid);
             if (last_uid === curr_uid) {
                 // alredy routed
+                this.debug("resolve#last_uid === curr_uid", last_uid, curr_uid);
                 return;
             }
             this._last_route = route;
             super.emit(EVENT_ON_ROUTE, route);
+            this.debug("resolve#emit", EVENT_ON_ROUTE, curr_uid, route);
+        } else {
+            this.debug("resolve#route.isEmpty()", route.isEmpty());
         }
     }
 

@@ -42,7 +42,7 @@ class ImageLoader
                 const name: string = file.name;
                 const size: number = file.size;
                 const reader: FileReader = new FileReader();
-                reader.onload = (e: FileReaderProgressEvent) => {
+                reader.onload = (e: Event) => {
                     const target: any = e.target;
                     if (!!target.result) {
                         const data: string = target.result as string;

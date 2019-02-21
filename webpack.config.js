@@ -1,6 +1,6 @@
-const path = require('path');
+var path = require('path');
 
-const config = {
+var config = {
 
     entry: './lyts/lyts_core/ly.ts',
 
@@ -26,7 +26,7 @@ const config = {
 };
 
 
-const config_app = {
+var config_app = {
 
     entry: './lyts_app_src/launcher.ts',
 
@@ -52,7 +52,7 @@ const config_app = {
 };
 
 
-const config_tests = {
+var config_tests = {
 
     entry: './tests/index.ts',
 

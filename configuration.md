@@ -9,7 +9,12 @@ Installing locally is what we recommend for most projects.
 This makes it easier to upgrade projects individually when breaking changes are introduced. 
 [More Info Here](https://webpack.js.org/guides/installation/)
 
-2. **Configure Webpack to use Typescript**
+2. **Install Webpack Uglify**
+```bash
+   npm install --save-dev uglifyjs-webpack-plugin 
+```
+
+3. **Configure Webpack to use Typescript**
 
 First you need to have Typescript installed
 
@@ -98,25 +103,43 @@ The following line must be added to our TypeScript configuration:
 
 Now we need to tell webpack to extract these source maps and into our final bundle:
 
-*webpack.config.js*
+*webpack.config.js (WEBPACK 4)*
   
 ```javascript
-   const path = require('path');
+   var path = require('path');
+   var webpack = require("webpack");
+   var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
    
-   const config = {
+   var config_web_app = {
    
-       entry: './src/index.ts',
+   
+       entry: {
+           "bundle": "./web_app/src/launcher.ts",
+           "bundle.min": "./web_app/src/launcher.ts"
+       },
    
        output: {
-           path: path.resolve(__dirname, 'build'),
-           filename: 'bundle.js'
+           path: path.resolve(__dirname, './web_app/build'),
+           filename: '[name].js'
+       },
+   
+       devtool: "source-map",
+   
+       optimization: {
+           minimize: true,
+           minimizer: [
+               new UglifyJsPlugin({
+                   include: /\.min\.js$/,
+                   exclude: /node_modules/,
+               })
+           ]
        },
    
        resolve: {
            // Add '.ts' and '.tsx' as a resolvable extension.
            extensions: [".ts", ".tsx", ".js"]
        },
-       
+   
        module: {
            rules: [
                {
@@ -125,12 +148,11 @@ Now we need to tell webpack to extract these source maps and into our final bund
                    exclude: /node_modules/
                }
            ]
-       },
-       
-       devtool: 'inline-source-map'
+       }
    };
    
-   module.exports = config;
+   
+   module.exports = [config_web_app];
 ```
 
 See the [devtool documentation](https://webpack.js.org/configuration/devtool/) for more information.

@@ -10,9 +10,11 @@
   "author": "Gian Angelo Geminiani",
   "license": "MIT",
   "devDependencies": {
-    "ts-loader": "^3.5.0",
-    "typescript": "^2.9.2",
-    "webpack": "^3.12.0"
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "repository": {
     "type": "git",
