@@ -315,14 +315,14 @@ class domClass {
         return elem;
     }
 
-    public getFirst(selector: string = '', target?: HTMLElement): HTMLElement | null {
+    public getFirst(selector: string = '', target?: HTMLElement): HTMLElement | undefined {
         const response: Array<HTMLElement> = this.get(selector, target);
-        return response.length > 0 ? response[0] : null;
+        return response.length > 0 ? response[0] : undefined;
     }
 
-    public getLast(selector: string = '', target?: HTMLElement): HTMLElement | null {
+    public getLast(selector: string = '', target?: HTMLElement): HTMLElement | undefined {
         const response: Array<HTMLElement> = this.get(selector, target);
-        return response.length > 0 ? response[response.length - 1] : null;
+        return response.length > 0 ? response[response.length - 1] : undefined;
     }
 
     public get(selector: string = '', target?: HTMLElement): Array<HTMLElement> {
@@ -373,37 +373,37 @@ class domClass {
         return response;
     }
 
-    public isInput(elem: Element | null) {
+    public isInput(elem: Element | undefined) {
         return !!elem
             ? elem.tagName.toLowerCase() === "input"
             : false;
     }
 
-    public isInputButton(elem: Element | null) {
+    public isInputButton(elem: Element | undefined) {
         return !!elem
             ? this.isInput(elem) && elem.getAttribute("type") === "button"
             : false;
     }
 
-    public isInputText(elem: HTMLElement | null) {
+    public isInputText(elem: HTMLElement | undefined) {
         return !!elem
             ? this.isInput(elem) && elem.getAttribute("type") === "text"
             : false;
     }
 
-    public isInputCheck(elem: HTMLElement | null) {
+    public isInputCheck(elem: HTMLElement | undefined) {
         return !!elem
             ? this.isInput(elem) && elem.getAttribute("type") === "checkbox"
             : false;
     }
 
-    public isTextArea(elem: Element | null) {
+    public isTextArea(elem: Element | undefined) {
         return !!elem
             ? elem.tagName.toLowerCase() === "textarea"
             : false;
     }
 
-    public getValue(elem: HTMLElement | null): any {
+    public getValue(elem: HTMLElement | undefined): any {
         if (!!elem) {
             if (this.isInput(elem)) {
                 const e = elem as HTMLInputElement;
@@ -430,7 +430,7 @@ class domClass {
         return null;
     }
 
-    public setValue(elem: HTMLElement | null, value: any): void {
+    public setValue(elem: HTMLElement | undefined, value: any): void {
         if (!!elem) {
             if (this.isInput(elem)) {
                 const e = elem as HTMLInputElement;
@@ -456,7 +456,7 @@ class domClass {
         }
     }
 
-    public classAdd(elem: HTMLElement | null, class_name: string | string[]): boolean {
+    public classAdd(elem: HTMLElement | undefined, class_name: string | string[]): boolean {
         if (!!elem && !!elem.classList) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -469,7 +469,7 @@ class domClass {
         return false;
     }
 
-    public classRemove(elem: HTMLElement | null, class_name: string | string[]): boolean {
+    public classRemove(elem: HTMLElement | undefined, class_name: string | string[]): boolean {
         if (!!elem && !!elem.classList) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -482,7 +482,7 @@ class domClass {
         return false;
     }
 
-    public classHas(elem: HTMLElement | null, class_name: string | string[]): boolean {
+    public classHas(elem: HTMLElement | undefined, class_name: string | string[]): boolean {
         if (!!elem && !!elem.classList) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {

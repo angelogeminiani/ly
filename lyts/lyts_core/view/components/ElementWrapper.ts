@@ -20,13 +20,13 @@ class ElementWrapper {
     // ------------------------------------------------------------------------
 
     private readonly _owner: Component;
-    private _element: HTMLElement | null;
+    private _element: HTMLElement | undefined;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor(owner: Component, elem: HTMLElement | null) {
+    constructor(owner: Component, elem: HTMLElement | undefined) {
         this._owner = owner;
         this._element = elem;
 
@@ -46,7 +46,7 @@ class ElementWrapper {
      * Use instead "addEventListener" method.
      * @return {HTMLElement}
      */
-    public get htmlElement(): HTMLElement | null {
+    public get htmlElement(): HTMLElement | undefined {
         return this._element;
     }
 
@@ -244,18 +244,10 @@ class ElementWrapper {
         }
     }
 
-    /**
-     * Shortcut to add "debounced" click event handler
-     * @param handler binded handler
-     * @param context optional context (required if handler has no bind)
-     */
     public onClick(handler: Function, context?: any): void {
         this.addEventListener("click", ly.lang.funcDebounce(!!context ? context : this, handler, 500, true));
     }
 
-    /**
-     * Remove click event handler
-     */
     public offClick(): void {
         this.removeEventListener("click");
     }

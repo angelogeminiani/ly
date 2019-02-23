@@ -386,7 +386,7 @@ class Router
     }
 
     private replaceLinks(elem: ElementWrapper): void {
-        const native: HTMLElement | null = elem.htmlElement;
+        const native: HTMLElement | undefined = elem.htmlElement;
         if (!!native) {
             const childs: Array<HTMLElement> = ly.dom.get('[data-router=relative]', native);
             for (let i = 0; i < childs.length; i++) {

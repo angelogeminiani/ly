@@ -29,12 +29,12 @@ abstract class Component
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
 
-    constructor() {
+    constructor(element?: HTMLElement) {
         super();
 
         this._native_events = new Dictionary<Events>();
         this._native_elements = new Dictionary<HTMLElement>();
-        this._element = this._createElement(this.render());
+        this._element = !!element ? element : this._createElement(this.render());
         this._element_wrapper = new ElementWrapper(this, this._element);
         this._data = {};
 
@@ -83,11 +83,11 @@ abstract class Component
         return this._hash(this._element);
     }
 
-    public hide(animate?:boolean): void {
+    public hide(animate?: boolean): void {
         dom.classAdd(this._element, 'hidden');
     }
 
-    public show(animate?:boolean): void {
+    public show(animate?: boolean): void {
         dom.classRemove(this._element, 'hidden');
     }
 
@@ -150,7 +150,7 @@ abstract class Component
      * @return {string[]} Array of class names
      */
     public classList(selector: string): string[] {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             return elem.className.split(" ");
         }
@@ -164,7 +164,7 @@ abstract class Component
      * @return {boolean} Match found or not.
      */
     public classHas(selector: string, class_name: string | string[]): boolean {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -184,7 +184,7 @@ abstract class Component
      * @return {boolean} Match found or not.
      */
     public classHasOne(selector: string, class_name: string[]): boolean {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             let classes: string[] = lang.toArray<string>(class_name);
             for (let aclass of classes) {
@@ -197,12 +197,12 @@ abstract class Component
     }
 
     public classAdd(selector: string, class_name: string | string[]): boolean {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         return dom.classAdd(elem, class_name);
     }
 
     public classRemove(selector: string, class_name: string | string[]): boolean {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         return dom.classRemove(elem, class_name);
     }
 
@@ -212,7 +212,7 @@ abstract class Component
 
 
     public attrValue(selector: string, attr_name: string): string {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             return elem.getAttribute(attr_name) || '';
         }
@@ -220,7 +220,7 @@ abstract class Component
     }
 
     public attrHas(selector: string, attr_name: string): boolean {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             return elem.hasAttribute(attr_name);
         }
@@ -228,7 +228,7 @@ abstract class Component
     }
 
     public attrSet(selector: string, name: string, value: string): string {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             elem.setAttribute(name, value);
             return elem.getAttribute(name) || '';
@@ -237,7 +237,7 @@ abstract class Component
     }
 
     public getValue(selector: string): any {
-        const elem: HTMLElement | null = this._getFirstElement(selector);
+        const elem: HTMLElement | undefined = this._getFirstElement(selector);
         if (!!elem) {
             return dom.getValue(elem);
         }
@@ -328,7 +328,7 @@ abstract class Component
     private _resolveElement(elem_or_selector: HTMLElement | string | null, defVal?: HTMLElement): HTMLElement | null {
         if (!!elem_or_selector) {
             if (lang.isString(elem_or_selector)) {
-                let found: HTMLElement | null = this._getFirstElement(elem_or_selector as string);
+                let found: HTMLElement | undefined = this._getFirstElement(elem_or_selector as string);
                 if (!!found) {
                     return this._normalizeElement(found);
                 }
@@ -347,11 +347,11 @@ abstract class Component
         return dom.get(selector, this._element);
     }
 
-    private _getFirstElement(selector: string): HTMLElement | null {
+    private _getFirstElement(selector: string): HTMLElement | undefined {
         return dom.getFirst(selector, this._element);
     }
 
-    private _getLastElement(selector: string): HTMLElement | null {
+    private _getLastElement(selector: string): HTMLElement | undefined {
         return dom.getLast(selector, this._element);
     }
 
@@ -399,6 +399,7 @@ abstract class Component
                 }
             }
         }
+        // console.log("Component_removeEventlisteners", elem, event_names, counter);
         return counter;
     }
 
@@ -416,7 +417,7 @@ abstract class Component
         return elem;
     }
 
-    private _hash(elem: HTMLElement | null): string {
+    private _hash(elem: HTMLElement | undefined): string {
         if (null != elem) {
             let hash_code: string = ElementWrapper.hash(elem);
             if (!!hash_code) {
