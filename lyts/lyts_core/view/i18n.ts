@@ -2,6 +2,7 @@ import {Dictionary} from "../commons/collections/Dictionary";
 import EventEmitter from "../commons/events/EventEmitter";
 import browser from "./browser";
 import dom from "./dom";
+import ly from "../ly";
 
 
 interface Items {
@@ -138,7 +139,7 @@ class i18n
                             elem.setAttribute("placeholder", value);
                         }
                     } else {
-                        elem.innerHTML = value;
+                        elem.innerHTML = ly.strings.replaceAll("\n", "<br>", value);
                     }
                 }
             }

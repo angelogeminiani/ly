@@ -1,7 +1,7 @@
 /**
  * Utility class
  */
-import random from "./random";
+import ly from "../ly";
 
 class langClass {
 
@@ -213,6 +213,16 @@ class langClass {
         return null;
     }
 
+    public funcTryInvoke(context: any, func_name: string, ...args: any[]): any {
+        try {
+            const func: Function = ly.objects.get(context, func_name) as Function;
+            return this.funcInvoke(func.bind(context), ...args);
+        } catch (ignored) {
+            // ignored
+        }
+        return null;
+    }
+
     /**
      * Delays a function for the given number of milliseconds, and then calls
      * it with the arguments supplied.
@@ -303,7 +313,7 @@ class langClass {
             }
         };
     }
-    
+
     /**
      * Returns a function that will be executed at most one time, no matter how
      * often you call it. Useful for lazy initialization.
@@ -333,7 +343,7 @@ class langClass {
         let result: any;
 
         const later = function () {
-            let last = random.now() - timestamp;
+            let last = ly.random.now() - timestamp;
             const full_args = Array.prototype.slice.call(arguments).concat(args);
 
             if (last < wait && last > 0) {
@@ -349,7 +359,7 @@ class langClass {
         };
 
         return function () {
-            timestamp = random.now();
+            timestamp = ly.random.now();
             let callNow = immediate && !timeout;
             const full_args = Array.prototype.slice.call(arguments).concat(args);
             if (!timeout) {

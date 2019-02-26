@@ -6,6 +6,32 @@ export default class arrays {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    static equals(array1: Array<any>, array2: Array<any>): boolean {
+        let response: boolean = true;
+        try {
+            if (!!array1 && !!array2 && array1.length === array2.length) {
+                for (let i = 0; i < array1.length; i++) {
+                    const val1: any = array1[i];
+                    const val2: any = array2[i];
+                    if (ly.lang.isArray(val1) && ly.lang.isArray(val2)) {
+                        response = arrays.equals(val1, val2);
+                    } else {
+                        response = (val1 === val2);
+                    }
+                    if (!response) {
+                        break;
+                    }
+                }
+            } else {
+                response = false;
+            }
+        } catch (ignored) {
+            // ignored
+            response = false;
+        }
+        return response;
+    }
+
     static push(array: Array<any>, ...items: any[]): void {
         array.push(...items);
     }
@@ -35,6 +61,19 @@ export default class arrays {
             } else {
                 if (array.indexOf(item) < 0) {
                     array.push(item);
+                }
+            }
+        });
+    }
+
+    static remove(array: Array<any>, ...items: any[]) {
+        items.forEach((item) => {
+            if (ly.lang.isArray(item)) {
+                arrays.remove(array, ...(item as Array<any>));
+            } else {
+                const index: number = array.indexOf(item);
+                if (array.indexOf(item) > -1) {
+                    array.splice(index, 1);
                 }
             }
         });
