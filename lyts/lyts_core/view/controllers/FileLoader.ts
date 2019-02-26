@@ -77,12 +77,14 @@ class FileLoader
 
     private get input(): ElementWrapper {
         if (!this.__input) {
-            const id: string = this._owner.uid + "___field_imageloader";
+            const id: string = this._owner.uid + "___field_imageloader_" + ly.random.id();
             this.__input = new ElementWrapper(this._owner, ly.dom.newElement(ly.format.template(TPL_INPUT, {
                 id: id,
                 accept: this._accept
             })));
-            this.__input.appendTo(this._owner.element);
+            //this.__input.appendTo(this._owner.element);
+            const elem: HTMLElement = ly.dom.getElementsByTagName("body")[0] as HTMLElement;
+            this.__input.appendTo(this._owner.element || elem);
             this.__input.addEventListener("change", this.inputChanged.bind(this));
         }
         return this.__input;
@@ -96,7 +98,6 @@ class FileLoader
             this.loaded(elem.files);
         }
     }
-
 
 
 }
