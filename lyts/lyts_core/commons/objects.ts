@@ -55,6 +55,13 @@ export default class objects {
         });
     }
 
+    static default(scope: any, path: any, value: any): void {
+        const curr_val: any = objects.get(scope, path);
+        if (!curr_val) {
+            objects.set(scope, path, value);
+        }
+    }
+    
     static clone<T>(obj: T): T {
         let target = <T>{};
         for (const field in obj) {

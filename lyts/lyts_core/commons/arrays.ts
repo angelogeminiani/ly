@@ -66,6 +66,12 @@ export default class arrays {
         });
     }
 
+    static removeAt(array: Array<any>, index: number) {
+        if (!!array && array.length > 0 && index < array.length) {
+            array.splice(index, 1);
+        }
+    }
+
     static remove(array: Array<any>, ...items: any[]) {
         items.forEach((item) => {
             if (ly.lang.isArray(item)) {
