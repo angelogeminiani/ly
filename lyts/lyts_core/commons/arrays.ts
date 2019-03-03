@@ -32,6 +32,18 @@ export default class arrays {
         return response;
     }
 
+    static createUnique(...items: any[]): Array<any> {
+        const array: Array<any> = new Array<any>();
+        arrays.pushUnique(array, ...items);
+        return array;
+    }
+
+    static createFlattenUnique(...items: any[]): Array<any> {
+        const array: Array<any> = new Array<any>();
+        arrays.pushFlattenUnique(array, ...items);
+        return array;
+    }
+    
     static push(array: Array<any>, ...items: any[]): void {
         array.push(...items);
     }
