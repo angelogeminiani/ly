@@ -1,5 +1,5 @@
+import ly from "../../ly";
 import {Dictionary} from "../collections/Dictionary";
-import lang from "../lang";
 
 
 // ------------------------------------------------------------------------
@@ -80,7 +80,7 @@ class Events {
     }
 
     public off(event_names?: string | string[], listener?: Listener): Events {
-        const names: string[] = lang.isArray(event_names)
+        const names: string[] = ly.lang.isArray(event_names)
             ? event_names as string[]
             : !!event_names ? [event_names as string] : [];
         if (!!listener) {
@@ -147,7 +147,7 @@ class Events {
 
     private _registerEvent(eventName: string, listener: Listener, type: boolean): void {
         if (this._listenerLimitReached(eventName)) {
-            console.warn("Maximum listener reached, new Listener not added");
+            ly.console.warn("Events._registerEvent", "Maximum listener reached, new Listener not added", this.getMaxListeners());
             return;
         }
         if (type === true) {
