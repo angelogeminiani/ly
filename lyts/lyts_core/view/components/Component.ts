@@ -25,6 +25,8 @@ abstract class Component
 
     private readonly _data: any; // simple data container
 
+    private _showing: boolean;
+
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
@@ -37,6 +39,8 @@ abstract class Component
         this._element = !!element ? element : this._createElement(this.render());
         this._element_wrapper = new ElementWrapper(this, this._element);
         this._data = {};
+
+        this._showing = !this.element.classHas("hidden");
 
         this._normalizeElements();
 
@@ -59,6 +63,10 @@ abstract class Component
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
+
+    public get is_visible(): boolean {
+        return this._showing;
+    }
 
     public get data(): any {
         return this._data;
@@ -85,10 +93,12 @@ abstract class Component
 
     public hide(animate?: boolean): void {
         dom.classAdd(this._element, 'hidden');
+        this._showing = false;
     }
 
     public show(animate?: boolean): void {
         dom.classRemove(this._element, 'hidden');
+        this._showing = true;
     }
 
     // ------------------------------------------------------------------------
