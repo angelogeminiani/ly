@@ -1,0 +1,47 @@
+{
+  "database": "lyts_app",
+  "collection": "account",
+  "keys": [],
+  "entities": [
+    {
+      "_key": "test_admin",
+      "auth": {
+        "username": "info@botika.it",
+        "password": "5f4dcc3b5aa765d61d8327deb882cf99"
+      },
+      "person": {
+        "image": "",
+        "name": "Gian Angelo",
+        "surname": "Geminiani",
+        "email": "angelo.geminiani@gmail.com",
+        "address": "Via Elisabetta da Montefeltro, 35/a - Serravalle",
+        "phone": "0549",
+        "mobile": "+393477857785",
+        "note":"PASSWORD IS: password"
+      },
+      "company": {
+        "image": "",
+        "name": "Botika S.r.l.",
+        "vat": "sm26275",
+        "address": "Via O. Scavino, 10 - Falciano",
+        "phone": "0549",
+        "email": "info@botika.it"
+      },
+      "lang": "it",
+      "roles": [
+        {
+          "company_id": "admin",
+          "role_id": "admin",
+          "role_name": "Administrator",
+          "include_apps": [],
+          "impersonate": "",
+          "parents": []
+        }
+      ],
+      "stats": {
+        "last_login_timestamp": "0",
+        "login_count": 0
+      }
+    }
+  ]
+}

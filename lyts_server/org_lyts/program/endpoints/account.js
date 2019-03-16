@@ -1,5 +1,5 @@
 /**
- * auth.js
+ * account.js
  * ---------------
  * Authentication controller
  *
@@ -11,6 +11,7 @@ module.exports = (function () {
     //              i m p o r t s
     // ------------------------------------------------------------------------
 
+    var _CONST = require("/constants");
     var _CRUD_ACCOUNT = require("/endpoints/crud_account");
 
     // ------------------------------------------------------------------------
@@ -35,6 +36,7 @@ module.exports = (function () {
      */
     instance.login = function (username, password) {
         if (!!username && !!password) {
+            console.info("database: " + $db.name(), "username:" + username, "password;" + password);
             // check if user exists
             if (!_CRUD_ACCOUNT.getByUsername(username)) {
                 throw new Error(_CONST.ERR_USER_NOT_FOUND);
@@ -133,7 +135,7 @@ module.exports = (function () {
     // ------------------------------------------------------------------------
 
     function doRegister(username, password, company_name, company_vat, company_address, lang) {
-        var md5_password = $string.md5(password);
+        var md5_password = $string.md5(password).toLowerCase();
         var key = $rnd.uuid();
         var account = {
             _key: key,

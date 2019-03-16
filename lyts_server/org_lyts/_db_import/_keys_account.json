@@ -1,0 +1,32 @@
+{
+  "database": "lyts_app",
+  "collection": "account",
+  "keys": [
+    {
+      "fields": [
+        "auth.username"
+      ],
+      "unique": true
+    },
+    {
+      "fields": [
+        "auth.username",
+        "auth.password"
+      ],
+      "unique": true
+    },
+    {
+      "fields": [
+        "roles[*].role_id"
+      ],
+      "unique": false
+    },
+    {
+      "fields": [
+        "company.name"
+      ],
+      "unique": false
+    }
+  ],
+  "entities": []
+}

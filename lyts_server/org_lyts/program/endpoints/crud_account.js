@@ -138,7 +138,7 @@ module.exports = (function () {
     };
 
     instance.getByUsernameAndPassword = function (username, password) {
-        var md5_psw = $string.md5(password);
+        var md5_psw = $string.md5(password).toLowerCase();
         var args = {
             "auth.username": username,
             "auth.password": md5_psw

@@ -25,6 +25,8 @@ ly.new(function () {
         try {
             // console.log("_init: ", info.name + " (" + info.guid + "): " + info.url);
 
+            initDatabase();
+
             // no return expected
             return {
                 'version': $info.version
@@ -64,14 +66,18 @@ ly.new(function () {
 
     //-- endpoints --//
 
-    this.account = function(){
-        return _ACCOUNT.account();
+    this.account = function () {
+        return _ACCOUNT;
     };
 
 
     // ------------------------------------------------------------------------
     //                 private
     // ------------------------------------------------------------------------
+
+    function initDatabase() {
+        $db.name("lyts_app");
+    }
 
 
 });
