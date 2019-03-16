@@ -1,6 +1,8 @@
 const IS_LOCALE: boolean = true;
-const HOST_LOCALE: string = 'https://localhost:4000';
-const HOST: string = 'https://api.conversacon.com:4000';
+// locale endpoint
+const HOST_LOCALE: string = 'http://localhost:4199';
+// production endpoint
+const HOST: string = 'https://your.domain.com:4199';
 
 const constants = {
 
@@ -16,15 +18,20 @@ const constants = {
     server_namespace: 'org_lyts', // AUTOMATO app server (see: /lyts_server/...)
 
     // APP IDENTIFIER
-    APP_TOKEN: "botbuilder_dashboard_uyfgvdjqs6723",
-
-
-    //-- STANDARD COMPONENTS EVENTS (do not use for native HTMLElement) --//
-    EVENT_ON_CLICK: "on_click",
+    APP_TOKEN: "iuhdiu87w23ruh897dfyc2w3r",
 
     // BUS EVENTS
     ONBUS_USER_ON: "onbus_user_on",
     ONBUS_USER_OFF: "onbus_user_off",
+    ONBUS_USER_IMAGE: "onbus_user_image",
+    ONBUS_NETWORK_ON: "onbus_network_on",
+    ONBUS_NETWORK_OFF: "onbus_network_off",
+
+    // IMG
+    IMAGE_USER: "build/assets/images/user.png",
+
+    // STYLE CLASSES
+    CLASS_HIDDEN: "hidden",
 
 };
 

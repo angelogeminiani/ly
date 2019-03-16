@@ -6,9 +6,8 @@ const root: any = window;
 
 const globals = {
 
-    // expone window
+    // expose window
     root: root,
-    Materialize: root['Materialize'], // materialize
     $: root['$'], // jQuery
 
 

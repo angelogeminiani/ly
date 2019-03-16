@@ -1,0 +1,44 @@
+.--sub-page-topbar{
+    height: 140px;
+    min-height: 140px;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.--sub-page-topbar button{
+    min-width: 96px;
+}
+
+.--sub-page-back{
+    position: absolute;
+    top:8px;
+    left: 0;
+    cursor: pointer;
+}
+
+.--sub-page-back i{
+    font-size: 2rem;
+}
+
+.--sub-page-content{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-top: 5px;
+}
+
+.--sub-page-pagination{
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.--sub-page-pagination nav ul{
+    margin-bottom: 0;
+}

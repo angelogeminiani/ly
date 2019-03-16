@@ -1,15 +1,18 @@
-import view from "./MainView";
-import console from "../../lyts/lyts_core/commons/console";
-import constants from "../constants";
-import ElementWrapper from "../../lyts/lyts_core/view/components/ElementWrapper";
 import ly from "../../lyts/lyts_core/ly";
+import console from "../../lyts/lyts_core/commons/console";
+import ElementWrapper from "../../lyts/lyts_core/view/components/ElementWrapper";
+import ScreenController from "../../lyts/lyts_core/view/screens/ScreenController";
+import ApplicationController from "../core/ApplicationController";
+import constants from "../constants";
+import CompNavBar from "./components/navbar/CompNavBar";
+import Screen from "../../lyts/lyts_core/view/screens/screen/Screen";
+import ScreenDashboard from "./screens/00_dashboard/ScreenDashboard";
+import PageLogin from "./screens/00_dashboard/pages/login/PageLogin";
+import PageDashboard from "./screens/00_dashboard/pages/dashboard/PageDashboard";
+import PageMaintenance from "./screens/00_dashboard/pages/maintenance/PageMaintenance";
 import en from "../core/i18n/en";
 import it from "../core/i18n/it";
-import ScreenController from "../../lyts/lyts_core/view/screens/ScreenController";
-import Screen1 from "./screens/screen1/Screen1";
-import Screen2 from "./screens/screen2/Screen2";
-import Screen from "../../lyts/lyts_core/view/screens/screen/Screen";
-
+import view from "./view";
 
 export default class Main
     extends ScreenController {
@@ -19,7 +22,10 @@ export default class Main
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
+    private readonly _nav: ElementWrapper;
     private readonly _body: ElementWrapper;
+
+    private _comp_nav_bar: CompNavBar;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -29,15 +35,17 @@ export default class Main
         super("");
 
         // set debug mode
-        this.debugMode = true;
+        this.debugMode = constants.DEBUG_MODE;
 
         // customize console
         console.uid = constants.uid;
 
         // register screens
-        super.register('/screen1', Screen1);
-        super.register('/screen2', Screen2);
+        super.register('/00_dashboard', ScreenDashboard);
+        // super.register('/01_profile', ScreenProfile);
+        // super.register('/02_manage_people', ScreenManagePeople);
 
+        this._nav = super.getFirst("#" + this.uid + "_nav");
         this._body = super.getFirst("#" + this.uid + "_screens");
     }
 
@@ -50,15 +58,19 @@ export default class Main
     }
 
     protected free(): void {
-        super.free();
-        // release memory
+        try {
+            //-- remove components --//
+            this._comp_nav_bar.remove();
 
-        console.log("REMOVED MAIN: ", constants.uid);
+            //-- remove listeners --//
+            ApplicationController.events.off(this);
+        } finally {
+            super.free();
+        }
     }
 
     protected ready(): void {
         super.ready();
-
         this.init();
     }
 
@@ -74,6 +86,16 @@ export default class Main
         screen.appendTo(this._body);
     }
 
+    public localize(): void {
+
+        //-- load i18n dictionaries --//
+        ly.i18n.registerDefault(it);
+        ly.i18n.register("en", en);
+        ly.i18n.register("it", it);
+
+        super.localize();
+    }
+
     // ------------------------------------------------------------------------
     //                      p u b l i c
     // ------------------------------------------------------------------------
@@ -86,30 +108,32 @@ export default class Main
     private init(): void {
 
         try {
-            // App localizations
-            this.initI18n();
 
-            // event handlers
-            this.initHandlers();
+            // nav bar
+            this._comp_nav_bar = new CompNavBar();
+            this._comp_nav_bar.appendTo(this._nav);
 
-
+            // init listeners
+            ApplicationController.events.on(this, constants.ONBUS_USER_OFF, this.gotoLoginPage);
+            ApplicationController.events.on(this, constants.ONBUS_USER_ON, this.gotoDashboardPage);
+            ApplicationController.events.on(this, constants.ONBUS_NETWORK_OFF, this.gotoMaintenancePage);
+            ApplicationController.events.on(this, constants.ONBUS_NETWORK_ON, this.gotoDashboardPage);
         } catch (err) {
-            console.error("Main.init()", err)
+            console.error("Main.init()", err);
         }
 
     }
 
-    private initI18n(): void {
-        //-- load i18n dictionaries --//
-        ly.i18n.registerDefault(en);
-        ly.i18n.register("en", en);
-        ly.i18n.register("it", it);
-
+    // redirection function
+    private gotoLoginPage(): void {
+        ApplicationController.goto(PageLogin.ADDRESS);
     }
 
-    private initHandlers(): void {
-
+    private gotoDashboardPage(): void {
+        ApplicationController.goto(PageDashboard.ADDRESS);
     }
 
-
+    private gotoMaintenancePage(): void {
+        ApplicationController.goto(PageMaintenance.ADDRESS);
+    }
 }

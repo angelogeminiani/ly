@@ -21,6 +21,7 @@ class ApplicationController {
     };
 
     private _auth_helper: AuthHelper;
+    private _connected: boolean;
 
     private readonly _page_params: any; // parameters passed to pages
 
@@ -49,6 +50,19 @@ class ApplicationController {
         return this._auth_helper;
     }
 
+    public get connected(): boolean {
+        return this._connected;
+    }
+
+    public set connected(value: boolean) {
+        if (value && !this._connected) {
+            this._connected = value;
+            this.events.emit(constants.ONBUS_NETWORK_ON, this._connected);
+        } else if (!value && this._connected) {
+            this._connected = value;
+            this.events.emit(constants.ONBUS_NETWORK_OFF, this._connected);
+        }
+    }
 
     // ------------------------------------------------------------------------
     //                      p u b l i c

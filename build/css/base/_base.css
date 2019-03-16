@@ -4,20 +4,53 @@ html, body {
     height: 100%;
     width: 100%;
     z-index: 1;
-
+    background-color: #fff;
+    scroll-behavior: smooth;
+    overflow: hidden;
 }
 
-section {
+
+#_app_container {
 
     height: 100%;
     width: 100%;
+    background-color: #fafafa;
+    position: fixed;
     z-index: 1;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 
 }
 
 .hidden, .hide {
     display: none !important;
 }
+
+.--full-size {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.--screens {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.--cursor-pointer {
+    cursor: pointer;
+}
+
 
 /*
     S C R O L L S
@@ -57,4 +90,62 @@ section {
 
     overflow-y: hidden;
 
+}
+
+/*
+    I M A G E S
+*/
+
+.--img-sm {
+    width: 32px;
+    height: 32px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.--img-md {
+    width: 48px;
+    height: 48px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.--img-lg {
+    width: 64px;
+    height: 64px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.--img-xl {
+    width: 128px;
+    height: 128px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/*
+    T E X T
+*/
+
+.--text-sm {
+    font-size: 0.6rem;
+}
+
+.--text-md {
+   font-size: 0.8rem;
+}
+
+/*
+    CLOSE
+*/
+
+.--close {
+    margin-left: .25rem;
+    padding: auto;
+    color: inherit;
+    font-size: 100%;
+    text-shadow: 0 1px 0 rgba(255,255,255, .5);
+    display: inline-block;
 }

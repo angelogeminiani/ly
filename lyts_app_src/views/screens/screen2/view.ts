@@ -1,11 +1,10 @@
-import style from "./style";
+
 
 export default function view(uid: string, props?: any): string {
     props = props || {};
     return `
             <div id="${uid}" class="">
-                ${ style(uid, props) }
-   
+                
                 <nav>
                     <div class="nav-wrapper">
                       <a href="#" class="brand-logo">Logo</a>

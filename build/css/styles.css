@@ -1,14 +1,9 @@
 /* Base */
-@import url('base/_normalize.css');
-@import url('base/_base.css');
-
-/* FONTS */
-@font-face {
-    font-family: RobotoBold;
-    src: url('../vendor/fonts/roboto/Roboto-Bold.woff2');
-}
-
-@font-face {
-    font-family: RobotoRegular;
-    src: url('../vendor/fonts/roboto/Roboto-Regular.woff2');
-}
+@import url('base/_base.css?v=1.0.1');
+@import url('base/_loader.css?v=1.0.1');
+@import url('base/_rotations.css?v=1.0.1');
+/* pages */
+@import url('pages/_sub_page.css?v=1.0.0');
+/* components */
+@import url('components/_navbar.css?v=1.0.0');
+@import url('components/_loading.css?v=1.0.0');

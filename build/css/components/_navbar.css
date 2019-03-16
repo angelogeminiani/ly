@@ -1,0 +1,20 @@
+/** MAIN **/
+.--navbar-logo {
+    height: 38px;
+    width: auto;
+}
+
+/** USER **/
+.--navbar-user label,
+.--navbar-user span {
+    line-height: 1;
+}
+
+.--navbar-user label {
+    font-size: 0.9rem;
+}
+
+.--navbar-user .dropleft > .btn {
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0);
+}
