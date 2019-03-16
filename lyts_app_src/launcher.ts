@@ -2,7 +2,7 @@ import ly from "../lyts/lyts_core/ly";
 import BaseObject from "../lyts/lyts_core/commons/BaseObject";
 import constants from "./constants";
 import Main from "./views/Main";
-import ApplicationController from "./controllers/ApplicationController";
+import ApplicationController from "./core/ApplicationController";
 import console from "../lyts/lyts_core/commons/console";
 // import {StyleManager} from "../lyts/lyts_core_style/StyleManager";
 
