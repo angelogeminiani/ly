@@ -201,9 +201,9 @@ class langClass {
     /**
      * Invoke a function. Shortcut for "func.call(this, ...args)"
      */
-    public funcInvoke(func: Function, ...args: any[]): any {
+    public funcInvoke(func?: Function, ...args: any[]): any {
         const self = this;
-        if (self.isFunction(func)) {
+        if (!!func && self.isFunction(func)) {
             if (args.length === 0) {
                 return func.call(self);
             } else {
