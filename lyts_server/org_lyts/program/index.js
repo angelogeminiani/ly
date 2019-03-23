@@ -7,7 +7,7 @@ ly.new(function () {
     //              i m p o r t s
     // ------------------------------------------------------------------------
 
-    var _ACCOUNT = require("/endpoints/account");
+    var _ENDPOINTS = require("/endpoints/index");
 
     // ------------------------------------------------------------------------
     //              c o n s t
@@ -67,7 +67,7 @@ ly.new(function () {
     //-- endpoints --//
 
     this.account = function () {
-        return _ACCOUNT;
+        return _ENDPOINTS.account();
     };
 
 
