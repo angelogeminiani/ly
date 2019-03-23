@@ -7,7 +7,8 @@ ly.new(function () {
     //              i m p o r t s
     // ------------------------------------------------------------------------
 
-    var _ENDPOINTS = require("/endpoints/index");
+    var _ACCOUNT = require("/endpoints/account");
+    var _CRUD_ACCOUNT = require("/endpoints/crud_account");
 
     // ------------------------------------------------------------------------
     //              c o n s t
@@ -67,7 +68,22 @@ ly.new(function () {
     //-- endpoints --//
 
     this.account = function () {
-        return _ENDPOINTS.account();
+        return {
+            // authentication
+            login: _ACCOUNT.login,
+            register: _ACCOUNT.register,
+            reset_password: _ACCOUNT.resetPassword,
+            change_password: _ACCOUNT.changePassword,
+            // crud_account account
+            get_account: _CRUD_ACCOUNT.getEntity,
+            upsert_account: _CRUD_ACCOUNT.upsert,
+            get_accounts_by_id: _CRUD_ACCOUNT.getAccountsById,
+            get_account_by_email: _CRUD_ACCOUNT.getAccountByEmail,
+            get_accounts_by_company_id: _CRUD_ACCOUNT.getAccountsByCompanyId,
+            find_accounts: _CRUD_ACCOUNT.find,
+            import_account: _CRUD_ACCOUNT.import_account
+
+        }
     };
 
 
