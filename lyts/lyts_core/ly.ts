@@ -6,6 +6,7 @@ import arrays from "./commons/arrays";
 import strings from "./commons/strings";
 import objects from "./commons/objects";
 import MD5 from "./commons/MD5";
+import math from "./commons/math";
 import random from "./commons/random";
 import browser from "./view/browser";
 import installer from "./view/installer";
@@ -40,6 +41,7 @@ const ly = {
     strings: strings,
     objects: objects,
     MD5: MD5,
+    math: math,
     random: random,
     browser: browser,
     installer: installer,
