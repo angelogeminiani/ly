@@ -47,6 +47,7 @@ export default class format {
     /**
      *
      * @param value  {{value:type:opt1:opt....}}
+     * i.e. {{1234.2456666:number:2:€}} -> 1234,24€
      */
     public static value(value: string): string {
         try {
