@@ -97,6 +97,18 @@ export default class arrays {
         });
     }
 
+    static shuffle(source: Array<any>, create_new: boolean = false): Array<any> {
+        const array: Array<any> = create_new ? [] : source;
+        if (create_new) {
+            array.push(...source);
+        }
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+            [array[i], array[j]] = [array[j], array[i]]; // swap elements
+        }
+        return array;
+    }
+    
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
