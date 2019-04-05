@@ -17,6 +17,12 @@ interface Items {
  *  Do not listen directly at EVENT_CHANGE_LANG, but use Application events propagation.
  *  Components automatically handle this event, so you do not need to do it by yourself.
  *
+ * simple localization:
+ * <div data-i18n="caption"></div>
+ *
+ * attribute localization:
+ * <div data-i18n="data-text:caption" data-text=""></div>
+ *
  */
 class i18n
     extends EventEmitter {
@@ -98,10 +104,10 @@ class i18n
         return def_val || '';
     }
 
-    public localize(elem: HTMLElement): void {
-        this._localize(elem);
+    public localize(elem: HTMLElement, trace?: boolean): void {
+        this._localize(elem, !!trace);
         dom.forEachChild(elem, (child: HTMLElement) => {
-            this._localize(child);
+            this._localize(child, !!trace);
         }, true);
         const trigger_event: boolean = !!this._lang && this._dictionaries.count() > 0;
         if (trigger_event) {
@@ -124,22 +130,32 @@ class i18n
         }
     }
 
-    private _localize(elem: HTMLElement): void {
+    private _localize(elem: HTMLElement, trace: boolean): void {
         if (!!elem && !!elem.hasAttribute) {
             const data_i18n: string = elem.getAttribute(i18n._ATTR_DATA_I18N) || '';
             if (!!data_i18n) {
-                const value: string = this.get(data_i18n);
+                const tokens: Array<string> = data_i18n.split(":");
+                const attr: string = tokens.length === 2 ? tokens[0] : "";
+                const key: string = tokens.length === 2 ? tokens[1] : data_i18n;
+                const value: string = this.get(key);
+                if (trace) {
+                    ly.console.log("i18n._localize", elem, data_i18n, value);
+                }
                 if (!!value) {
-                    // console.log("i18n._localize", data_i18n, value);
+                    // ly.console.log("i18n._localize", data_i18n, value);
                     // ready to set i18n text or placeholder
-                    if (dom.isInput(elem) || dom.isTextArea(elem)) {
-                        if (dom.isInputButton(elem)) {
-                            dom.setValue(elem, value);
-                        } else if (elem.hasAttribute("placeholder")) {
-                            elem.setAttribute("placeholder", value);
-                        }
+                    if (!!attr) {
+                        elem.setAttribute(attr, value);
                     } else {
-                        elem.innerHTML = ly.strings.replaceAll("\n", "<br>", value);
+                        if (dom.isInput(elem) || dom.isTextArea(elem)) {
+                            if (dom.isInputButton(elem)) {
+                                dom.setValue(elem, value);
+                            } else if (elem.hasAttribute("placeholder")) {
+                                elem.setAttribute("placeholder", value);
+                            }
+                        } else {
+                            elem.innerHTML = ly.strings.replaceAll("\n", "<br>", value);
+                        }
                     }
                 }
             }

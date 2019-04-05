@@ -105,8 +105,8 @@ abstract class Component
     //                      d o m
     // ------------------------------------------------------------------------
 
-    public localize(): void {
-        i18n.localize(this._element);
+    public localize(trace?:boolean): void {
+        i18n.localize(this._element, trace);
     }
 
     public get(selector: string): Array<ElementWrapper> {
@@ -148,7 +148,7 @@ abstract class Component
             if (!!target) {
                 target.appendChild(child);
                 // handle events for child
-                this._normalizeElement(child);
+                // this._normalizeElement(child); // ALREADY INVOKED in _createElement
             }
         }
 
@@ -328,11 +328,8 @@ abstract class Component
 
     private _normalizeElements(): void {
         // events on root
-        this._normalizeElement(this._element);
-        // events on child
-        dom.forEachChild(this._element, (elem) => {
-            this._normalizeElement(elem);
-        }, true);
+        this._normalizeElement(this._element, true);
+
     }
 
     private _resolveElement(elem_or_selector: HTMLElement | string | null, defVal?: HTMLElement): HTMLElement | null {
@@ -340,16 +337,16 @@ abstract class Component
             if (lang.isString(elem_or_selector)) {
                 let found: HTMLElement | undefined = this._getFirstElement(elem_or_selector as string);
                 if (!!found) {
-                    return this._normalizeElement(found);
+                    return this._normalizeElement(found, false);
                 }
             } else {
                 let found: HTMLElement | null = elem_or_selector as HTMLElement;
                 if (!!found) {
-                    return this._normalizeElement(found);
+                    return this._normalizeElement(found, false);
                 }
             }
         }
-        return !!defVal ? this._normalizeElement(defVal) : null;
+        return !!defVal ? this._normalizeElement(defVal, false) : null;
     }
 
 
@@ -415,16 +412,22 @@ abstract class Component
 
     private _createElement(html: string): HTMLElement {
         html = html.trim();
-        return this._normalizeElement(dom.newElement(html));
+        return this._normalizeElement(dom.newElement(html), true);
     }
 
-    private _normalizeElement(elem: HTMLElement): HTMLElement {
+    private _normalizeElement(root_elem: HTMLElement, deep: boolean): HTMLElement {
         // add hash
-        this._hash(elem);
+        this._hash(root_elem);
 
+        // events on child
+        if (deep) {
+            dom.forEachChild(root_elem, (elem) => {
+                this._normalizeElement(elem, false);
+            }, true);
+        }
         //... do more stuff here
 
-        return elem;
+        return root_elem;
     }
 
     private _hash(elem: HTMLElement | undefined): string {
