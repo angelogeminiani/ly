@@ -3,6 +3,13 @@
  */
 import random from "./random";
 
+enum LogLevel {
+    error = 0,
+    warn = 1,
+    info = 2,
+    debug = 3
+}
+
 class console_ext {
 
     // ------------------------------------------------------------------------
@@ -14,6 +21,7 @@ class console_ext {
     // ------------------------------------------------------------------------
 
     private _uid: string;
+    private _level: LogLevel;
 
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
@@ -21,10 +29,11 @@ class console_ext {
 
     private constructor() {
         this._uid = random.guid();
+        this._level = LogLevel.info;
     }
 
     // ------------------------------------------------------------------------
-    //                      p u b l i c
+    //                      p r o p e r t i e s
     // ------------------------------------------------------------------------
 
     public get uid() {
@@ -35,15 +44,47 @@ class console_ext {
         this._uid = value;
     }
 
+    public get level(): LogLevel {
+        return this._level;
+    }
+
+    public set level(value: LogLevel) {
+        this._level = value;
+    }
+
+    // ------------------------------------------------------------------------
+    //                      p u b l i c
+    // ------------------------------------------------------------------------
+
     public error(scope: string, error: Error | string, ...args: any[]): void {
         console.error("[" + this.uid + "] " + scope, error, ...args);
     };
 
     public warn(scope: string, ...args: any[]): void {
+        if (this._level < LogLevel.warn) {
+            return;
+        }
         console.warn("[" + this.uid + "] " + scope, ...args);
     };
 
+    public info(scope: string, ...args: any[]): void {
+        if (this._level < LogLevel.info) {
+            return;
+        }
+        console.info("[" + this.uid + "] " + scope, ...args);
+    };
+
+    public debug(scope: string, ...args: any[]): void {
+        if (this._level < LogLevel.debug) {
+            return;
+        }
+        console.log("[" + this.uid + "] " + scope, ...args);
+    };
+
     public log(scope: string, ...args: any[]): void {
+        if (this._level < LogLevel.info) {
+            return;
+        }
         console.log("[" + this.uid + "] " + scope, ...args);
     }
 
@@ -75,5 +116,5 @@ class console_ext {
 // ------------------------------------------------------------------------
 
 export default console_ext.instance();
-
+export {LogLevel};
 
