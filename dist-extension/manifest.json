@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "LYTS Chrome Extension",
+  "version": "1.0.2",
+  "description": "LYTS sample chrome extension",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "incognito": "split",
+  "options_page": "options.html",
+  "page_action": {
+    "default_icon": "assets/icons/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "lyts extension"
+  },
+  "background": {
+    "scripts": [
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/",
+        "http://*/*",
+        "https://*/",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.min.js",
+        "app/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "tabs",
+    "activeTab",
+    "storage",
+    "background",
+    "notifications",
+    "contentSettings",
+    "http://*/",
+    "http://*/*",
+    "https://*/",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

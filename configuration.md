@@ -14,13 +14,23 @@ This makes it easier to upgrade projects individually when breaking changes are 
    npm install --save-dev uglifyjs-webpack-plugin 
 ```
 
-3. **Configure Webpack to use Typescript**
+3. **Install Webpack Merge**
+```bash
+   npm install --save-dev webpack-merge 
+```
+
+4. **Configure Webpack to use Typescript**
 
 First you need to have Typescript installed
 
 *Install Typescript locally*
 ```bash
 npm install --save-dev typescript
+```
+
+*Install TSLint locally*
+```bash
+npm install --save-dev tslint
 ```
 
 *Install Loader*
