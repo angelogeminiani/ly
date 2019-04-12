@@ -2,6 +2,7 @@
  * Extends standard console
  */
 import random from "./random";
+import {Dictionary} from "./collections/Dictionary";
 
 enum LogLevel {
     error = 0,
@@ -20,6 +21,8 @@ class console_ext {
     //                      f i e l d s
     // ------------------------------------------------------------------------
 
+    private readonly _class_levels: Dictionary<LogLevel>;
+
     private _uid: string;
     private _level: LogLevel;
 
@@ -30,6 +33,8 @@ class console_ext {
     private constructor() {
         this._uid = random.guid();
         this._level = LogLevel.info;
+
+        this._class_levels = new Dictionary();
     }
 
     // ------------------------------------------------------------------------
@@ -56,33 +61,37 @@ class console_ext {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public setClassLevel(class_name: string, level: LogLevel) {
+        this._class_levels.put(class_name, level);
+    }
+
     public error(scope: string, error: Error | string, ...args: any[]): void {
         console.error("[" + this.uid + "] " + scope, error, ...args);
     };
 
     public warn(scope: string, ...args: any[]): void {
-        if (this._level < LogLevel.warn) {
+        if (this.getLevel(scope) < LogLevel.warn) {
             return;
         }
         console.warn("[" + this.uid + "] " + scope, ...args);
     };
 
     public info(scope: string, ...args: any[]): void {
-        if (this._level < LogLevel.info) {
+        if (this.getLevel(scope) < LogLevel.info) {
             return;
         }
         console.info("[" + this.uid + "] " + scope, ...args);
     };
 
     public debug(scope: string, ...args: any[]): void {
-        if (this._level < LogLevel.debug) {
+        if (this.getLevel(scope) < LogLevel.debug) {
             return;
         }
         console.log("[" + this.uid + "] " + scope, ...args);
     };
 
     public log(scope: string, ...args: any[]): void {
-        if (this._level < LogLevel.info) {
+        if (this.getLevel(scope) < LogLevel.info) {
             return;
         }
         console.log("[" + this.uid + "] " + scope, ...args);
@@ -92,8 +101,14 @@ class console_ext {
     //                      p r i v a t e
     // ------------------------------------------------------------------------
 
-    private init(): void {
-        this.uid = random.guid();
+    private getLevel(scope?: string): LogLevel {
+        if (!!scope) {
+            const class_name: string = scope.split(".")[0];
+            if (this._class_levels.containsKey(class_name)) {
+                return this._class_levels.get(class_name);
+            }
+        }
+        return this.level;
     }
 
     // ------------------------------------------------------------------------
