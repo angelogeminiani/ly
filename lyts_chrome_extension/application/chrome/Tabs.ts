@@ -1,5 +1,5 @@
-import ly from "../../../../lyts/lyts_core/ly";
-import BaseObject from "../../../../lyts/lyts_core/commons/BaseObject";
+import ly from "../../../lyts/lyts_core/ly";
+import BaseObject from "../../../lyts/lyts_core/commons/BaseObject";
 import Tab = chrome.tabs.Tab;
 import InjectDetails = chrome.tabs.InjectDetails;
 import HighlightInfo = chrome.tabs.HighlightInfo;

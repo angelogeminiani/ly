@@ -1,5 +1,5 @@
-import BaseObject from "../../../../lyts/lyts_core/commons/BaseObject";
-import ModelMessage from "../../model/ModelMessage";
+import BaseObject from "../../../lyts/lyts_core/commons/BaseObject";
+import ModelMessage from "../model/ModelMessage";
 import MessageSender = chrome.runtime.MessageSender;
 
 type responseCallback = (response: any) => void;

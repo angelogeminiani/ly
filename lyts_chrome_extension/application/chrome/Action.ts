@@ -1,4 +1,4 @@
-import BaseObject from "../../../../lyts/lyts_core/commons/BaseObject";
+import BaseObject from "../../../lyts/lyts_core/commons/BaseObject";
 
 type actionCallback = (tab: chrome.tabs.Tab) => void;
 
