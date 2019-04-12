@@ -2,7 +2,7 @@ import ly from "../lyts/lyts_core/ly";
 import BaseObject from "../lyts/lyts_core/commons/BaseObject";
 import constants from "./application/constants";
 import ModelMessage, {ActionType} from "./application/model/ModelMessage";
-import Runtime from "./application/controller/chrome/Runtime";
+import Runtime from "./application/chrome/Runtime";
 import globals from "./application/globals";
 import HTMLParser, {HTMLLink} from "./application/controller/parse/HTMLParser";
 import UrlParser from "../lyts/lyts_core/view/UrlParser";

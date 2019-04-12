@@ -1,10 +1,10 @@
 import ly from "../lyts/lyts_core/ly";
 import BaseObject from "../lyts/lyts_core/commons/BaseObject";
 import constants from "./application/constants";
-import Tabs, {TabEvents} from "./application/controller/chrome/Tabs";
+import Tabs, {TabEvents} from "./application/chrome/Tabs";
 import ModelMessage, {ActionType} from "./application/model/ModelMessage";
-import Runtime from "./application/controller/chrome/Runtime";
-import Action from "./application/controller/chrome/Action";
+import Runtime from "./application/chrome/Runtime";
+import Action from "./application/chrome/Action";
 import MessageSender = chrome.runtime.MessageSender;
 import Tab = chrome.tabs.Tab;
 import TabChangeInfo = chrome.tabs.TabChangeInfo;

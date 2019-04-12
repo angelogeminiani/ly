@@ -1,5 +1,5 @@
 import globals from "../application/globals";
-import Runtime from "../application/controller/chrome/Runtime";
+import Runtime from "../application/chrome/Runtime";
 import ModelMessage, {ActionType} from "../application/model/ModelMessage";
 
 function getContent(): string {
