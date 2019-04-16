@@ -85,6 +85,10 @@ abstract class ScreenController
         this._router.register(route + '/*', handler);
     }
 
+    public unregister(route: string): void {
+        this._router.unregister(route + '/*');
+    }
+    
     public current(): Screen {
         return this._last_screen;
     }

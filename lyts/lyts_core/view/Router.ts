@@ -283,6 +283,11 @@ class Router
         return this;
     }
 
+    public unregister(path: string): Router {
+        this._routes.remove(path);
+        return this;
+    }
+
     public goto(path: string): void {
         if (!!window) {
             const target:string =  this._hash + path;
