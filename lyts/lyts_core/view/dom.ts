@@ -1,8 +1,8 @@
+import ly from "../ly";
 import browser from "./browser";
-
 import strings from "../commons/strings";
 import lang from "../commons/lang";
-import ly from "../ly";
+import ElementWrapper from "./components/ElementWrapper";
 
 
 export enum SelectorType { ID, CLASS, TAG, ATTR }
@@ -257,6 +257,51 @@ class domClass {
         return response;
     }
 
+    public getParentTargetByAttribute(e: Event | HTMLElement | null | undefined, attribute?: string): HTMLElement | undefined {
+        attribute = attribute || "data-event";
+        try {
+            if (!!e) {
+                if (e instanceof HTMLElement) {
+                    const elem = e as HTMLElement;
+                    if (elem.hasAttribute(attribute)) {
+                        return elem;
+                    } else {
+                        return this.getParentTargetByAttribute(elem.parentElement);
+                    }
+                } else {
+                    return this.getParentTargetByAttribute(e.target as HTMLElement);
+                }
+            }
+        } catch (err) {
+            ly.console.error("dom.getParentTargetByAttribute", err);
+        }
+        return undefined;
+    }
+
+    /**
+     * Return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+     * @param e
+     */
+    public offset(e: Event | HTMLElement | null | undefined): { top: number, left: number } {
+        if (!!e) {
+            if (e instanceof HTMLElement) {
+                const elem = e as HTMLElement;
+                const rect = elem.getBoundingClientRect(),
+                    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+                    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                return {top: rect.top + scrollTop, left: rect.left + scrollLeft}
+            } else if (e instanceof ElementWrapper) {
+                const elem = e as ElementWrapper;
+                return this.offset(elem.htmlElement);
+            } else {
+                return this.offset(e.target as HTMLElement);
+            }
+        }
+        return {
+            top: 0, left: 0
+        }
+    }
+
     public createElement(tag: string = 'div', target: string | HTMLElement = 'body'): HTMLElement {
         let parent: HTMLElement | null = null;
         if (target instanceof HTMLElement) {
@@ -419,7 +464,7 @@ class domClass {
                 const e = elem as HTMLTextAreaElement;
                 return !!e ? e.value : null;
             } else {
-                const tag_name:string = elem.tagName.toLowerCase();
+                const tag_name: string = elem.tagName.toLowerCase();
                 if (tag_name === "img") {
                     return elem.getAttribute("src");
                 } else {
@@ -446,7 +491,7 @@ class domClass {
                 const e = elem as HTMLTextAreaElement;
                 e.value = value;
             } else {
-                const tag_name:string = elem.tagName.toLowerCase();
+                const tag_name: string = elem.tagName.toLowerCase();
                 if (tag_name === "img" && !!value) {
                     elem.setAttribute("src", value);
                 } else {
