@@ -3,6 +3,7 @@ import browser from "./browser";
 import strings from "../commons/strings";
 import lang from "../commons/lang";
 import ElementWrapper from "./components/ElementWrapper";
+import objects from "../commons/objects";
 
 
 export enum SelectorType { ID, CLASS, TAG, ATTR }
@@ -179,7 +180,7 @@ export class SelectorParser {
 /**
  * Default Export class.
  */
-const doc: any = document;
+const doc: HTMLDocument = document;
 const win: any = window;
 
 class domClass {
@@ -196,20 +197,29 @@ class domClass {
     // ------------------------------------------------------------------------
 
     constructor() {
+        const is_IE: boolean = !objects.get(doc, "addEventListener");
         this._readyList = [];
-        this._ready = (doc.readyState === "complete" || (!doc.attachEvent && doc.readyState === "interactive"));
+        this._ready = (doc.readyState === "complete" || (!is_IE && doc.readyState === "interactive"));
         if (!this._ready) {
-            if (doc.addEventListener) {
+            if (!is_IE) {
                 // first choice is DOMContentLoaded event
                 doc.addEventListener("DOMContentLoaded", this.onDocumentReady.bind(this), false);
                 // backup is window load event
                 win.addEventListener("load", this.onDocumentReady.bind(this), false);
             } else {
                 // must be IE
-                doc.attachEvent("onreadystatechange", this.onDocumentReadyStateChange.bind(this));
+                ly.objects.get(doc, "attachEvent")("onreadystatechange", this.onDocumentReadyStateChange.bind(this));
                 win.attachEvent("onload", this.onDocumentReady.bind(this));
             }
         }
+    }
+
+    // ------------------------------------------------------------------------
+    //                      p r o p e r t i e s
+    // ------------------------------------------------------------------------
+
+    public get document(): HTMLDocument {
+        return doc;
     }
 
     // ------------------------------------------------------------------------
@@ -227,12 +237,12 @@ class domClass {
         }
     }
 
-    public setDesignMode(value:boolean):void{
-       if(value){
-           doc.designMode = 'on';
-       } else {
-           doc.designMode = 'off'
-       }
+    public setDesignMode(value: boolean): void {
+        if (value) {
+            doc.designMode = 'on';
+        } else {
+            doc.designMode = 'off'
+        }
     }
 
     public parse(text: string): Node {
@@ -247,20 +257,26 @@ class domClass {
 
     public getElementsByTagName(tag_name: string): Element[] {
         const response: Element[] = [];
-        const list: NodeListOf<Element> = doc.getElementsByTagName(tag_name);
+        const list: HTMLCollectionOf<Element> = doc.getElementsByTagName(tag_name);
         const count = list.length;
         for (let i = 0; i < count; i++) {
-            response.push(list.item(i));
+            const elem: Element | null = list.item(i);
+            if (!!elem) {
+                response.push(elem);
+            }
         }
         return response;
     }
 
     public getElementsByClassName(class_name: string): Element[] {
         const response: Element[] = [];
-        const list: NodeListOf<Element> = doc.getElementsByClassName(class_name);
+        const list: HTMLCollectionOf<Element> = doc.getElementsByClassName(class_name);
         const count = list.length;
         for (let i = 0; i < count; i++) {
-            response.push(list.item(i));
+            const elem: Element | null = list.item(i);
+            if (!!elem) {
+                response.push(elem);
+            }
         }
         return response;
     }
@@ -310,22 +326,6 @@ class domClass {
         }
     }
 
-    public createElement(tag: string = 'div', target: string | HTMLElement = 'body'): HTMLElement {
-        let parent: HTMLElement | null = null;
-        if (target instanceof HTMLElement) {
-            parent = target;
-        } else if (ly.lang.isString(target)) {
-            parent = (doc as any)[target] || doc.getElementsByTagName(target)[0];
-        }
-
-        const element: HTMLElement = doc.createElement(tag);
-        if (!!parent) {
-            parent.appendChild(element);
-        }
-
-        return element;
-    }
-
     public injectStyle(css: string, target: string = 'head'): void {
         const head: any = (doc as any)[target] || doc.getElementsByTagName(target)[0];
         const style: any = doc.createElement('style');
@@ -342,6 +342,22 @@ class domClass {
 
     public createAttribute(name: string): Attr {
         return doc.createAttribute(name);
+    }
+
+    public createElement(tag: string = 'div', target: string | HTMLElement = 'body'): HTMLElement {
+        let parent: HTMLElement | null = null;
+        if (target instanceof HTMLElement) {
+            parent = target;
+        } else if (ly.lang.isString(target)) {
+            parent = (doc as any)[target] || doc.getElementsByTagName(target)[0];
+        }
+
+        const element: HTMLElement = doc.createElement(tag);
+        if (!!parent) {
+            parent.appendChild(element);
+        }
+
+        return element;
     }
 
     public newElement(inner_html: string = '', append_to_selector?: string): HTMLElement {
@@ -366,6 +382,12 @@ class domClass {
         }
 
         return elem;
+    }
+
+    public buildElement(tag: string, inner_html: string): HTMLElement {
+        const response: HTMLElement = doc.createElement(tag);
+        response.innerHTML = inner_html;
+        return response;
     }
 
     public getFirst(selector: string = '', target?: HTMLElement): HTMLElement | undefined {
@@ -580,7 +602,7 @@ class domClass {
                     list.push(result.item(i));
                 }
             } else if (selector.type === SelectorType.TAG) {
-                const result: NodeListOf<Element> = doc.getElementsByTagName(selector.value);
+                const result: HTMLCollectionOf<Element> = doc.getElementsByTagName(selector.value);
                 const count = result.length;
                 for (let i = 0; i < count; i++) {
                     list.push(result.item(i));
