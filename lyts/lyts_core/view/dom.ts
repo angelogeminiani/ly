@@ -227,6 +227,14 @@ class domClass {
         }
     }
 
+    public setDesignMode(value:boolean):void{
+       if(value){
+           doc.designMode = 'on';
+       } else {
+           doc.designMode = 'off'
+       }
+    }
+
     public parse(text: string): Node {
         let parser: DOMParser = new DOMParser();
         let doc: HTMLDocument = parser.parseFromString(text, "text/html");

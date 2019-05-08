@@ -4,6 +4,8 @@ import dom from "../dom";
 import Component from "./Component";
 import ly from "../../ly";
 
+const CSS_EDITABLE:string = "border-bottom: 1px darkgray dashed;";
+
 /**
  * Wrap a native HTMLElement to expose at Component methods.
  */
@@ -217,17 +219,19 @@ class ElementWrapper {
     }
 
     public addEventListener(event_name: string, listener: Listener): void {
-        if (null != this._element && !!this._owner) {
+        if (!!this._element && !!this._owner) {
             let hash_code: string = ElementWrapper.hash(this._element);
             if (!!hash_code) {
                 let selector: string = "[" + ElementWrapper.HASH_ATTRIBUTE + "=" + hash_code + "]";
                 this._owner.addEventListener(selector, event_name, listener);
+            } else {
+                ly.console.error("ElementWrapper.addEventListener()", "Missing HASH in Element.", this);
             }
         } else {
             if (!this._element) {
-                console.error("ElementWrapper.addEventListener()", "Missing HTML Element.", this);
+                ly.console.error("ElementWrapper.addEventListener()", "Missing HTML Element.", this);
             } else {
-                console.error("ElementWrapper.addEventListener()", "Component Owner.", this._element);
+                ly.console.error("ElementWrapper.addEventListener()", "Component Owner.", this._element);
             }
         }
     }
@@ -261,6 +265,44 @@ class ElementWrapper {
                 handler.call(_self, e);
             }
         });
+    }
+
+    public onInput(handler: Function, context?: any): void {
+        const _self: any = !!context ? context : this;
+        this.addEventListener("input", (e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handler.call(_self, e);
+        });
+    }
+
+    public get editable(): boolean {
+        try {
+            if (!!this._element) {
+                return this._element.isContentEditable;
+            }
+        } catch (err) {
+        }
+        return false;
+    }
+
+    public set editable(value: boolean) {
+        if (!!this._element) {
+            this._element.setAttribute("contenteditable", value + "");
+            if(value){
+                const style:string = this._element.getAttribute("style")||"";
+                if(style.indexOf(CSS_EDITABLE)===-1){
+                    this._element.setAttribute("style", CSS_EDITABLE.concat(style));
+                }
+                // disable spellcheck
+                this._element.setAttribute("spellcheck", "false");
+            } else {
+                const style:string = this._element.getAttribute("style")||"";
+                if(!!style && style.indexOf(CSS_EDITABLE)){
+                    this._element.setAttribute("style", style.replace(CSS_EDITABLE, ""));
+                }
+            }
+        }
     }
 
     public classAdd(class_name: string | string[]): boolean {
