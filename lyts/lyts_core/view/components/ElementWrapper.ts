@@ -4,7 +4,7 @@ import dom from "../dom";
 import Component from "./Component";
 import ly from "../../ly";
 
-const CSS_EDITABLE:string = "border-bottom: 1px darkgray dashed;";
+const CSS_EDITABLE: string = "border-bottom: 1px darkgray dashed;";
 
 /**
  * Wrap a native HTMLElement to expose at Component methods.
@@ -249,7 +249,8 @@ class ElementWrapper {
     }
 
     public onClick(handler: Function, context?: any): void {
-        this.addEventListener("click", ly.lang.funcDebounce(!!context ? context : this, handler, 500, true));
+        const _self: any = !!context ? context : this;
+        this.addEventListener("click", ly.lang.funcDebounce(_self, handler, 500, true));
     }
 
     public offClick(): void {
@@ -269,11 +270,12 @@ class ElementWrapper {
 
     public onInput(handler: Function, context?: any): void {
         const _self: any = !!context ? context : this;
-        this.addEventListener("input", (e: Event) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handler.call(_self, e);
-        });
+        this.addEventListener("input", ly.lang.funcDebounce(_self, handler, 300, false));
+    }
+
+    public onChange(handler: Function, context?: any): void {
+        const _self: any = !!context ? context : this;
+        this.addEventListener("change", ly.lang.funcDebounce(_self, handler, 300, false));
     }
 
     public get editable(): boolean {
@@ -289,16 +291,16 @@ class ElementWrapper {
     public set editable(value: boolean) {
         if (!!this._element) {
             this._element.setAttribute("contenteditable", value + "");
-            if(value){
-                const style:string = this._element.getAttribute("style")||"";
-                if(style.indexOf(CSS_EDITABLE)===-1){
+            if (value) {
+                const style: string = this._element.getAttribute("style") || "";
+                if (style.indexOf(CSS_EDITABLE) === -1) {
                     this._element.setAttribute("style", CSS_EDITABLE.concat(style));
                 }
                 // disable spellcheck
                 this._element.setAttribute("spellcheck", "false");
             } else {
-                const style:string = this._element.getAttribute("style")||"";
-                if(!!style && style.indexOf(CSS_EDITABLE)){
+                const style: string = this._element.getAttribute("style") || "";
+                if (!!style && style.indexOf(CSS_EDITABLE)) {
                     this._element.setAttribute("style", style.replace(CSS_EDITABLE, ""));
                 }
             }

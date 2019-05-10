@@ -290,10 +290,10 @@ class domClass {
                     if (elem.hasAttribute(attribute)) {
                         return elem;
                     } else {
-                        return this.getParentTargetByAttribute(elem.parentElement);
+                        return this.getParentTargetByAttribute(elem.parentElement, attribute);
                     }
                 } else {
-                    return this.getParentTargetByAttribute(e.target as HTMLElement);
+                    return this.getParentTargetByAttribute(e.target as HTMLElement, attribute);
                 }
             }
         } catch (err) {
