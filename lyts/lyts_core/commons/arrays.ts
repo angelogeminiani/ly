@@ -43,7 +43,7 @@ export default class arrays {
         arrays.pushFlattenUnique(array, ...items);
         return array;
     }
-    
+
     static push(array: Array<any>, ...items: any[]): void {
         array.push(...items);
     }
@@ -78,13 +78,13 @@ export default class arrays {
         });
     }
 
-    static removeAt(array: Array<any>, index: number) {
+    static removeAt(array: Array<any>, index: number): void {
         if (!!array && array.length > 0 && index < array.length) {
             array.splice(index, 1);
         }
     }
 
-    static remove(array: Array<any>, ...items: any[]) {
+    static remove(array: Array<any>, ...items: any[]): void {
         items.forEach((item) => {
             if (ly.lang.isArray(item)) {
                 arrays.remove(array, ...(item as Array<any>));
@@ -95,6 +95,14 @@ export default class arrays {
                 }
             }
         });
+    }
+
+    static swap(source: Array<any>, from: number, to: number): void {
+        if (source.length > from && source.length > to) {
+            const tmp: any = source[from];
+            source[from] = source[to];
+            source[to] = tmp;
+        }
     }
 
     static shuffle(source: Array<any>, create_new: boolean = false): Array<any> {
@@ -108,7 +116,8 @@ export default class arrays {
         }
         return array;
     }
-    
+
+
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
