@@ -281,19 +281,23 @@ class domClass {
         return response;
     }
 
-    public getParentTargetByAttribute(e: Event | HTMLElement | null | undefined, attribute?: string): HTMLElement | undefined {
+    public getParentTargetByAttribute(e: Event | Element | null | undefined, attribute?: string): HTMLElement | undefined {
         attribute = attribute || "data-event";
         try {
             if (!!e) {
-                if (e instanceof HTMLElement) {
-                    const elem = e as HTMLElement;
-                    if (elem.hasAttribute(attribute)) {
-                        return elem;
-                    } else {
-                        return this.getParentTargetByAttribute(elem.parentElement, attribute);
-                    }
+                if (e instanceof Event) {
+                    return this.getParentTargetByAttribute(e.target as Element, attribute);
+                } else if (!!ly.objects.get(e, "target")) {
+                    // event like object
+                    return this.getParentTargetByAttribute(ly.objects.get(e, "target") as Element, attribute);
                 } else {
-                    return this.getParentTargetByAttribute(e.target as HTMLElement, attribute);
+                    if (this.hasAttribute(e, attribute)) {
+                        // ly.console.log("dom.getParentTargetByAttribute#hasAttribute", e);
+                        return e as HTMLElement;
+                    } else {
+                        // ly.console.log("dom.getParentTargetByAttribute#parent", e, e["parentElement"]);
+                        return this.getParentTargetByAttribute(e["parentElement"], attribute);
+                    }
                 }
             }
         } catch (err) {
@@ -512,7 +516,7 @@ class domClass {
                 if (!!e) {
                     const type = e.getAttribute("type");
                     if (type === "checkbox") {
-                        e.checked = value;
+                        e.checked = !!value;
                     } else {
                         e.value = value;
                     }
@@ -572,6 +576,26 @@ class domClass {
     // ------------------------------------------------------------------------
     //                      p r i v a t e
     // ------------------------------------------------------------------------
+
+    private hasAttribute(elem: any, name: string): boolean {
+        try {
+            // ly.console.log("dom.hasAttribute", name, elem);
+            if (elem instanceof Element) {
+                // ly.console.log("dom.hasAttribute#Element", elem);
+                const html_elem: Element = elem as Element;
+                return html_elem.hasAttribute(name);
+            } else if (!!objects.get(elem, "hasAttribute")) {
+                // ly.console.log("dom.hasAttribute#func()", name, elem.hasAttribute(name));
+                return elem.hasAttribute(name);
+            } else if (!!ly.objects.get(elem, name)) {
+                // ly.console.log("dom.hasAttribute#ly.objects.get", elem);
+                return true;
+            }
+        } catch (ignored) {
+            // ignored
+        }
+        return false;
+    }
 
     private onDocumentReadyStateChange(): void {
         if (doc.readyState === "complete") {
