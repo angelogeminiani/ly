@@ -61,9 +61,9 @@ export default class objects {
             objects.set(scope, path, value);
         }
     }
-    
-    static clone<T>(obj: T): T {
-        let target = <T>{};
+
+    static clone(obj: any): any {
+        let target: any = {};
         for (const field in obj) {
             if (obj.hasOwnProperty(field)) {
                 target[field] = obj[field];
