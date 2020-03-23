@@ -285,7 +285,7 @@ class langClass {
         const self = this;
         let count = 0;
         let func_done: Function;
-        let timer: number = 0;
+        let timer: any = 0;
         const intervalFunction = function () {
             try {
                 clearInterval(timer);
