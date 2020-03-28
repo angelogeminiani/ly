@@ -64,6 +64,59 @@ class browser {
         return false;
     }
 
+    public userAgent(): string {
+        return this.isReady() ? navigator.userAgent || navigator.vendor : "";
+    }
+
+    public name(): string {
+        return this.isReady() ? navigator.appName : "";
+    }
+
+    public engine(): string {
+        return this.isReady() ? navigator.product : "";
+    }
+
+    public version(): string {
+        return this.isReady() ? navigator.appVersion : "";
+    }
+
+    public platform(): string {
+        return this.isReady() ? navigator.platform : "";
+    }
+
+    public onLine(): boolean {
+        return this.isReady() ? navigator.onLine : false;
+    }
+
+    public cookieEnabled(): boolean {
+        return this.isReady() ? navigator.cookieEnabled : false;
+    }
+
+    public size(): any {
+        const size: any = {
+            screen: {
+                width: 0,
+                height: 0,
+                dpi: 0,
+                color: 0,
+                innerWidth: 0,
+                innerHeight: 0,
+            }
+        };
+        if (this.isReady()) {
+            try {
+                size.screen.width = screen.width;
+                size.screen.height = screen.height;
+                size.screen.dpi = screen.pixelDepth;
+                size.screen.color = screen.colorDepth;
+                size.screen.innerHeight = innerHeight;
+                size.screen.innerWidth = innerWidth;
+            } catch (err) {
+            }
+        }
+        return size;
+    }
+    
     public isPushStateAvailable(): boolean {
         return !!(
             typeof window !== 'undefined' &&
