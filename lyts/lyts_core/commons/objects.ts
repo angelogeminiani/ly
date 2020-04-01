@@ -72,6 +72,17 @@ export default class objects {
         return target;
     }
 
+    static expand(target: any, obj: any): any {
+        for (const field in obj) {
+            if (obj.hasOwnProperty(field)) {
+                if (!target[field]) {
+                    target[field] = obj[field];
+                }
+            }
+        }
+        return target;
+    }
+
     static isEmpty(value: any): boolean {
         if (!!value) {
             if (value.hasOwnProperty("length")) {

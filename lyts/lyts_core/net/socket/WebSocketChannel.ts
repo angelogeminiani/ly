@@ -11,6 +11,10 @@ const EVENT_CLOSE: string = 'on_close';
 const EVENT_MESSAGE: string = 'on_message';
 const EVENT_ERROR: string = 'on_error';
 
+const FLD_REQUEST_UUID = "request_uuid";
+const FLD_REQUEST_UUID_HANDLED = "request_uuid_handled";
+const FLD_REQUEST_UUID_TIMEOUT = 10*1000; // 10 seconds timeout
+
 class WebSocketChannel
     extends EventEmitter {
 
@@ -22,7 +26,7 @@ class WebSocketChannel
     private _initialized: boolean;
     private _active: boolean;
     private _web_socket: WebSocket | null;
-
+    private _callback_pool: any;
     // ------------------------------------------------------------------------
     //                      c o n s t r u c t o r
     // ------------------------------------------------------------------------
@@ -36,6 +40,7 @@ class WebSocketChannel
         this._initialized = false;
         this._active = false;
         this._host = params.host || DEF_HOST;
+        this._callback_pool = {}; // contains registered callbacks
     }
 
     // ------------------------------------------------------------------------
@@ -60,6 +65,12 @@ class WebSocketChannel
             // exit not ready
             ly.lang.funcInvoke(callback, false);
         }
+    }
+
+    public reset(): void {
+        this._callback_pool = {};
+        this.close();
+        this.open();
     }
 
     /**
@@ -108,11 +119,22 @@ class WebSocketChannel
         }
     }
 
-    public send(message: any) {
+    public send(message: any, callback?: any) {
         try {
             if (this._active
                 && !!this._web_socket
                 && this._web_socket.readyState === this._web_socket.OPEN) {
+
+                if (!!callback) {
+                    const callback_uuid: string = ly.random.guid();
+                    message[FLD_REQUEST_UUID] = callback_uuid;
+                    this._callback_pool[callback_uuid] = callback;
+                    // set timeout
+                    ly.lang.funcDelay(()=>{
+                        delete this._callback_pool[callback_uuid];
+                        console.debug("WebSocketChannel.send", "timeout removed " + callback_uuid);
+                    }, FLD_REQUEST_UUID_TIMEOUT);
+                }
                 // ready to send
                 this._web_socket.send(ly.lang.toString(message));
             } else {
@@ -165,10 +187,26 @@ class WebSocketChannel
     }
 
     private _on_message(ev: MessageEvent): void {
-        const origin: string = ev.origin;
-        const ports: any = ev.ports;
-        const data: any = ev.data;
-        this.emit(EVENT_MESSAGE, ly.lang.parse(data));
+        try {
+            const origin: string = ev.origin;
+            const ports: any = ev.ports;
+            const data: any = ly.lang.parse(ev.data);
+            if (!!data[FLD_REQUEST_UUID]) {
+                const callback_uuid: string = data[FLD_REQUEST_UUID];
+                if (!!this._callback_pool[callback_uuid]) {
+                    const f: any = this._callback_pool[callback_uuid];
+                    if (ly.lang.isFunction(f)) {
+                        f(data);
+                    }
+                }
+                // remove
+                delete this._callback_pool[callback_uuid];
+                data[FLD_REQUEST_UUID_HANDLED] = true;
+            }
+            this.emit(EVENT_MESSAGE, data);
+        } catch (err) {
+            console.error("WebSocketChannel._on_message", err);
+        }
     }
 
     private _on_error(ev: Event): void {
