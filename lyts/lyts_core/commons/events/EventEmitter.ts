@@ -28,30 +28,36 @@ export default class EventEmitter
     // ------------------------------------------------------------------------
 
     public on(scope: BaseObject, eventName: string, listener: Listener): void {
-        let key: string = EventEmitter.key(scope);
-        if (!this._listeners.containsKey(key)) {
-            this._listeners.put(key, new Events());
+        if (!!scope) {
+            let key: string = EventEmitter.key(scope);
+            if (!this._listeners.containsKey(key)) {
+                this._listeners.put(key, new Events());
+            }
+            this._listeners.get(key).on(eventName, listener.bind(scope));
         }
-        this._listeners.get(key).on(eventName, listener.bind(scope));
     }
 
     public once(scope: BaseObject, eventName: string, listener: Listener): void {
-        let key: string = EventEmitter.key(scope);
-        if (!this._listeners.containsKey(key)) {
-            this._listeners.put(key, new Events());
+        if (!!scope) {
+            let key: string = EventEmitter.key(scope);
+            if (!this._listeners.containsKey(key)) {
+                this._listeners.put(key, new Events());
+            }
+            this._listeners.get(key).once(eventName, listener.bind(scope));
         }
-        this._listeners.get(key).once(eventName, listener.bind(scope));
     }
 
     public off(scope: BaseObject, eventName?: string): void {
-        let key: string = EventEmitter.key(scope);
-        if (this._listeners.containsKey(key)) {
-            this._listeners.get(key).off(eventName);
+        if (!!scope) {
+            let key: string = EventEmitter.key(scope);
+            if (this._listeners.containsKey(key)) {
+                this._listeners.get(key).off(eventName);
+            }
         }
     }
 
     public clear(): void {
-        if(!!this._listeners) {
+        if (!!this._listeners) {
             let keys: string[] = this._listeners.keys();
             for (let key of keys) {
                 if (this._listeners.containsKey(key)) {
@@ -62,7 +68,7 @@ export default class EventEmitter
     }
 
     public emit(eventName: string, ...args: any[]): void {
-        if(!!this._listeners){
+        if (!!this._listeners) {
             let keys: string[] = this._listeners.keys();
             for (let key of keys) {
                 if (this._listeners.containsKey(key)) {
