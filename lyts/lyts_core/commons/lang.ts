@@ -22,6 +22,10 @@ class langClass {
     //                      p u b l i c
     // ------------------------------------------------------------------------
 
+    public get window(): any {
+        return window;
+    }
+
     public parse(value: any): any {
         try {
             if (this.isString(value)) {

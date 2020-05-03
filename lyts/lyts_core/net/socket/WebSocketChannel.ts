@@ -1,6 +1,7 @@
-import ly from "../../ly";
 import EventEmitter from "../../commons/events/EventEmitter";
 import console from "../../commons/console";
+import lang from "../../commons/lang";
+import random from "../../commons/random";
 
 
 const DEF_HOST = 'ws://localhost:8181/websocket';
@@ -13,7 +14,7 @@ const EVENT_ERROR: string = 'on_error';
 
 const FLD_REQUEST_UUID = "request_uuid";
 const FLD_REQUEST_UUID_HANDLED = "request_uuid_handled";
-const FLD_REQUEST_UUID_TIMEOUT = 10*1000; // 10 seconds timeout
+const FLD_REQUEST_UUID_TIMEOUT = 10 * 1000; // 10 seconds timeout
 
 class WebSocketChannel
     extends EventEmitter {
@@ -35,11 +36,11 @@ class WebSocketChannel
      * Creates a WebSocket wrapper
      * @param params "{host:'ws://localhost:8181/websocket'}"
      */
-    constructor(params: any) {
+    constructor(params?: any) {
         super();
         this._initialized = false;
         this._active = false;
-        this._host = params.host || DEF_HOST;
+        this._host = !!params ? params.host || DEF_HOST : DEF_HOST;
         this._callback_pool = {}; // contains registered callbacks
     }
 
@@ -54,16 +55,26 @@ class WebSocketChannel
     public ready(callback: Function): void {
         if (this._initialized) {
             if (this._active) {
-                ly.lang.funcInvoke(callback, true);
+                lang.funcInvoke(callback, true);
             } else {
+                // timeout for ready status  (3 seconds)
+                lang.funcDelay(() => {
+                    if (!this._active) {
+                        this.off(this); // clear buffer
+                        lang.funcInvoke(callback, false, "timeout");
+                        // reset socket status
+                        this.free()
+                    }
+                }, 3 * 1000);
+                this.off(this); // clear buffer
                 this.on(this, EVENT_OPEN, () => {
-                    this.off(this);
-                    ly.lang.funcInvoke(callback, true);
+                    this.off(this); // clear buffer
+                    lang.funcInvoke(callback, true);
                 });
             }
         } else {
             // exit not ready
-            ly.lang.funcInvoke(callback, false);
+            lang.funcInvoke(callback, false, "not initialized");
         }
     }
 
@@ -91,17 +102,20 @@ class WebSocketChannel
         return this._host;
     }
 
-    public open(): void {
-        try {
-            this._web_socket = this.createWs();
-            if (this.handle(this._web_socket)) {
-                this._initialized = true;
-            } else {
-                this._initialized = false;
+    public open(): WebSocketChannel {
+        if (!this._web_socket) {
+            try {
+                this._web_socket = this.createWs();
+                if (this.handle(this._web_socket)) {
+                    this._initialized = true;
+                } else {
+                    this._initialized = false;
+                }
+            } catch (err) {
+                console.error('WebSocketChannel.open', err);
             }
-        } catch (err) {
-            console.error('WebSocketChannel.open', err);
         }
+        return this;
     }
 
     public close(): void {
@@ -109,10 +123,8 @@ class WebSocketChannel
             if (this._active) {
                 this._initialized = false;
                 this._active = false;
-                if (!!this._web_socket) {
-                    this._web_socket.close();
-                    this.free();
-                }
+                // close and free socket
+                this.free();
             }
         } catch (err) {
             console.error('WebSocketChannel.close', err);
@@ -126,17 +138,17 @@ class WebSocketChannel
                 && this._web_socket.readyState === this._web_socket.OPEN) {
 
                 if (!!callback) {
-                    const callback_uuid: string = ly.random.guid();
+                    const callback_uuid: string = random.guid();
                     message[FLD_REQUEST_UUID] = callback_uuid;
                     this._callback_pool[callback_uuid] = callback;
                     // set timeout
-                    ly.lang.funcDelay(()=>{
+                    lang.funcDelay(() => {
                         delete this._callback_pool[callback_uuid];
                         console.debug("WebSocketChannel.send", "timeout removed " + callback_uuid);
                     }, FLD_REQUEST_UUID_TIMEOUT);
                 }
                 // ready to send
-                this._web_socket.send(ly.lang.toString(message));
+                this._web_socket.send(lang.toString(message));
             } else {
                 console.warn('WebSocketChannel.send',
                     'Socket is not ready to send message.',
@@ -152,12 +164,17 @@ class WebSocketChannel
     // ------------------------------------------------------------------------
 
     private createWs(): WebSocket {
-        const WS_native: any = ly.window['WebSocket'] || ly.window['MozWebSocket'];
+        const WS_native: any = lang.window['WebSocket'] || lang.window['MozWebSocket'];
         return new WS_native(this._host);
     }
 
     private free(): void {
         if (!!this._web_socket) {
+            try {
+                this._web_socket.close();
+            } catch (err) {
+                console.debug("WebSocketChannel.free", err);
+            }
             this._web_socket = null;
         }
     }
@@ -190,12 +207,12 @@ class WebSocketChannel
         try {
             const origin: string = ev.origin;
             const ports: any = ev.ports;
-            const data: any = ly.lang.parse(ev.data);
+            const data: any = lang.parse(ev.data);
             if (!!data[FLD_REQUEST_UUID]) {
                 const callback_uuid: string = data[FLD_REQUEST_UUID];
                 if (!!this._callback_pool[callback_uuid]) {
                     const f: any = this._callback_pool[callback_uuid];
-                    if (ly.lang.isFunction(f)) {
+                    if (lang.isFunction(f)) {
                         f(data);
                     }
                 }
@@ -211,10 +228,10 @@ class WebSocketChannel
 
     private _on_error(ev: Event): void {
         ev.preventDefault();
-        const str_err: string = ly.lang.toString(ev);
+        const str_err: string = lang.toString(ev);
         console.error('WebSocketChannel._on_error', str_err);
         this.emit(EVENT_ERROR, str_err);
     }
 }
 
-export {WebSocketChannel, EVENT_CLOSE, EVENT_MESSAGE, EVENT_OPEN}
+export {WebSocketChannel, EVENT_CLOSE, EVENT_MESSAGE, EVENT_OPEN, EVENT_ERROR}
