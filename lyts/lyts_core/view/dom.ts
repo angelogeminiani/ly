@@ -222,7 +222,7 @@ class domClass {
         return doc;
     }
 
-    public get window():Window{
+    public get window(): Window {
         return win;
     }
 
@@ -486,6 +486,12 @@ class domClass {
             : false;
     }
 
+    public isSelect(elem: Element | undefined) {
+        return !!elem
+            ? elem.tagName.toLowerCase() === "select"
+            : false;
+    }
+
     public getValue(elem: HTMLElement | undefined): any {
         if (!!elem) {
             if (this.isInput(elem)) {
@@ -498,6 +504,20 @@ class domClass {
                         return e.value;
                     }
                 }
+            } else if (this.isSelect(elem)) {
+                let value: string = "";
+                const e = elem as HTMLSelectElement;
+                if (!!e) {
+                    const count: number = e.options.length
+                    for (let i = 0; i < count; i++) {
+                        const option: HTMLOptionElement | null = e.options.item(i);
+                        if (!!option && option.selected) {
+                            value = option.value
+                            break;
+                        }
+                    }
+                }
+                return value
             } else if (this.isTextArea(elem)) {
                 const e = elem as HTMLTextAreaElement;
                 return !!e ? e.value : null;
@@ -523,6 +543,18 @@ class domClass {
                         e.checked = !!value;
                     } else {
                         e.value = value;
+                    }
+                }
+            } else if (this.isSelect(elem)) {
+                const e = elem as HTMLSelectElement;
+                if (!!e) {
+                    const count: number = e.options.length
+                    for (let i = 0; i < count; i++) {
+                        const option: HTMLOptionElement | null = e.options.item(i);
+                        if (!!option) {
+                            const opt_value = option.value
+                            option.selected = value == opt_value;
+                        }
                     }
                 }
             } else if (this.isTextArea(elem)) {

@@ -54,7 +54,7 @@ export default class format {
             // check for pattern {{value:number/date:opt:opt}}
             if (value.indexOf("{{") > -1 && value.indexOf("}}") > -1) {
                 value = ly.format.replace(value, (fmt_cmd: string) => {
-                    const tokens: Array<string> = value.split(":"); // {{1234.3445667:number:2:$}}
+                    const tokens: Array<string> = fmt_cmd.split(":"); // {{1234.3445667:number:2:$}}
                     const f_value: string = tokens[0];
                     const f_type: string = tokens.length > 1 ? tokens[1] : "";
                     if (f_type === "number") {
